@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
-const AdminMenu = () => {
+const TeacherMenu = () => {
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
-  const [isEcommerceExpanded, setEcommerceExpanded] = useState(false);
+  const [isAccountExpanded, setAccountExpanded] = useState(false);
 
   const toggleDashboard = () => setDashboardExpanded(!isDashboardExpanded);
-  const toggleEcommerce = () => setEcommerceExpanded(!isEcommerceExpanded);
+  const toggleAccount = () => setAccountExpanded(!isAccountExpanded);
 
   return (
-    <>
+    <div className="flex-none">
       <div className="relative flex h-[calc(100vh-2rem)] w-full max-w-[20rem] flex-col rounded-xl bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
         <div className="p-4 mb-2">
           <h5 className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-            Sidebar
+            ERP-System
           </h5>
         </div>
         <nav className="flex min-w-[240px] flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700">
@@ -42,7 +42,7 @@ const AdminMenu = () => {
                   </svg>
                 </div>
                 <p className="block mr-auto font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-                  Dashboard
+                  Time Table & Attendance
                 </p>
                 <span className="ml-4">
                   <svg
@@ -90,7 +90,7 @@ const AdminMenu = () => {
                           ></path>
                         </svg>
                       </div>
-                      Analytics
+                      Time Table
                     </div>
                     <div
                       role="button"
@@ -113,30 +113,7 @@ const AdminMenu = () => {
                           ></path>
                         </svg>
                       </div>
-                      Reporting
-                    </div>
-                    <div
-                      role="button"
-                      className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
-                    >
-                      <div className="grid mr-4 place-items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="3"
-                          stroke="currentColor"
-                          aria-hidden="true"
-                          className="w-5 h-3"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                          ></path>
-                        </svg>
-                      </div>
-                      Projects
+                      Attendance
                     </div>
                   </nav>
                 </div>
@@ -146,7 +123,7 @@ const AdminMenu = () => {
           <div className="relative block w-full">
             <div
               role="button"
-              onClick={toggleEcommerce}
+              onClick={toggleAccount}
               className="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
             >
               <button
@@ -169,7 +146,7 @@ const AdminMenu = () => {
                   </svg>
                 </div>
                 <p className="block mr-auto font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-                  E-Commerce
+                  My Account
                 </p>
                 <span className="ml-4">
                   <svg
@@ -180,7 +157,7 @@ const AdminMenu = () => {
                     stroke="currentColor"
                     aria-hidden="true"
                     className={`w-4 h-4 mx-auto transition-transform ${
-                      isEcommerceExpanded ? "rotate-180" : ""
+                      isAccountExpanded ? "rotate-180" : ""
                     }`}
                   >
                     <path
@@ -192,7 +169,7 @@ const AdminMenu = () => {
                 </span>
               </button>
             </div>
-            {isEcommerceExpanded && (
+            {isAccountExpanded && (
               <div className="overflow-hidden">
                 <div className="block w-full py-1 font-sans text-sm antialiased font-light leading-normal text-gray-700">
                   <nav className="flex min-w-[240px] flex-col gap-1 p-0 font-sans text-base font-normal text-blue-gray-700">
@@ -217,7 +194,7 @@ const AdminMenu = () => {
                           ></path>
                         </svg>
                       </div>
-                      Orders
+                      Profile
                     </div>
                     <div
                       role="button"
@@ -240,7 +217,7 @@ const AdminMenu = () => {
                           ></path>
                         </svg>
                       </div>
-                      Products
+                      <a href="/teacher/changepassword">  Change Password</a>
                     </div>
                     <div
                       role="button"
@@ -263,7 +240,7 @@ const AdminMenu = () => {
                           ></path>
                         </svg>
                       </div>
-                      Invoices
+                      Logout
                     </div>
                   </nav>
                 </div>
@@ -272,8 +249,8 @@ const AdminMenu = () => {
           </div>
         </nav>
       </div>
-    </>
+    </div>
   );
 };
 
-export default AdminMenu;
+export default TeacherMenu;
