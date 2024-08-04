@@ -1,10 +1,9 @@
-
-import Home from "./components/Home";
+import Studenthome from "./components/Studenthome";
 
 function App() {
   return (
     <>
-      <Home />
+      <Studenthome />
     </>
   );
 }
