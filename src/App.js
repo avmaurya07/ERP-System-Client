@@ -12,6 +12,7 @@ import {
 import AlertState from "./contex/alert/alertstate";
 import RegisterState from "./contex/register/registerstate";
 import UserListState from "./contex/userlist/userliststate";
+import MainState from "./contex/main/mainstate";
 
 function App() {
   return (
@@ -19,18 +20,19 @@ function App() {
       <AlertState>
         <RegisterState>
           <UserListState>
-            <Alert />
+            <MainState>
+              <Alert />
 
-            <Router>
-              <Routes>
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/student/*" element={<Studenthome />} />
-                <Route exact path="/teacher/*" element={<TeacherHome />} />
-                <Route exact path="/admin/*" element={<AdminHome />} />
-                <Route path="*" element={<Navigate to="/login" />} />
-              </Routes>
-            </Router>
-            
+              <Router>
+                <Routes>
+                  <Route exact path="/login" element={<Login />} />
+                  <Route exact path="/student/*" element={<Studenthome />} />
+                  <Route exact path="/teacher/*" element={<TeacherHome />} />
+                  <Route exact path="/admin/*" element={<AdminHome />} />
+                  <Route path="*" element={<Navigate to="/login" />} />
+                </Routes>
+              </Router>
+            </MainState>
           </UserListState>
         </RegisterState>
       </AlertState>

@@ -23,12 +23,49 @@ const UserListState = (props) => {
     showAlert(json);
   };
 
+  const masterlogin = async (user) => {
+    let reqbody=[]
+    if (user.usertype==="student"){
+      reqbody={
+        "systemid":user.systemid,
+        "usertype":"student"
+      }
+    }
+    else if (user.usertype==="teacher"){
+      reqbody={
+        "empid":user.empid,
+        "usertype":"teacher"
+      }
+    }
+    const response = await fetch(`${host}/api/auth/masterlogin`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+
+      body: JSON.stringify(reqbody),
+    });
+    const json = await response.json();
+    if (json.msgtype) {
+      localStorage.setItem("token1", localStorage.getItem("token"));
+      localStorage.removeItem("token")
+      localStorage.setItem("token", json.authtoken);
+      localStorage.removeItem("usertype")
+      localStorage.setItem("usertype", json.usertype);
+    }
+    showAlert(json);
+    return json
+    
+  };
+
   return (
     <UserListContext.Provider
       value={{
         userlist,
         fetchuserlist,
         setUserlist,
+        masterlogin,
       }}
     >
       {props.children}

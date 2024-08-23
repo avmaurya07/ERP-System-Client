@@ -30,7 +30,6 @@ This repository contains the client-side implementation of the College ERP (Ente
 ### Student's View
 ![Student's View](screenshots/students-view.png)
 
-*Include additional screenshots to showcase specific features and functionalities.*
 
 ## Project Structure
 

@@ -7,6 +7,8 @@ import RegisterAdmin from "./RegisterAdmin";
 import RegisterTeacher from "./RegisterTeacher";
 import ChangePassword from "../ChangePassword";
 import UserList from "./userlist";
+import SchoolDep from "./SchoolDep";
+import Logs from "../Logs";
 
 const AdminHome = () => {
   return (
@@ -22,6 +24,8 @@ const AdminHome = () => {
             <Route exact path="registerteacher" element={<RegisterTeacher  />} />
             <Route exact path="registerstudent" element={<RegisterStudent />} />
             <Route exact path="changepassword" element={<ChangePassword />} />
+            <Route exact path="schooldep" element={<SchoolDep />} />
+            <Route exact path="logs" element={<Logs />} />
           </Routes>
           
         </div>

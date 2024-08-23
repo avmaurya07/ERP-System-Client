@@ -27,8 +27,7 @@ const AdminMenu = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("usertype");
     localStorage.removeItem("username");
-    navigate("/login");
-    window.location.reload(true) 
+    navigate("/login"); 
   };
 
   useEffect(() => {
@@ -124,7 +123,7 @@ const AdminMenu = () => {
                     ></path>
                   </svg>
                   <p className="text-lg font-medium text-blue-gray-900">
-                    Register Users
+                    Master
                   </p>
                 </div>
                 <svg
@@ -152,24 +151,13 @@ const AdminMenu = () => {
                 >
                   Users
                 </Link>
-                  <Link
-                    to="/admin/registeradmin"
-                    className="block p-2 rounded-lg hover:bg-blue-gray-100"
-                  >
-                    Register an Admin
-                  </Link>
-                  <Link
-                    to="/admin/registerstudent"
-                    className="block p-2 rounded-lg hover:bg-blue-gray-100"
-                  >
-                    Register a Student
-                  </Link>
-                  <Link
-                    to="/admin/registerteacher"
-                    className="block p-2 rounded-lg hover:bg-blue-gray-100"
-                  >
-                    Register a Teacher
-                  </Link>
+                <Link
+                  to="/admin/schooldep"
+                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                >
+                  School & Department
+                </Link>
+                  
                 </div>
               )}
             </div>

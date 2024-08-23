@@ -15,11 +15,19 @@ const TeacherMenu = () => {
     setDashboardExpanded(false)
   };
   const handleLogout = () => {
+    if (localStorage.getItem("token1")){
+      localStorage.removeItem("token");
+      localStorage.setItem("token",localStorage.getItem("token1"))
+      localStorage.removeItem("usertype");
+      localStorage.setItem("usertype","admin")
+      localStorage.removeItem("username");
+      navigate("/admin");
+    }else{
     localStorage.removeItem("token");
     localStorage.removeItem("usertype");
     localStorage.removeItem("username");
     navigate("/login");
-    window.location.reload(true) 
+    }
   };
 
   useEffect(() => {
