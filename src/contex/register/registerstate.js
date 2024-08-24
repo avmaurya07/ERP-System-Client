@@ -44,6 +44,17 @@ const RegisterState = (props) => {
         usertype: "teacher",
       };
     }
+    if (rdata.usertype === "cordinator") {
+      jsonbody = {
+        empid: rdata.empid,
+        name: rdata.name,
+        email: rdata.email,
+        phone: rdata.phone,
+        school: rdata.school,
+        department: rdata.department,
+        usertype: "cordinator",
+      };
+    }
     const response = await fetch(`${host}/api/auth/createuser`, {
       method: "post",
       headers: {

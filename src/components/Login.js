@@ -47,6 +47,9 @@ const Login = () => {
       if (json.usertype === "teacher") {
         navigate("/teacher");
       }
+      if (json.usertype === "cordinator") {
+        navigate("/cordinator");
+      }
       // window.location.reload(true);
     }
   };
@@ -59,6 +62,9 @@ const Login = () => {
     }
     if (localStorage.getItem("usertype") === "teacher") {
       navigate("/teacher");
+    }
+    if (localStorage.getItem("usertype") === "cordinator") {
+      navigate("/cordinator");
     }
   }, []);
   return (

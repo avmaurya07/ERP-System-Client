@@ -23,7 +23,7 @@ const MainState = (props) => {
     if (json.msgtype) {
       setSchoollist(json.schoollist)
     }
-    showAlert(json);
+    // showAlert(json);
     return json
     
   };
@@ -40,10 +40,77 @@ const MainState = (props) => {
     if (json.msgtype) {
         setDepartmentslist(json.departmentlist)
     }
+    // showAlert(json);
+    return json
+    
+  };
+  const addschooldep = async (data) => {
+    let body=[]
+    let link =""
+    if (data.toadd==="school"){
+      link =`${host}/api/master/createschool`
+      body ={schoolname:data.schoolname,schoolcode:data.schoolcode}
+    }
+    else if (data.toadd==="department"){
+      link =`${host}/api/master/createdepartment`
+      body ={departmentname:data.depname,departmentcode:data.depcode,schoolcode:data.schoolcodedep}
+    }else {
+      return showAlert({msgtype:false,msg:"Internal Server Error"})
+    }
+    const response = await fetch(link, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify(body),
+    });
+    const json = await response.json();
+    if (json.msgtype) {
+        setDepartmentslist(json.departmentlist)
+    }
     showAlert(json);
     return json
     
   };
+
+
+
+
+  const switchrole = async (user) => {
+    let reqbody=[]
+    if (user.usertype==="cordinator"){
+      reqbody={
+        "usertype":"cordinator"
+      }
+    }
+    else if (user.usertype==="teacher"){
+      reqbody={
+        "usertype":"teacher"
+      }
+    }
+    const response = await fetch(`${host}/api/auth/switchuser`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+
+      body: JSON.stringify(reqbody),
+    });
+    const json = await response.json();
+    if (json.msgtype) {
+      localStorage.removeItem("token")
+      localStorage.setItem("token", json.authtoken);
+      localStorage.removeItem("usertype")
+      localStorage.setItem("usertype", json.usertype);
+    }
+    showAlert(json);
+    return json
+    
+  };
+
+
 
   return (
     <MainContext.Provider
@@ -52,6 +119,9 @@ const MainState = (props) => {
         departmentslist,
         getschoollist,
         getdepartmentlist,
+        addschooldep,
+        setDepartmentslist,
+        switchrole,
       }}
     >
       {props.children}

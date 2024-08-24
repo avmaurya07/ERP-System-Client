@@ -2,55 +2,56 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MainContext from "../../contex/main/maincontext";
 
-const TeacherMenu = () => {
-  const context = useContext(MainContext);
-  const { switchrole } = context;
+const CordinatorMenu = () => {
+    const context = useContext(MainContext);
+    const { switchrole} = context;
   const navigate = useNavigate();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isAccountExpanded, setAccountExpanded] = useState(false);
 
   const toggleDashboard = () => {
-    setDashboardExpanded(!isDashboardExpanded);
-    setAccountExpanded(false);
+    setDashboardExpanded(!isDashboardExpanded)
+    setAccountExpanded(false)
   };
   const toggleAccount = () => {
-    setAccountExpanded(!isAccountExpanded);
-    setDashboardExpanded(false);
+    setAccountExpanded(!isAccountExpanded)
+    setDashboardExpanded(false)
   };
   const handleLogout = () => {
-    if (localStorage.getItem("token1")) {
+    if (localStorage.getItem("token1")){
       localStorage.removeItem("token");
-      localStorage.setItem("token", localStorage.getItem("token1"));
+      localStorage.setItem("token",localStorage.getItem("token1"))
       localStorage.removeItem("token1");
       localStorage.removeItem("usertype");
-      localStorage.setItem("usertype", "admin");
+      localStorage.setItem("usertype","admin")
       localStorage.removeItem("username");
       navigate("/admin");
-    } else {
-      localStorage.removeItem("token");
-      localStorage.removeItem("usertype");
-      localStorage.removeItem("username");
-      navigate("/login");
+    }else{
+    localStorage.removeItem("token");
+    localStorage.removeItem("usertype");
+    localStorage.removeItem("username");
+    navigate("/login");
     }
   };
+
   const onswitchrole = async () => {
     const user = {
-      usertype: "cordinator",
+      usertype: "teacher",
     };
     const json = await switchrole(user);
     if (json.msgtype) {
-      navigate("/cordinator");
+      navigate("/teacher");
     }
   };
 
   useEffect(() => {
-    if (localStorage.getItem("usertype") !== "teacher") {
+    if (localStorage.getItem("usertype") !== "cordinator") {
       navigate("/login");
     }
   }, []);
 
   return (
-    <div className="relative flex w-full max-w-[20rem] flex-col rounded-none bg-white p-4 text-gray-700 shadow-lg overflow-auto h-full min-h-[calc(100vh-2rem)]">
+<div className="relative flex w-full max-w-[20rem] flex-col rounded-none bg-white p-4 text-gray-700 shadow-lg overflow-auto h-full min-h-[calc(100vh-2rem)]">
       <div className="p-4 mb-4">
         <h5 className="text-2xl font-semibold text-blue-gray-900">
           ERP-System
@@ -114,7 +115,7 @@ const TeacherMenu = () => {
             </div>
           )}
         </div>
-
+        
         <div className="relative">
           <div
             role="button"
@@ -157,30 +158,18 @@ const TeacherMenu = () => {
           </div>
           {isAccountExpanded && (
             <div className="mt-2 pl-6">
-              <button
-                className="block w-full text-left p-2 rounded-lg hover:bg-green-50 text-green-700 hover:text-green-900"
-                onClick={onswitchrole}
-              >
-                Switch Role to Cordinator
-              </button>
+                <button
+                  className="block w-full text-left p-2 rounded-lg hover:bg-green-50 text-green-700 hover:text-green-900"
+                  onClick={onswitchrole}
+                >
+                  Switch Role to Teacher
+                </button>
               <Link
-                to="/"
-                className="block p-2 rounded-lg hover:bg-blue-gray-100"
-              >
-                Profile
-              </Link>
-              <Link
-                to="/teacher/changepassword"
-                className="block p-2 rounded-lg hover:bg-blue-gray-100"
-              >
-                Change Password
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="block w-full text-left p-2 rounded-lg hover:bg-red-50 text-red-700 hover:text-red-900"
-              >
-                Logout
-              </button>
+                  to="/"
+                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                >
+                  Profile
+                </Link>
             </div>
           )}
         </div>
@@ -189,4 +178,4 @@ const TeacherMenu = () => {
   );
 };
 
-export default TeacherMenu;
+export default CordinatorMenu;

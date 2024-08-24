@@ -13,6 +13,7 @@ import AlertState from "./contex/alert/alertstate";
 import RegisterState from "./contex/register/registerstate";
 import UserListState from "./contex/userlist/userliststate";
 import MainState from "./contex/main/mainstate";
+import CordinatorHome from "./components/cordinator/CordinatorHome";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                   <Route exact path="/login" element={<Login />} />
                   <Route exact path="/student/*" element={<Studenthome />} />
                   <Route exact path="/teacher/*" element={<TeacherHome />} />
+                  <Route exact path="/cordinator/*" element={<CordinatorHome />} />
                   <Route exact path="/admin/*" element={<AdminHome />} />
                   <Route path="*" element={<Navigate to="/login" />} />
                 </Routes>

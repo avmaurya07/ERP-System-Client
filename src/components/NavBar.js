@@ -1,11 +1,13 @@
-import React, { useContext} from "react";
+import React, { useContext, useEffect} from "react";
 import { Link } from "react-router-dom";
 import AlertContext from "../contex/alert/alertcontext";
 
 const NavBar = () => {
   const context = useContext(AlertContext);
   const { getuserdata,usertype,UserName } = context;
-  getuserdata();
+  useEffect(() => {
+    getuserdata();
+  }, []);
 
   return (
     <>
@@ -14,7 +16,8 @@ const NavBar = () => {
           <Link className="navbar-brand" to="/">
             Hello, {UserName}({usertype === "admin" && <>Admin</>}
             {usertype === "student" && <>Student</>}
-            {usertype === "teacher" && <>Teacher</>})
+            {usertype === "teacher" && <>Teacher</>}
+            {usertype === "cordinator" && <>Cordinator</>})
           </Link>
           <button
             className="navbar-toggler"
