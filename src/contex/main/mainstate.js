@@ -8,6 +8,8 @@ const MainState = (props) => {
   const { showAlert } = context;
   const [schoollist, setSchoollist] = useState([]);
   const [departmentslist, setDepartmentslist] = useState([]);
+  const [yearlist, setYearlist] = useState([]);
+  const [semlist, setSemlist] = useState([]);
   const [selectedRoles, setSelectedRoles] = useState({
     timetable: false,
     studentcontrol: false,
@@ -44,6 +46,40 @@ const MainState = (props) => {
     // showAlert(json);
     return json;
   };
+
+  const getyearlist = async () => {
+    const response = await fetch(`${host}/api/master/getacademicyearlist`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+    const json = await response.json();
+    if (json.msgtype) {
+      setYearlist(json.academicyearlist);
+    }
+    // showAlert(json);
+    return json;
+  };
+  const getsemlist = async (yearcode) => {
+    const response = await fetch(`${host}/api/master/getsemesterlist`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ academicyearcode: yearcode }),
+    });
+    const json = await response.json();
+    if (json.msgtype) {
+      setSemlist(json.semesterlist);
+    }
+    // showAlert(json);
+    return json;
+  };
+
+
   const addschooldep = async (data) => {
     let body = [];
     let link = "";
@@ -72,6 +108,37 @@ const MainState = (props) => {
     if (json.msgtype) {
       setDepartmentslist(json.departmentlist);
     }
+    showAlert(json);
+    return json;
+  };
+
+
+  const addyearsem = async (data) => {
+    let body = [];
+    let link = "";
+    if (data.toadd === "year") {
+      link = `${host}/api/master/createacademicyear`;
+      body = { academicyearname: data.yearname, academicyearcode: data.yearcode };
+    } else if (data.toadd === "sem") {
+      link = `${host}/api/master/createsemester`;
+      body = {
+        semestername: data.semname,
+        semestercode: data.semcode,
+        academicyearname: data.yearcodesem,
+        academicyearcode: data.yearcodesem,
+      };
+    } else {
+      return showAlert({ msgtype: false, msg: "Internal Server Error" });
+    }
+    const response = await fetch(link, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify(body),
+    });
+    const json = await response.json();
     showAlert(json);
     return json;
   };
@@ -151,11 +218,17 @@ const MainState = (props) => {
     <MainContext.Provider
       value={{
         schoollist,
+        yearlist,
         departmentslist,
+        semlist,
         getschoollist,
+        getyearlist,
         getdepartmentlist,
+        getsemlist,
         addschooldep,
+        addyearsem,
         setDepartmentslist,
+        setSemlist,
         switchrole,
         setrole,
         selectedRoles,

@@ -34,7 +34,7 @@ const UserList = () => {
 
   const onUsertypeChange = (e) => {
     setUsertype(e.target.value);
-    setUserlist([]); // Clear user list when type changes
+    setUserlist([]);
   };
 
   const onUserIdChange = (e) => {
@@ -43,7 +43,7 @@ const UserList = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    fetchuserlist(usertype, userId); // Assuming fetchuserlist accepts usertype and userId
+    fetchuserlist(usertype, userId);
   };
 
   const handleclick = async (user) => {
@@ -145,10 +145,9 @@ const UserList = () => {
                 <th className="py-2 px-4 border-b text-left">Email</th>
               )}
               <th className="py-2 px-4 border-b text-left">Name</th>
-              <th className="py-2 px-4 border-b text-left">School</th>
-              <th className="py-2 px-4 border-b text-left">Department</th>
+              { !(usertype === "admin") && <th className="py-2 px-4 border-b text-left">School</th>}
+              { !(usertype === "admin") && <th className="py-2 px-4 border-b text-left">Department</th>}
               <th className="py-2 px-4 border-b text-left">Phone</th>
-              <th className="py-2 px-4 border-b text-left">User Type</th>
               <th className="py-2 px-4 border-b text-left">Actions</th>
             </tr>
           </thead>
@@ -170,10 +169,9 @@ const UserList = () => {
                     <td className="py-2 px-4 border-b">{user.email}</td>
                   )}
                   <td className="py-2 px-4 border-b">{user.name}</td>
-                  <td className="py-2 px-4 border-b">{user.school}</td>
-                  <td className="py-2 px-4 border-b">{user.department}</td>
+                  { !(usertype === "admin") && <td className="py-2 px-4 border-b">{user.school}</td>}
+                  { !(usertype === "admin") && <td className="py-2 px-4 border-b">{user.department}</td>}
                   <td className="py-2 px-4 border-b">{user.phone}</td>
-                  <td className="py-2 px-4 border-b">{user.usertype}</td>
                   <td className="py-2 px-4 border-b">
                     {(usertype === "teacher" || usertype === "student") && <button
                       className="bg-green-500 text-white font-bold py-1 my-1 mx-1 px-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"

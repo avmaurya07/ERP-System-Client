@@ -45,7 +45,7 @@ const Roles = forwardRef(({ ruser }, ref) => {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Define the Roles of "{ruser.name}"
+                Define the Roles of "<b>{ruser.name}</b>"
               </h1>
               <button
                 type="button"

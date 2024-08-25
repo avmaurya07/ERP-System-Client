@@ -9,6 +9,7 @@ import ChangePassword from "../ChangePassword";
 import UserList from "./userlist";
 import SchoolDep from "./SchoolDep";
 import Logs from "../Logs";
+import YearSem from "./YearSem";
 
 const AdminHome = () => {
   return (
@@ -25,6 +26,7 @@ const AdminHome = () => {
             <Route exact path="registerstudent" element={<RegisterStudent />} />
             <Route exact path="changepassword" element={<ChangePassword />} />
             <Route exact path="schooldep" element={<SchoolDep />} />
+            <Route exact path="yearsem" element={<YearSem />} />
             <Route exact path="logs" element={<Logs />} />
           </Routes>
           

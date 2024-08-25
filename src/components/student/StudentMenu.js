@@ -31,7 +31,7 @@ const Menu = () => {
       localStorage.removeItem("usertype");
       localStorage.setItem("usertype","admin")
       localStorage.removeItem("username");
-      navigate("/admin");
+      navigate("/admin/users");
     }else{
     localStorage.removeItem("token");
     localStorage.removeItem("usertype");

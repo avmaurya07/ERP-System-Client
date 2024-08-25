@@ -157,6 +157,12 @@ const AdminMenu = () => {
                 >
                   School & Department
                 </Link>
+                <Link
+                  to="/admin/yearsem"
+                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                >
+                  Academic Year & Semester
+                </Link>
                   
                 </div>
               )}
