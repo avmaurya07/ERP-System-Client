@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MainContext from "../../contex/main/maincontext";
+import AlertContext from "../../contex/alert/alertcontext";
 
 const TeacherMenu = () => {
   const context = useContext(MainContext);
   const { switchrole } = context;
+  const context1 = useContext(AlertContext);
+  const { iscordinator } = context1;
   const navigate = useNavigate();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isAccountExpanded, setAccountExpanded] = useState(false);
@@ -157,12 +160,12 @@ const TeacherMenu = () => {
           </div>
           {isAccountExpanded && (
             <div className="mt-2 pl-6">
-              <button
+              {iscordinator && <button
                 className="block w-full text-left p-2 rounded-lg hover:bg-green-50 text-green-700 hover:text-green-900"
                 onClick={onswitchrole}
               >
                 Switch Role to Cordinator
-              </button>
+              </button>}
               <Link
                 to="/"
                 className="block p-2 rounded-lg hover:bg-blue-gray-100"

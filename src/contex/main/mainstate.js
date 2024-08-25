@@ -8,8 +8,10 @@ const MainState = (props) => {
   const { showAlert } = context;
   const [schoollist, setSchoollist] = useState([]);
   const [departmentslist, setDepartmentslist] = useState([]);
-
- 
+  const [selectedRoles, setSelectedRoles] = useState({
+    timetable: false,
+    studentcontrol: false,
+  });
 
   const getschoollist = async () => {
     const response = await fetch(`${host}/api/master/getschoollist`, {
@@ -21,11 +23,10 @@ const MainState = (props) => {
     });
     const json = await response.json();
     if (json.msgtype) {
-      setSchoollist(json.schoollist)
+      setSchoollist(json.schoollist);
     }
     // showAlert(json);
-    return json
-    
+    return json;
   };
   const getdepartmentlist = async (schoolcode) => {
     const response = await fetch(`${host}/api/master/getdepartmentlist`, {
@@ -34,28 +35,30 @@ const MainState = (props) => {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify({schoolcode:schoolcode}),
+      body: JSON.stringify({ schoolcode: schoolcode }),
     });
     const json = await response.json();
     if (json.msgtype) {
-        setDepartmentslist(json.departmentlist)
+      setDepartmentslist(json.departmentlist);
     }
     // showAlert(json);
-    return json
-    
+    return json;
   };
   const addschooldep = async (data) => {
-    let body=[]
-    let link =""
-    if (data.toadd==="school"){
-      link =`${host}/api/master/createschool`
-      body ={schoolname:data.schoolname,schoolcode:data.schoolcode}
-    }
-    else if (data.toadd==="department"){
-      link =`${host}/api/master/createdepartment`
-      body ={departmentname:data.depname,departmentcode:data.depcode,schoolcode:data.schoolcodedep}
-    }else {
-      return showAlert({msgtype:false,msg:"Internal Server Error"})
+    let body = [];
+    let link = "";
+    if (data.toadd === "school") {
+      link = `${host}/api/master/createschool`;
+      body = { schoolname: data.schoolname, schoolcode: data.schoolcode };
+    } else if (data.toadd === "department") {
+      link = `${host}/api/master/createdepartment`;
+      body = {
+        departmentname: data.depname,
+        departmentcode: data.depcode,
+        schoolcode: data.schoolcodedep,
+      };
+    } else {
+      return showAlert({ msgtype: false, msg: "Internal Server Error" });
     }
     const response = await fetch(link, {
       method: "post",
@@ -67,27 +70,22 @@ const MainState = (props) => {
     });
     const json = await response.json();
     if (json.msgtype) {
-        setDepartmentslist(json.departmentlist)
+      setDepartmentslist(json.departmentlist);
     }
     showAlert(json);
-    return json
-    
+    return json;
   };
 
-
-
-
   const switchrole = async (user) => {
-    let reqbody=[]
-    if (user.usertype==="cordinator"){
-      reqbody={
-        "usertype":"cordinator"
-      }
-    }
-    else if (user.usertype==="teacher"){
-      reqbody={
-        "usertype":"teacher"
-      }
+    let reqbody = [];
+    if (user.usertype === "cordinator") {
+      reqbody = {
+        usertype: "cordinator",
+      };
+    } else if (user.usertype === "teacher") {
+      reqbody = {
+        usertype: "teacher",
+      };
     }
     const response = await fetch(`${host}/api/auth/switchuser`, {
       method: "post",
@@ -100,14 +98,51 @@ const MainState = (props) => {
     });
     const json = await response.json();
     if (json.msgtype) {
-      localStorage.removeItem("token")
+      localStorage.removeItem("token");
       localStorage.setItem("token", json.authtoken);
-      localStorage.removeItem("usertype")
+      localStorage.removeItem("usertype");
       localStorage.setItem("usertype", json.usertype);
     }
     showAlert(json);
-    return json
-    
+    return json;
+  };
+
+  const setrole = async (data) => {
+    const response = await fetch(`${host}/api/users/editroles`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+
+      body: JSON.stringify({
+        empid: data.empid,
+        timetable: data.timetable,
+        studentcontrol: data.studentcontrol,
+      }),
+    });
+    const json = await response.json();
+    showAlert(json);
+    return json;
+  };
+
+
+  const getrole = async (empid) => {
+    const response = await fetch(`${host}/api/users/getroles`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+
+      body: JSON.stringify({empid:empid}),
+    });
+    const json = await response.json();
+    setSelectedRoles({
+      timetable:json.roles.timetable,
+      studentcontrol:json.roles.studentcontrol,
+    })
+    return json;
   };
 
 
@@ -122,6 +157,10 @@ const MainState = (props) => {
         addschooldep,
         setDepartmentslist,
         switchrole,
+        setrole,
+        selectedRoles,
+        setSelectedRoles,
+        getrole,
       }}
     >
       {props.children}

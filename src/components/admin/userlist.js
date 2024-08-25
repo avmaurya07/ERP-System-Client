@@ -1,7 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import UserListContext from "../../contex/userlist/userlistcontext";
 import { Link, useNavigate } from "react-router-dom";
 import RegisterContext from "../../contex/register/registercontext";
+import Roles from "./Roles";
+import MainContext from "../../contex/main/maincontext";
 
 const UserList = () => {
   const navigate = useNavigate();
@@ -9,8 +11,13 @@ const UserList = () => {
   const { userlist, fetchuserlist, setUserlist, masterlogin } = context;
   const context1 = useContext(RegisterContext);
   const { register } = context1;
-  const [usertype, setUsertype] = useState(""); 
+  const context2 = useContext(MainContext);
+  const { getrole } = context2;
+  const [usertype, setUsertype] = useState("");
   const [userId, setUserId] = useState("");
+  const [ruser, setRuser] = useState([]);
+
+  const rolesButtonRef = useRef(null);
 
   const onmakecordinator = async (user) => {
     const cordinatorData = {
@@ -39,7 +46,11 @@ const UserList = () => {
     fetchuserlist(usertype, userId); // Assuming fetchuserlist accepts usertype and userId
   };
 
-  const filteredUserList = userlist.filter(user => {
+  const handleclick = async (user) => {
+    await getrole(user.empid);
+  };
+
+  const filteredUserList = userlist.filter((user) => {
     if (usertype === "teacher" && user.empid) {
       return user.empid.includes(userId);
     }
@@ -65,6 +76,14 @@ const UserList = () => {
     }
   };
 
+  const openRolesModal = (user) => {
+    setRuser(user);
+    if (rolesButtonRef.current) {
+      rolesButtonRef.current.click();
+    }
+    handleclick(user)
+  };
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Search User Details</h1>
@@ -78,7 +97,7 @@ const UserList = () => {
           <option value="">Select</option>
           <option value="student">Student</option>
           <option value="teacher">Teacher</option>
-          <option value="cordinator">Cordinator</option>
+          <option value="cordinator">Coordinator</option>
           <option value="admin">Admin</option>
         </select>
         <button
@@ -120,74 +139,74 @@ const UserList = () => {
             <tr>
               {usertype === "teacher" || usertype === "cordinator" ? (
                 <th className="py-2 px-4 border-b text-left">Employee Id</th>
-              ) : null}
-              {usertype === "student" && (
+              ) : usertype === "student" ? (
                 <th className="py-2 px-4 border-b text-left">System Id</th>
+              ) : (
+                <th className="py-2 px-4 border-b text-left">Email</th>
               )}
               <th className="py-2 px-4 border-b text-left">Name</th>
-              <th className="py-2 px-4 border-b text-left">Email</th>
+              <th className="py-2 px-4 border-b text-left">School</th>
+              <th className="py-2 px-4 border-b text-left">Department</th>
               <th className="py-2 px-4 border-b text-left">Phone</th>
-              {(usertype === "teacher" || usertype === "student" || usertype === "cordinator") && (
-                <>
-                  <th className="py-2 px-4 border-b text-left">School</th>
-                  <th className="py-2 px-4 border-b text-left">Department</th>
-                </>
-              )}
+              <th className="py-2 px-4 border-b text-left">User Type</th>
               <th className="py-2 px-4 border-b text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {filteredUserList.map((user, index) => (
-              <tr key={index}>
-                {usertype === "teacher" || usertype === "cordinator" ? (
-                  <td className="py-2 px-4 border-b">{user.empid}</td>
-                ) : null}
-                {usertype === "student" && (
-                  <td className="py-2 px-4 border-b">{user.systemid}</td>
-                )}
-                <td className="py-2 px-4 border-b">{user.name}</td>
-                <td className="py-2 px-4 border-b">{user.email}</td>
-                <td className="py-2 px-4 border-b">{user.phone}</td>
-                {(usertype === "teacher" || usertype === "student" || usertype === "cordinator") && (
-                  <>
-                    <td className="py-2 px-4 border-b">{user.school}</td>
-                    <td className="py-2 px-4 border-b">{user.department}</td>
-                  </>
-                )}
-                <td className="py-2 px-4 border-b flex space-x-2">
-                  {(usertype === "teacher"  || usertype === "student") && (
-                    <button
-                      className="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-700"
+            {filteredUserList.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="py-2 px-4 text-center">
+                  No matching user found.
+                </td>
+              </tr>
+            ) : (
+              filteredUserList.map((user) => (
+                <tr key={user._id}>
+                  {usertype === "teacher" || usertype === "cordinator" ? (
+                    <td className="py-2 px-4 border-b">{user.empid}</td>
+                  ) : usertype === "student" ? (
+                    <td className="py-2 px-4 border-b">{user.systemid}</td>
+                  ) : (
+                    <td className="py-2 px-4 border-b">{user.email}</td>
+                  )}
+                  <td className="py-2 px-4 border-b">{user.name}</td>
+                  <td className="py-2 px-4 border-b">{user.school}</td>
+                  <td className="py-2 px-4 border-b">{user.department}</td>
+                  <td className="py-2 px-4 border-b">{user.phone}</td>
+                  <td className="py-2 px-4 border-b">{user.usertype}</td>
+                  <td className="py-2 px-4 border-b">
+                    {(usertype === "teacher" || usertype === "student") && <button
+                      className="bg-green-500 text-white font-bold py-1 my-1 mx-1 px-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                       onClick={() => handleMasterLogin(user)}
                     >
                       Login
-                    </button>
-                  )}
-                  {usertype === "teacher" && (
-                    <button
-                      className="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-700"
-                      onClick={() => onmakecordinator(user)}
-                    >
-                      Make Cordinator
-                    </button>
-                  )}
-                  {usertype === "cordinator" && (
-                    <button className="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-700">
-                      Roles
-                    </button>
-                  )}
-                  <Link
-                    to="/admin/logs"
-                    className="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-700"
-                  >
-                    Logs
-                  </Link>
-                </td>
-              </tr>
-            ))}
+                    </button>}
+                    {usertype === "teacher" && (
+                      <button
+                        className="bg-yellow-500 text-white font-bold py-1 mx-1 my-1 px-2 rounded hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                        onClick={() => onmakecordinator(user)}
+                      >
+                        Make Coordinator
+                      </button>
+                    )}
+                    {usertype === "cordinator" && (
+                      <button
+                        className="bg-yellow-500 text-white font-bold py-1 mx-1 my-1 px-2 rounded hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                        onClick={() => openRolesModal(user)}
+                      >
+                        Roles
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
+
+      {/* Place the Roles component here and pass the ref */}
+      <Roles ref={rolesButtonRef} ruser={ruser} />
     </div>
   );
 };

@@ -2,10 +2,12 @@ import { useState } from "react";
 import AlertContext from "./alertcontext";
 import config from "../../config";
 const host = config.host;
+let iscordinator=false;
 
 const AlertState = (props) => {
   const [UserName, setUserName] = useState("");
   const [usertype, setusertype] = useState("");
+  const [empid, setEmpid] = useState("");
   const [alert, setAlert] = useState([{ success: true, msg: "" }]);
 
   const showAlert = (json) => {
@@ -30,8 +32,12 @@ const AlertState = (props) => {
       }),
     });
     const json = await response.json();
-    setUserName(json.name);
-    setusertype(json.usertype);
+    setUserName(json.user.name);
+    setusertype(json.user.usertype);
+    iscordinator=json.iscordinator;
+    if(json.user.usertype==="teacher"){
+      setEmpid(json.user.empid)
+    }
   };
 
   return (
@@ -41,7 +47,9 @@ const AlertState = (props) => {
         showAlert,
         getuserdata,
         UserName,
+        empid,
         usertype,
+        iscordinator,
       }}
     >
       {props.children}
