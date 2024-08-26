@@ -160,7 +160,7 @@ const UserList = () => {
               </tr>
             ) : (
               filteredUserList.map((user) => (
-                <tr key={user._id}>
+                <tr key={user.email}>
                   {usertype === "teacher" || usertype === "cordinator" ? (
                     <td className="py-2 px-4 border-b">{user.empid}</td>
                   ) : usertype === "student" ? (

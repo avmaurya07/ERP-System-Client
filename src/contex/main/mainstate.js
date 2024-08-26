@@ -202,7 +202,7 @@ const MainState = (props) => {
         "auth-token": localStorage.getItem("token"),
       },
 
-      body: JSON.stringify({empid:empid}),
+      body: JSON.stringify({empid:empid,usertype:localStorage.getItem("usertype")}),
     });
     const json = await response.json();
     setSelectedRoles({

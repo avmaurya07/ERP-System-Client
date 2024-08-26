@@ -15,9 +15,9 @@ const EditBatch = () => {
   const [toggleview, setToggleview] = useState("page");
   const [userId, setUserId] = useState("");
   const checkPermission = () => {
-    if (!selectedRoles.studentcontrol) {
+    if (localStorage.getItem("usertype")==="cordinator"){if (!selectedRoles.studentcontrol) {
       navigate("/cordinator");
-    }
+    }}
   };
   const onUserIdChange = (e) => {
     setUserId(e.target.value);

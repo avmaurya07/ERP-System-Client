@@ -163,6 +163,12 @@ const AdminMenu = () => {
                 >
                   Academic Year & Semester
                 </Link>
+                <Link
+                  to="/admin/batches"
+                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                >
+                  Batches
+                </Link>
                   
                 </div>
               )}

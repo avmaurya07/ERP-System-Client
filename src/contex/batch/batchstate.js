@@ -17,7 +17,17 @@ const BatchState = (props) => {
     students: [],
   });
 
-  const getbatchlist = async (batchcode) => {
+  const getbatchlist = async (batchcode, school, department) => {
+    let body = [];
+    if (localStorage.getItem("usertype") === "cordinator") {
+      body = batchcode;
+    } else if (localStorage.getItem("usertype") === "admin") {
+      body = {
+        batchcode: batchcode,
+        schoolcode: school,
+        departmentcode: department,
+      };
+    }
     const response = await fetch(`${host}/api/academic/getbatchlist`, {
       method: "post",
       headers: {
@@ -25,7 +35,7 @@ const BatchState = (props) => {
         "auth-token": localStorage.getItem("token"),
       },
 
-      body: JSON.stringify({ batchcode: batchcode }),
+      body: JSON.stringify(body),
     });
     const json = await response.json();
     if (json.msgtype) {
@@ -35,6 +45,21 @@ const BatchState = (props) => {
   };
 
   const addbatch = async (data) => {
+    let body = [];
+    if (localStorage.getItem("usertype") === "cordinator") {
+      body = data;
+    } else if (localStorage.getItem("usertype") === "admin") {
+      body = {
+        academicyearname: data.academicyearname,
+        academicyearcode: data.academicyearcode,
+        semestername: data.semestername,
+        semestercode: data.semestercode,
+        batchname: data.batchname,
+        batchcode: data.batchcode,
+        schoolcode: data.batchcode,
+        departmentcode: data.batchcode,
+      };
+    }
     const response = await fetch(`${host}/api/academic/createbatch`, {
       method: "post",
       headers: {
@@ -42,14 +67,7 @@ const BatchState = (props) => {
         "auth-token": localStorage.getItem("token"),
       },
 
-      body: JSON.stringify({
-        academicyearname: data.academicyearname,
-        academicyearcode: data.academicyearcode,
-        semestername: data.semestername,
-        semestercode: data.semestercode,
-        batchname: data.batchname,
-        batchcode: data.batchcode,
-      }),
+      body: JSON.stringify({body}),
     });
     const json = await response.json();
     showAlert(json);
@@ -64,6 +82,7 @@ const BatchState = (props) => {
         addbatch,
         selectedBatch,
         setSelectedBatch,
+        setBatchlist,
       }}
     >
       {props.children}

@@ -10,6 +10,8 @@ import UserList from "./userlist";
 import SchoolDep from "./SchoolDep";
 import Logs from "../Logs";
 import YearSem from "./YearSem";
+import Batches from "../cordinator/Batches";
+import EditBatch from "../cordinator/EditBatch";
 
 const AdminHome = () => {
   return (
@@ -28,6 +30,8 @@ const AdminHome = () => {
             <Route exact path="schooldep" element={<SchoolDep />} />
             <Route exact path="yearsem" element={<YearSem />} />
             <Route exact path="logs" element={<Logs />} />
+            <Route exact path="batches" element={<Batches />} />
+            <Route exact path="batches/editstudents" element={<EditBatch />} />
           </Routes>
           
         </div>
