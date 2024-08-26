@@ -20,7 +20,7 @@ const UserListState = (props) => {
     });
     const json = await response.json();
     setUserlist(json.userlist)
-    showAlert(json);
+    // showAlert(json);
   };
 
   const masterlogin = async (user) => {

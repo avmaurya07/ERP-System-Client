@@ -1,9 +1,9 @@
-import React, { forwardRef, useContext, useState } from "react";
+import React, { forwardRef, useContext} from "react";
 import MainContext from "../../contex/main/maincontext";
 
 const Roles = forwardRef(({ ruser }, ref) => {
   const context = useContext(MainContext);
-  const { setrole, selectedRoles, setSelectedRoles, getrole } = context;
+  const { setrole, selectedRoles, setSelectedRoles} = context;
 
   const handleCheckboxChange = (e) => {
     const { id, checked } = e.target;

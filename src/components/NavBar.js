@@ -7,7 +7,7 @@ const NavBar = () => {
   const { getuserdata,usertype,UserName } = context;
   useEffect(() => {
     getuserdata();
-  }, []);
+  }, [getuserdata]);
 
   return (
     <>

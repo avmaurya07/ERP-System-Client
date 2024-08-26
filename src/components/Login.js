@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import config from "../config";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AlertContext from "../contex/alert/alertcontext";
 const host = config.host;
 
@@ -66,7 +66,7 @@ const Login = () => {
     if (localStorage.getItem("usertype") === "cordinator") {
       navigate("/cordinator");
     }
-  }, []);
+  }, [navigate]);
   return (
     <>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -125,12 +125,12 @@ const Login = () => {
                   Password
                 </label>
                 <div className="text-sm">
-                  <a
-                    href="#"
+                  <Link
+                    to="/"
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-2">

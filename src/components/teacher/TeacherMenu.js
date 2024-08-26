@@ -50,7 +50,7 @@ const TeacherMenu = () => {
     if (localStorage.getItem("usertype") !== "teacher") {
       navigate("/login");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="relative flex w-full max-w-[20rem] flex-col rounded-none bg-white p-4 text-gray-700 shadow-lg overflow-auto h-full min-h-[calc(100vh-2rem)]">

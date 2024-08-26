@@ -9,7 +9,6 @@ const AlertState = (props) => {
   const [usertype, setusertype] = useState("");
   const [empid, setEmpid] = useState("");
   const [alert, setAlert] = useState([{ success: true, msg: "" }]);
-
   const showAlert = (json) => {
     setAlert({
       success: json.msgtype,
@@ -35,7 +34,7 @@ const AlertState = (props) => {
     setUserName(json.user.name);
     setusertype(json.user.usertype);
     iscordinator=json.iscordinator;
-    if(json.user.usertype==="teacher"){
+    if((json.user.usertype==="teacher") || json.user.usertype==="cordinator"){
       setEmpid(json.user.empid)
     }
   };

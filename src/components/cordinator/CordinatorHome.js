@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "../NavBar";
 import CordinatorMenu from "./CordinatorMenu";
+import Batches from "./Batches";
+import EditBatch from "./EditBatch";
 
 const CordinatorHome = () => {
   return (
@@ -12,7 +14,8 @@ const CordinatorHome = () => {
       
       <div className="flex-grow p-4 overflow-auto">
           <Routes>
-            {/* <Route exact path="changepassword" element={<ChangePassword />} /> */}
+            <Route exact path="batches" element={<Batches />} />
+            <Route path="/batches/editstudents" element={<EditBatch />} />
           </Routes>
           
         </div>

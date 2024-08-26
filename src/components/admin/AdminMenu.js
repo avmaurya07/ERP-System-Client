@@ -34,7 +34,7 @@ const AdminMenu = () => {
     if (!(localStorage.getItem("usertype") === "admin")) {
       navigate("/login");
     }
-  }, [navigate]);
+  }, []);
 
   return (
     <>
