@@ -8,7 +8,7 @@ const Studenthome = () => {
   return (
     <>
     <NavBar/>
-    <div className="flex flex-row h-screen">
+    <div className="flex flex-row h-screen mt-5">
       <StudentMenu/>
       <div className="flex-grow p-4 overflow-auto">
           <Routes>

@@ -6,7 +6,7 @@ const Alert = () => {
 
   return (
     <div
-      className={`fixed top-5 left-1/2 transform -translate-x-1/2 z-50 max-w-lg w-full ${
+      className={`fixed z-40 top-5 left-1/2 transform -translate-x-1/2 z-50 max-w-lg w-full ${
         alert.msg ? "opacity-100" : "opacity-0"
       } transition-opacity duration-500`}
       style={{ pointerEvents: alert.msg ? "auto" : "none" }}

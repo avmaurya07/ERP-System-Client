@@ -7,37 +7,98 @@ import UserListContext from "../../contex/userlist/userlistcontext";
 const EditBatch = () => {
   const navigate = useNavigate();
   const context = useContext(BatchContext);
-  const { selectedBatch } = context;
+  const { selectedBatch, Students, setStudents, editbatch } = context;
   const context1 = useContext(MainContext);
   const { selectedRoles } = context1;
   const context2 = useContext(UserListContext);
-  const { userlist, fetchuserlist} = context2;
+  const { userlist, fetchuserlist } = context2;
   const [toggleview, setToggleview] = useState("page");
   const [userId, setUserId] = useState("");
+  const [inbatch, setInbatch] = useState({});
+
+  // Check permission and redirect if necessary
   const checkPermission = () => {
-    if (localStorage.getItem("usertype")==="cordinator"){if (!selectedRoles.studentcontrol) {
-      navigate("/cordinator");
-    }}
+    if (localStorage.getItem("usertype") === "cordinator") {
+      if (!selectedRoles.studentcontrol) {
+        navigate("/cordinator");
+      }
+    }
+    if (!(selectedBatch.batchcode)){
+      navigate("/admin/batches")
+    }
   };
+
   const onUserIdChange = (e) => {
     setUserId(e.target.value);
   };
+
   const handleEditStudents = () => {
     setToggleview("edit");
-    fetchuserlist("student")
+    fetchuserlist("student");
   };
+
   const handleback = () => {
     setToggleview("page");
   };
+
+  const handlesubmit = async () => {
+    const data ={
+      academicyearcode:selectedBatch.academicyearcode,
+      semestercode:selectedBatch.semestercode,
+      schoolcode:selectedBatch.schoolcode,
+      departmentcode:selectedBatch.departmentcode,
+      batchcode:selectedBatch.batchcode,
+      students:Students,
+    }
+    await editbatch(data);
+    if (localStorage.getItem("usertype")==="cordinator"){
+      navigate("/cordinator/batches")
+    }
+    else if (localStorage.getItem("usertype")==="admin"){
+      navigate("/admin/batches")
+    }
+  };
+
   const filteredUserList = userlist.filter((user) => {
-    return (user.systemid?.includes(userId) &&
-    user.school?.includes(selectedBatch.schoolcode) &&
-    user.department?.includes(selectedBatch.departmentcode)
-    )
+    return (
+      user.systemid?.includes(userId) &&
+      user.school?.includes(selectedBatch?.schoolcode) &&
+      user.department?.includes(selectedBatch?.departmentcode)
+    );
   });
+
+  const handleCheckboxChange = (e, user) => {
+    const { checked } = e.target;
+
+    if (checked) {
+      setStudents((prevStudents) => [
+        ...prevStudents,
+        { systemid: user.systemid, name: user.name, email: user.email, phone: user.phone }
+      ]);
+    } else {
+      setStudents((prevStudents) =>
+        prevStudents.filter((student) => student.systemid !== user.systemid)
+      );
+    }
+
+    setInbatch((prevSelected) => ({
+      ...prevSelected,
+      [user.systemid]: checked,
+    }));
+  };
+
   useEffect(() => {
     checkPermission();
   }, []);
+
+  useEffect(() => {
+    // Initialize the checkbox states based on Students state
+    const initialInbatch = Students.reduce((acc, student) => {
+      acc[student.systemid] = true;
+      return acc;
+    }, {});
+    setInbatch(initialInbatch);
+  }, [Students]);
 
   return (
     <>
@@ -54,46 +115,56 @@ const EditBatch = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="py-2 px-4 border-b">
-                    <strong>School:</strong>
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    {selectedBatch.schoolcode}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-2 px-4 border-b">
-                    <strong>Department:</strong>
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    {selectedBatch.departmentcode}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-2 px-4 border-b">
-                    <strong>Academic Year:</strong>
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    {selectedBatch.academicyearcode}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-2 px-4 border-b">
-                    <strong>Semester:</strong>
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    {selectedBatch.semestercode}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-2 px-4 border-b">
-                    <strong>Batch:</strong>
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    {selectedBatch.batchname}
-                  </td>
-                </tr>
+                {selectedBatch ? (
+                  <>
+                    <tr>
+                      <td className="py-2 px-4 border-b">
+                        <strong>School:</strong>
+                      </td>
+                      <td className="py-2 px-4 border-b">
+                        {selectedBatch.schoolcode}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 px-4 border-b">
+                        <strong>Department:</strong>
+                      </td>
+                      <td className="py-2 px-4 border-b">
+                        {selectedBatch.departmentcode}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 px-4 border-b">
+                        <strong>Academic Year:</strong>
+                      </td>
+                      <td className="py-2 px-4 border-b">
+                        {selectedBatch.academicyearcode}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 px-4 border-b">
+                        <strong>Semester:</strong>
+                      </td>
+                      <td className="py-2 px-4 border-b">
+                        {selectedBatch.semestercode}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 px-4 border-b">
+                        <strong>Batch:</strong>
+                      </td>
+                      <td className="py-2 px-4 border-b">
+                        {selectedBatch.batchname}
+                      </td>
+                    </tr>
+                  </>
+                ) : (
+                  <tr>
+                    <td colSpan={2} className="py-2 px-4 text-center">
+                      No batch selected.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -115,23 +186,27 @@ const EditBatch = () => {
                 </tr>
               </thead>
               <tbody>
-                {selectedBatch.students.map((student, index) => (
-                  <tr key={index}>
-                    <td className="py-2 px-4 border-b">{student.name}</td>
-                    <td className="py-2 px-4 border-b">{student.systemid}</td>
-                    <td className="py-2 px-4 border-b">{student.email}</td>
-                    <td className="py-2 px-4 border-b">{student.phone}</td>
-                    <td className="py-2 px-4 border-b"></td>
+                {selectedBatch?.students?.length > 0 ? (
+                  selectedBatch.students.map((student, index) => (
+                    <tr key={index}>
+                      <td className="py-2 px-4 border-b">{student.name}</td>
+                      <td className="py-2 px-4 border-b">{student.systemid}</td>
+                      <td className="py-2 px-4 border-b">{student.email}</td>
+                      <td className="py-2 px-4 border-b">{student.phone}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={4} className="py-2 px-4 text-center">
+                      No students found in this batch.
+                    </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
         </>
       )}
-
-
-
 
       {toggleview === "edit" && (
         <div>
@@ -175,7 +250,15 @@ const EditBatch = () => {
                   ) : (
                     filteredUserList.map((user) => (
                       <tr key={user.systemid}>
-                        <td className="py-2 px-4 border-b"><input type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:border-gray-600"/></td>
+                        <td className="py-2 px-4 border-b">
+                          <input
+                            type="checkbox"
+                            id="inbatch"
+                            checked={!!inbatch[user.systemid]}
+                            onChange={(e) => handleCheckboxChange(e, user)}
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                          />
+                        </td>
                         <td className="py-2 px-4 border-b">{user.name}</td>
                         <td className="py-2 px-4 border-b">{user.systemid}</td>
                         <td className="py-2 px-4 border-b">{user.email}</td>
@@ -185,6 +268,12 @@ const EditBatch = () => {
                   )}
                 </tbody>
               </table>
+              <button
+                className="bg-green-500 text-white font-bold py-1 px-3 mt-2 rounded hover:bg-green-700"
+                onClick={handlesubmit}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>

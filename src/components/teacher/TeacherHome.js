@@ -8,7 +8,7 @@ const TeacherHome = () => {
   return (
     <>
       <NavBar />
-      <div className="flex flex-row h-screen">
+      <div className="flex flex-row h-screen mt-5">
       <TeacherMenu />
       
       <div className="flex-grow p-4 overflow-auto">

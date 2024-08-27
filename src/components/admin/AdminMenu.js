@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AlertContext from "../../contex/alert/alertcontext";
 
 const AdminMenu = () => {
+  const context = useContext(AlertContext);
+  const { isMenuVisible } = context;
   const navigate = useNavigate();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isRegisterExpanded, setRegisterExpanded] = useState(false);
@@ -38,8 +41,10 @@ const AdminMenu = () => {
 
   return (
     <>
-      
-        <div className="flex-none w-64 bg-white p-4 text-gray-700 shadow-lg h-full">
+      {isMenuVisible && 
+        <div className="relative flex w-full max-w-[20rem] flex-col rounded-none bg-white p-4 text-gray-700 shadow-lg overflow-auto h-full min-h-[calc(100vh-2rem)] box-border min-w-[20rem] max-h-full">
+         
+          
           <div className="p-4 mb-4">
             <h5 className="text-2xl font-semibold text-blue-gray-900">
               ERP-System
@@ -53,7 +58,7 @@ const AdminMenu = () => {
                 className="flex items-center justify-between w-full p-3 rounded-lg bg-blue-gray-50 hover:bg-blue-gray-100 focus:bg-blue-gray-100 transition-colors cursor-pointer"
               >
                 <div className="flex items-center">
-                <svg
+                  <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
@@ -169,7 +174,12 @@ const AdminMenu = () => {
                 >
                   Batches
                 </Link>
-                  
+                <Link
+                  to="/admin/courses"
+                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                >
+                  Courses
+                </Link>
                 </div>
               )}
             </div>
@@ -237,9 +247,7 @@ const AdminMenu = () => {
               )}
             </div>
           </nav>
-        </div>
-        
-      
+        </div>}
     </>
   );
 };

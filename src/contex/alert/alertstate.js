@@ -9,6 +9,12 @@ const AlertState = (props) => {
   const [usertype, setusertype] = useState("");
   const [empid, setEmpid] = useState("");
   const [alert, setAlert] = useState([{ success: true, msg: "" }]);
+  const [isMenuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenuVisibility = () => {
+    setMenuVisible(!isMenuVisible);
+  };
+
   const showAlert = (json) => {
     setAlert({
       success: json.msgtype,
@@ -49,6 +55,8 @@ const AlertState = (props) => {
         empid,
         usertype,
         iscordinator,
+        toggleMenuVisibility,
+        isMenuVisible,
       }}
     >
       {props.children}

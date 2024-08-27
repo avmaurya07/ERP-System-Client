@@ -80,8 +80,8 @@ const UserList = () => {
     setRuser(user);
     if (rolesButtonRef.current) {
       rolesButtonRef.current.click();
+      handleclick(user)
     }
-    handleclick(user)
   };
 
   return (

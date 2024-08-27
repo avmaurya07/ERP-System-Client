@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AlertContext from "../../contex/alert/alertcontext";
 
 const Menu = () => {
+  const context1 = useContext(AlertContext);
+  const {isMenuVisible } = context1;
   const navigate = useNavigate();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isCourseExpanded, setCourseExpanded] = useState(false);
@@ -46,8 +49,9 @@ const Menu = () => {
     }
   }, [navigate]);
 
-  return (
-    <div className="relative flex w-full max-w-[20rem] flex-col rounded-none bg-white p-4 text-gray-700 shadow-lg overflow-auto h-full min-h-[calc(100vh-2rem)]">
+  return (<>
+    { isMenuVisible && 
+    <div className="relative flex w-full max-w-[20rem] flex-col rounded-none bg-white p-4 text-gray-700 shadow-lg overflow-auto h-full min-h-[calc(100vh-2rem)] box-border min-w-[20rem] max-h-full">
       <div className="p-4 mb-4">
         <h5 className="text-2xl font-semibold text-blue-gray-900">
           ERP-System
@@ -232,7 +236,8 @@ const Menu = () => {
           )}
         </div>
       </nav>
-    </div>
+    </div>}
+    </>
   );
 };
 

@@ -3,16 +3,12 @@ import { useNavigate } from "react-router-dom";
 import BatchContext from "../../contex/batch/batchcontext";
 import MainContext from "../../contex/main/maincontext";
 
-const Batches = () => {
+const Courses = () => {
   const navigate = useNavigate();
   const context = useContext(BatchContext);
-  const { batchlist, getbatchlist, addbatch, setSelectedBatch, setBatchlist, setStudents } = context;
-  
+  const { courselist, getcourselist, addcourse, setCourselist } = context;
   const context1 = useContext(MainContext);
   const {
-    yearlist,
-    getyearlist,
-    getsemlist,
     selectedRoles,
     schoollist,
     departmentslist,
@@ -20,17 +16,14 @@ const Batches = () => {
     getdepartmentlist,
   } = context1;
 
-  const [modalYear, setModalYear] = useState("");
-  const [modalSem, setModalSem] = useState("");
   const [toggleadmin, setToggleadmin] = useState(true);
-  const [modalSemList, setModalSemList] = useState([]);
-  const [batchData, setBatchData] = useState({
-    batchname: "",
-    batchcode: "",
-    academicyearcode: "",
-    semestercode: "",
-    schoolcode: "",
-    departmentcode: "",
+  const [courseData, setCourseData] = useState({
+    coursename: "",
+    coursecode: "",
+    academicyear: "",
+    semester: "",
+    schoolcode:"",
+    departmentcode:"",
   });
   const [school, setSchool] = useState("");
   const [department, setDepartment] = useState("");
@@ -38,23 +31,25 @@ const Batches = () => {
     school: "",
     department: "",
   });
+  const [modalYear, setModalYear] = useState("");
+  const [modalSem, setModalSem] = useState("");
+  const [modalSemList, setModalSemList] = useState([]);
 
   useEffect(() => {
     getschoollist();
-    getyearlist();
-    checkPermision();
+    checkPermission();
   }, []);
 
   useEffect(() => {
     if (localStorage.getItem("usertype") === "cordinator") {
-      getbatchlist();
+      getcourselist();
       setToggleadmin(false);
     } else if (localStorage.getItem("usertype") === "admin") {
-      setBatchlist([]);
+      setCourselist([]);
     }
   }, []);
 
-  const checkPermision = () => {
+  const checkPermission = () => {
     if (localStorage.getItem("usertype") === "cordinator" && !selectedRoles.studentcontrol) {
       return navigate("/cordinator");
     }
@@ -70,47 +65,18 @@ const Batches = () => {
   };
 
   const onInputChange = (e) => {
-    setBatchData({ ...batchData, [e.target.name]: e.target.value });
+    setCourseData({ ...courseData, [e.target.name]: e.target.value });
   };
 
-  const handleAddBatch = async () => {
-    await addbatch(batchData);
-    setBatchData({
-      batchname: "",
-      batchcode: "",
-      academicyearcode: "",
-      semestercode: "",
+  const handleAddCourse = async () => {
+    await addcourse(courseData);
+    setCourseData({
+      coursename: "",
+      coursecode: "",
+      academicyear: "",
+      semester: "",
     });
-    setModalYear("");
-    setModalSem("");
-    setModalSemList([]);
-    getbatchlist("", rdata.school, rdata.department);
-  };
-
-  const handleEditStudents = (batch) => {
-    setSelectedBatch(batch);
-    setStudents(batch.students);
-
-    const usertype = localStorage.getItem("usertype");
-    if (usertype === "cordinator") {
-      navigate("/cordinator/batches/editstudents");
-    } else if (usertype === "admin") {
-      navigate("/admin/batches/editstudents");
-    }
-  };
-
-  const onChangeModalYear = async (e) => {
-    const yearCode = e.target.value;
-    setModalYear(yearCode);
-    setBatchData({ ...batchData, academicyearcode: yearCode });
-    const json = await getsemlist(yearCode);
-    setModalSemList(json.semesterlist);
-  };
-
-  const onChangeModalSem = (e) => {
-    const semCode = e.target.value;
-    setModalSem(semCode);
-    setBatchData({ ...batchData, semestercode: semCode });
+    getcourselist("", rdata.school, rdata.department);
   };
 
   const onschoolChange = (e) => {
@@ -124,8 +90,8 @@ const Batches = () => {
   };
 
   const handlesubmit = () => {
-    getbatchlist("", rdata.school, rdata.department);
-    setBatchData({schoolcode:rdata.school,departmentcode:rdata.department,})
+    getcourselist("", rdata.school, rdata.department);
+    setCourseData({schoolcode:rdata.school,departmentcode:rdata.department,})
     setToggleadmin(false);
   };
 
@@ -186,14 +152,14 @@ const Batches = () => {
       {!toggleadmin && (
         <>
           <div className="flex justify-between mb-4">
-            <h1 className="text-xl font-bold">Batches</h1>
+            <h1 className="text-xl font-bold">Courses</h1>
             <button
               type="button"
               className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
               data-bs-toggle="modal"
-              data-bs-target="#addBatchModal"
+              data-bs-target="#addcourseModal"
             >
-              Add New Batch
+              Add New Course
             </button>
           </div>
 
@@ -201,47 +167,34 @@ const Batches = () => {
             <table className="min-w-full bg-white border table-auto">
               <thead>
                 <tr>
-                  <th className="py-2 px-4 border-b text-left">Batch Name</th>
-                  <th className="py-2 px-4 border-b text-left">Batch Code</th>
-                  <th className="py-2 px-4 border-b text-left">Academic Year</th>
-                  <th className="py-2 px-4 border-b text-left">Semester</th>
-                  <th className="py-2 px-4 border-b text-left">Actions</th>
+                  <th className="py-2 px-4 border-b text-left">Course Name</th>
+                  <th className="py-2 px-4 border-b text-left">Course Code</th>
                 </tr>
               </thead>
               <tbody>
-                {batchlist.map((batch, index) => (
+                {courselist.map((course, index) => (
                   <tr key={index}>
-                    <td className="py-2 px-4 border-b">{batch.batchname}</td>
-                    <td className="py-2 px-4 border-b">{batch.batchcode}</td>
-                    <td className="py-2 px-4 border-b">{batch.academicyearcode}</td>
-                    <td className="py-2 px-4 border-b">{batch.semestercode}</td>
-                    <td className="py-2 px-4 border-b">
-                      <button
-                        className="bg-green-500 text-white font-bold py-1 px-3 rounded hover:bg-green-700"
-                        onClick={() => handleEditStudents(batch)}
-                      >
-                        Edit Students
-                      </button>
-                    </td>
+                    <td className="py-2 px-4 border-b">{course.coursename}</td>
+                    <td className="py-2 px-4 border-b">{course.coursecode}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          {/* Add Batch Modal */}
+          {/* Add Course Modal */}
           <div
             className="modal fade"
-            id="addBatchModal"
+            id="addcourseModal"
             tabIndex="-1"
-            aria-labelledby="addBatchModalLabel"
+            aria-labelledby="addcourseModalLabel"
             aria-hidden="true"
           >
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="addBatchModalLabel">
-                    Add New Batch
+                  <h1 className="modal-title fs-5" id="addcourseModalLabel">
+                    Add New Course
                   </h1>
                   <button
                     type="button"
@@ -253,71 +206,60 @@ const Batches = () => {
                 <div className="modal-body">
                   <form>
                     <div className="mb-3">
+                      <label htmlFor="coursename" className="form-label">
+                        Course Name
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="coursename"
+                        name="coursename"
+                        onChange={onInputChange}
+                        value={courseData.coursename}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="coursecode" className="form-label">
+                        Course Code
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="coursecode"
+                        name="coursecode"
+                        onChange={onInputChange}
+                        value={courseData.coursecode}
+                        required
+                      />
+                    </div>
+                    {/* Optionally add academic year and semester fields if needed */}
+                    {/* <div className="mb-3">
                       <label htmlFor="academicyear" className="form-label">
                         Academic Year
                       </label>
-                      <select
+                      <input
+                        type="text"
                         className="form-control"
                         id="academicyear"
-                        name="academicyearcode"
-                        onChange={onChangeModalYear}
-                        value={modalYear}
-                      >
-                        <option value="">Select Academic Year</option>
-                        {yearlist.map((year, index) => (
-                          <option key={index} value={year.academicyearcode}>
-                            {year.academicyearname}
-                          </option>
-                        ))}
-                      </select>
+                        name="academicyear"
+                        onChange={onInputChange}
+                        value={courseData.academicyear}
+                      />
                     </div>
                     <div className="mb-3">
                       <label htmlFor="semester" className="form-label">
                         Semester
                       </label>
-                      <select
+                      <input
+                        type="text"
                         className="form-control"
                         id="semester"
-                        name="semestercode"
-                        onChange={onChangeModalSem}
-                        value={modalSem}
-                      >
-                        <option value="">Select Semester</option>
-                        {modalSemList.map((sem, index) => (
-                          <option key={index} value={sem.semestercode}>
-                            {sem.semestername}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="batchname" className="form-label">
-                        Batch Name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="batchname"
-                        name="batchname"
+                        name="semester"
                         onChange={onInputChange}
-                        value={batchData.batchname}
-                        required
+                        value={courseData.semester}
                       />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="batchcode" className="form-label">
-                        Batch Code
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="batchcode"
-                        name="batchcode"
-                        onChange={onInputChange}
-                        value={batchData.batchcode}
-                        required
-                      />
-                    </div>
+                    </div> */}
                   </form>
                 </div>
                 <div className="modal-footer">
@@ -331,10 +273,10 @@ const Batches = () => {
                   <button
                     type="button"
                     className="btn btn-primary"
-                    onClick={handleAddBatch}
+                    onClick={handleAddCourse}
                     data-bs-dismiss="modal"
                   >
-                    Add Batch
+                    Add Course
                   </button>
                 </div>
               </div>
@@ -346,4 +288,4 @@ const Batches = () => {
   );
 };
 
-export default Batches;
+export default Courses;
