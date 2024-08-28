@@ -2,22 +2,27 @@ import React, { useContext, useEffect, useState } from "react";
 import config from "../config";
 import { Link, useNavigate } from "react-router-dom";
 import AlertContext from "../contex/alert/alertcontext";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+
 const host = config.host;
 
 const Login = () => {
   const context = useContext(AlertContext);
-  const { showAlert } = context;
+  const { showAlert, setLoading } = context;
   const navigate = useNavigate();
   const [ldata, setLdata] = useState({
     systemid: "",
     password: "",
     usertype: "student",
   });
+  const [showPassword, setShowPassword] = useState(false);
+
   const onChange = (e) => {
     setLdata({ ...ldata, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const response = await fetch(`${host}/api/auth/login`, {
       method: "post",
@@ -32,6 +37,7 @@ const Login = () => {
     });
 
     const json = await response.json();
+    setLoading(false);
     showAlert(json);
     if (json.msgtype) {
       //save the token on local storage and redirect
@@ -50,9 +56,9 @@ const Login = () => {
       if (json.usertype === "cordinator") {
         navigate("/cordinator");
       }
-      // window.location.reload(true);
     }
   };
+
   useEffect(() => {
     if (localStorage.getItem("usertype") === "admin") {
       navigate("/admin");
@@ -67,136 +73,139 @@ const Login = () => {
       navigate("/cordinator");
     }
   }, [navigate]);
+
   return (
-    <>
-      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-lg shadow-lg">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Login to System
           </h2>
         </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              {ldata.usertype === "student" && (
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  System ID
-                </label>
-              )}
-              {ldata.usertype === "teacher" && (
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Employee ID
-                </label>
-              )}
-              {ldata.usertype === "admin" && (
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Admin Email ID
-                </label>
-              )}
-              <div className="mt-2">
-                <input
-                  id="systemid"
-                  name="systemid"
-                  type="text"
-                  required
-                  onChange={onChange}
-                  placeholder="  Enter your System ID"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+              <label htmlFor="systemid" className="sr-only">
+                {ldata.usertype === "student" && "System ID"}
+                {ldata.usertype === "teacher" && "Employee ID"}
+                {ldata.usertype === "admin" && "Admin Email ID"}
+              </label>
+              <input
+                id="systemid"
+                name="systemid"
+                type="text"
+                required
+                onChange={onChange}
+                placeholder={
+                  ldata.usertype === "student"
+                    ? "Enter your System ID"
+                    : ldata.usertype === "teacher"
+                    ? "Enter your Employee ID"
+                    : "Enter your Admin Email ID"
+                }
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              />
             </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Password
-                </label>
-                <div className="text-sm">
-                  <Link
-                    to="/"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </Link>
-                </div>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  onChange={onChange}
-                  placeholder="  Enter your Password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="center">
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="usertype"
-                  value="student"
-                  onChange={onChange}
-                  defaultChecked
-                />
-                <label className="form-check-label" htmlFor="inlineRadio1">
-                  Student
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="usertype"
-                  value="teacher"
-                  onChange={onChange}
-                />
-                <label className="form-check-label" htmlFor="inlineRadio2">
-                  Teacher
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="usertype"
-                  value="admin"
-                  onChange={onChange}
-                />
-                <label className="form-check-label" htmlFor="inlineRadio3">
-                  Admin
-                </label>
-              </div>
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            <div className="relative">
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
+                required
+                onChange={onChange}
+                placeholder="Enter your Password"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
               >
-                Login
-              </button>
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
             </div>
-          </form>
-        </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                id="remember_me"
+                name="remember_me"
+                type="checkbox"
+                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              />
+              <label
+                htmlFor="remember_me"
+                className="ml-2 block text-sm text-gray-900"
+              >
+                Remember me
+              </label>
+            </div>
+
+            <div className="text-sm">
+              <Link
+                to="/"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
+                Forgot your password?
+              </Link>
+            </div>
+          </div>
+
+          <div className="flex justify-center space-x-4">
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="usertype"
+                value="student"
+                onChange={onChange}
+                defaultChecked
+              />
+              <label className="form-check-label" htmlFor="inlineRadio1">
+                Student
+              </label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="usertype"
+                value="teacher"
+                onChange={onChange}
+              />
+              <label className="form-check-label" htmlFor="inlineRadio2">
+                Teacher
+              </label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="usertype"
+                value="admin"
+                onChange={onChange}
+              />
+              <label className="form-check-label" htmlFor="inlineRadio3">
+                Admin
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
+            >
+              Login
+            </button>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 

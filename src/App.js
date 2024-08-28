@@ -15,6 +15,7 @@ import UserListState from "./contex/userlist/userliststate";
 import MainState from "./contex/main/mainstate";
 import CordinatorHome from "./components/cordinator/CordinatorHome";
 import BatchState from "./contex/batch/batchstate";
+import Loader from "./components/loader";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
             <MainState>
               <BatchState>
                 <Alert />
-
+                <Loader />
                 <Router>
                   <Routes>
                     <Route exact path="/login" element={<Login />} />

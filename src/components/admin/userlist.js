@@ -1,9 +1,10 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import UserListContext from "../../contex/userlist/userlistcontext";
 import { Link, useNavigate } from "react-router-dom";
 import RegisterContext from "../../contex/register/registercontext";
 import Roles from "./Roles";
 import MainContext from "../../contex/main/maincontext";
+import AlertContext from "../../contex/alert/alertcontext";
 
 const UserList = () => {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ const UserList = () => {
   const { register } = context1;
   const context2 = useContext(MainContext);
   const { getrole } = context2;
+  const context3 = useContext(AlertContext);
+  const { setMenuVisible } = context3;
   const [usertype, setUsertype] = useState("");
   const [userId, setUserId] = useState("");
   const [ruser, setRuser] = useState([]);
@@ -80,10 +83,12 @@ const UserList = () => {
     setRuser(user);
     if (rolesButtonRef.current) {
       rolesButtonRef.current.click();
-      handleclick(user)
+      handleclick(user);
     }
   };
-
+  useEffect(() => {
+    setMenuVisible(false);
+  }, []);
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Search User Details</h1>
@@ -101,14 +106,14 @@ const UserList = () => {
           <option value="admin">Admin</option>
         </select>
         <button
-          className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
           onClick={handleSearch}
         >
           Search
         </button>
         <input
           type="text"
-          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded focus:outline-none "
           placeholder="Search User"
           value={userId}
           onChange={onUserIdChange}
@@ -145,8 +150,12 @@ const UserList = () => {
                 <th className="py-2 px-4 border-b text-left">Email</th>
               )}
               <th className="py-2 px-4 border-b text-left">Name</th>
-              { !(usertype === "admin") && <th className="py-2 px-4 border-b text-left">School</th>}
-              { !(usertype === "admin") && <th className="py-2 px-4 border-b text-left">Department</th>}
+              {!(usertype === "admin") && (
+                <th className="py-2 px-4 border-b text-left">School</th>
+              )}
+              {!(usertype === "admin") && (
+                <th className="py-2 px-4 border-b text-left">Department</th>
+              )}
               <th className="py-2 px-4 border-b text-left">Phone</th>
               <th className="py-2 px-4 border-b text-left">Actions</th>
             </tr>
@@ -169,19 +178,25 @@ const UserList = () => {
                     <td className="py-2 px-4 border-b">{user.email}</td>
                   )}
                   <td className="py-2 px-4 border-b">{user.name}</td>
-                  { !(usertype === "admin") && <td className="py-2 px-4 border-b">{user.school}</td>}
-                  { !(usertype === "admin") && <td className="py-2 px-4 border-b">{user.department}</td>}
+                  {!(usertype === "admin") && (
+                    <td className="py-2 px-4 border-b">{user.school}</td>
+                  )}
+                  {!(usertype === "admin") && (
+                    <td className="py-2 px-4 border-b">{user.department}</td>
+                  )}
                   <td className="py-2 px-4 border-b">{user.phone}</td>
                   <td className="py-2 px-4 border-b">
-                    {(usertype === "teacher" || usertype === "student") && <button
-                      className="bg-green-500 text-white font-bold py-1 my-1 mx-1 px-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-                      onClick={() => handleMasterLogin(user)}
-                    >
-                      Login
-                    </button>}
+                    {(usertype === "teacher" || usertype === "student") && (
+                      <button
+                        className="flex justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 transition duration-300 ease-in-out transform hover:scale-105"
+                        onClick={() => handleMasterLogin(user)}
+                      >
+                        Login
+                      </button>
+                    )}
                     {usertype === "teacher" && (
                       <button
-                        className="bg-yellow-500 text-white font-bold py-1 mx-1 my-1 px-2 rounded hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                        className="flex justify-center rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-yellow-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 transition duration-300 ease-in-out transform hover:scale-105"
                         onClick={() => onmakecordinator(user)}
                       >
                         Make Coordinator
@@ -189,7 +204,7 @@ const UserList = () => {
                     )}
                     {usertype === "cordinator" && (
                       <button
-                        className="bg-yellow-500 text-white font-bold py-1 mx-1 my-1 px-2 rounded hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                        className="flex justify-center rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-yellow-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 transition duration-300 ease-in-out transform hover:scale-105"
                         onClick={() => openRolesModal(user)}
                       >
                         Roles

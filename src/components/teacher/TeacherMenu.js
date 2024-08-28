@@ -7,7 +7,7 @@ const TeacherMenu = () => {
   const context = useContext(MainContext);
   const { switchrole } = context;
   const context1 = useContext(AlertContext);
-  const { iscordinator, isMenuVisible } = context1;
+  const { iscordinator, isMenuVisible, setMenuVisible } = context1;
   const navigate = useNavigate();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isAccountExpanded, setAccountExpanded] = useState(false);
@@ -42,7 +42,10 @@ const TeacherMenu = () => {
     };
     const json = await switchrole(user);
     if (json.msgtype) {
+      localStorage.removeItem("usertype");
+      localStorage.setItem("usertype", "cordinator");
       navigate("/cordinator");
+      setMenuVisible(false);
     }
   };
 

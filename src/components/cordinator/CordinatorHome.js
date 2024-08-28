@@ -5,6 +5,7 @@ import CordinatorMenu from "./CordinatorMenu";
 import Batches from "./Batches";
 import EditBatch from "./EditBatch";
 import Courses from "./Courses";
+import Classes from "./Classes";
 
 const CordinatorHome = () => {
   return (
@@ -17,6 +18,7 @@ const CordinatorHome = () => {
           <Routes>
             <Route exact path="batches" element={<Batches />} />
             <Route exact path="courses" element={<Courses />} />
+            <Route exact path="classes" element={<Classes />} />
             <Route path="/batches/editstudents" element={<EditBatch />} />
           </Routes>
           

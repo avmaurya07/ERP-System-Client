@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import MainContext from "../../contex/main/maincontext";
+import AlertContext from "../../contex/alert/alertcontext";
 
 const YearSem = () => {
   const context = useContext(MainContext);
   const { yearlist, semlist, getyearlist, getsemlist, addyearsem,setSemlist } = context;
+  const context2 = useContext(AlertContext);
+  const { setMenuVisible } = context2;
   const [toggle, setToggle] = useState("");
   const [year, setYear] = useState("");
   const [addyear, setAddyear] = useState("");
@@ -78,26 +81,27 @@ const YearSem = () => {
 
   useEffect(() => {
     getyearlist();
+    setMenuVisible(false);
   }, []);
 
   return (
     <div className="p-4">
       <div className="flex items-center space-x-4 mb-4">
         <button
-          className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
           onClick={handleyear}
         >
           Academic Year
         </button>
         <button
-          className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
           onClick={handlesem}
         >
           Semester
         </button>
         <button
           type="button"
-          className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
@@ -143,7 +147,7 @@ const YearSem = () => {
             </select>
 
             <button
-              className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
               onClick={semsearch}
             >
               Search
@@ -293,7 +297,7 @@ const YearSem = () => {
                 <div className="modal-footer">
                   <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
                     data-bs-dismiss="modal"
                   >
                     Close
@@ -301,7 +305,7 @@ const YearSem = () => {
                   <button
                     onClick={handleSubmit}
                     type="button"
-                    className="btn btn-primary"
+                    className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
                     data-bs-dismiss="modal"
                   >
                     Add

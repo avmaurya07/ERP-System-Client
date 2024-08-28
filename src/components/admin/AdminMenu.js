@@ -4,7 +4,7 @@ import AlertContext from "../../contex/alert/alertcontext";
 
 const AdminMenu = () => {
   const context = useContext(AlertContext);
-  const { isMenuVisible } = context;
+  const { isMenuVisible,setMenuVisible } = context;
   const navigate = useNavigate();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isRegisterExpanded, setRegisterExpanded] = useState(false);

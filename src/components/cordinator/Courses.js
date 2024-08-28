@@ -2,11 +2,14 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import BatchContext from "../../contex/batch/batchcontext";
 import MainContext from "../../contex/main/maincontext";
+import AlertContext from "../../contex/alert/alertcontext";
 
 const Courses = () => {
   const navigate = useNavigate();
   const context = useContext(BatchContext);
   const { courselist, getcourselist, addcourse, setCourselist } = context;
+  const context2 = useContext(AlertContext);
+  const { setMenuVisible } = context2;
   const context1 = useContext(MainContext);
   const {
     selectedRoles,
@@ -22,8 +25,8 @@ const Courses = () => {
     coursecode: "",
     academicyear: "",
     semester: "",
-    schoolcode:"",
-    departmentcode:"",
+    schoolcode: "",
+    departmentcode: "",
   });
   const [school, setSchool] = useState("");
   const [department, setDepartment] = useState("");
@@ -47,10 +50,15 @@ const Courses = () => {
     } else if (localStorage.getItem("usertype") === "admin") {
       setCourselist([]);
     }
+
+    setMenuVisible(false);
   }, []);
 
   const checkPermission = () => {
-    if (localStorage.getItem("usertype") === "cordinator" && !selectedRoles.studentcontrol) {
+    if (
+      localStorage.getItem("usertype") === "cordinator" &&
+      !selectedRoles.studentcontrol
+    ) {
       return navigate("/cordinator");
     }
   };
@@ -91,7 +99,10 @@ const Courses = () => {
 
   const handlesubmit = () => {
     getcourselist("", rdata.school, rdata.department);
-    setCourseData({schoolcode:rdata.school,departmentcode:rdata.department,})
+    setCourseData({
+      schoolcode: rdata.school,
+      departmentcode: rdata.department,
+    });
     setToggleadmin(false);
   };
 
@@ -99,13 +110,16 @@ const Courses = () => {
     <div className="p-4">
       {toggleadmin && (
         <>
-          <div>
-            <label htmlFor="school" className="block text-sm font-medium leading-6 text-gray-900">
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <label
+              htmlFor="school"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
               School
             </label>
             <div className="mt-2">
               <select
-                className="bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 onChange={onschoolChange}
                 value={school}
               >
@@ -118,13 +132,16 @@ const Courses = () => {
               </select>
             </div>
           </div>
-          <div>
-            <label htmlFor="department" className="block text-sm font-medium leading-6 text-gray-900">
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <label
+              htmlFor="department"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
               Department
             </label>
             <div className="mt-2">
               <select
-                className="bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 onChange={ondepartmentChange}
                 value={department}
               >
@@ -136,10 +153,12 @@ const Courses = () => {
                 ))}
               </select>
             </div>
+            <br />
+            <br />
             <div>
               <button
                 type="button"
-                className="bg-blue-500 text-white font-bold py-2 px-4 my-2 rounded hover:bg-blue-700"
+                className="flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
                 onClick={handlesubmit}
               >
                 Submit
@@ -155,7 +174,7 @@ const Courses = () => {
             <h1 className="text-xl font-bold">Courses</h1>
             <button
               type="button"
-              className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
+              className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
               data-bs-toggle="modal"
               data-bs-target="#addcourseModal"
             >
@@ -265,14 +284,14 @@ const Courses = () => {
                 <div className="modal-footer">
                   <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="flex justify-center rounded-md bg-gray-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
                     data-bs-dismiss="modal"
                   >
                     Close
                   </button>
                   <button
                     type="button"
-                    className="btn btn-primary"
+                    className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
                     onClick={handleAddCourse}
                     data-bs-dismiss="modal"
                   >

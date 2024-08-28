@@ -2,17 +2,26 @@ import { useState } from "react";
 import AlertContext from "./alertcontext";
 import config from "../../config";
 const host = config.host;
-let iscordinator=false;
+let iscordinator = false;
 
 const AlertState = (props) => {
+  const [alert2, setAlert2] = useState("");
   const [UserName, setUserName] = useState("");
   const [usertype, setusertype] = useState("");
   const [empid, setEmpid] = useState("");
   const [alert, setAlert] = useState([{ success: true, msg: "" }]);
   const [isMenuVisible, setMenuVisible] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const toggleMenuVisibility = () => {
     setMenuVisible(!isMenuVisible);
+  };
+  const showAlert2 = (json) => {
+    setAlert2(json);
+  };
+
+  const hideAlert = () => {
+    setAlert2("");
   };
 
   const showAlert = (json) => {
@@ -25,6 +34,9 @@ const AlertState = (props) => {
     }, 2000);
   };
   const getuserdata = async () => {
+    if (usertype==="") {
+      setLoading(true);
+    }
     const response = await fetch(`${host}/api/auth/getuserdata`, {
       method: "post",
       headers: {
@@ -39,9 +51,15 @@ const AlertState = (props) => {
     const json = await response.json();
     setUserName(json.user.name);
     setusertype(json.user.usertype);
-    iscordinator=json.iscordinator;
-    if((json.user.usertype==="teacher") || json.user.usertype==="cordinator"){
-      setEmpid(json.user.empid)
+    if (json.user.usertype) {
+      setLoading(false);
+    }
+    iscordinator = json.iscordinator;
+    if (
+      json.user.usertype === "teacher" ||
+      json.user.usertype === "cordinator"
+    ) {
+      setEmpid(json.user.empid);
     }
   };
 
@@ -57,6 +75,12 @@ const AlertState = (props) => {
         iscordinator,
         toggleMenuVisibility,
         isMenuVisible,
+        setMenuVisible,
+        alert2,
+        showAlert2,
+        hideAlert,
+        setLoading,
+        isLoading,
       }}
     >
       {props.children}

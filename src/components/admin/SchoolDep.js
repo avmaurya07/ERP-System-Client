@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import MainContext from "../../contex/main/maincontext";
+import AlertContext from "../../contex/alert/alertcontext";
 
 const SchoolDep = () => {
   const context = useContext(MainContext);
   const { schoollist, departmentslist, getschoollist, getdepartmentlist, addschooldep,setDepartmentslist } = context;
+  const context2 = useContext(AlertContext);
+  const {setMenuVisible } = context2;
   const [toggle, setToggle] = useState("");
   const [school, setSchool] = useState("");
   const [addschool, setAddschool] = useState("");
@@ -78,6 +81,7 @@ const SchoolDep = () => {
 
   useEffect(() => {
     getschoollist();
+    setMenuVisible(false);
   }, []);
 
   return (

@@ -7,7 +7,7 @@ const CordinatorMenu = () => {
   const context = useContext(MainContext);
   const { switchrole, getrole, selectedRoles } = context;
   const context1 = useContext(AlertContext);
-  const { empid, isMenuVisible } = context1;
+  const { empid, isMenuVisible,setMenuVisible } = context1;
   const navigate = useNavigate();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isstudentcontrolExpanded, setstudentcontrolExpanded] = useState(false);
@@ -35,7 +35,10 @@ const CordinatorMenu = () => {
     };
     const json = await switchrole(user);
     if (json.msgtype) {
+      localStorage.removeItem("usertype");
+      localStorage.setItem("usertype", "teacher");
       navigate("/teacher");
+      setMenuVisible(false);
     }
   };
 
@@ -173,6 +176,12 @@ const CordinatorMenu = () => {
                       className="block p-2 rounded-lg hover:bg-blue-gray-100"
                     >
                       Courses
+                    </Link>
+                    <Link
+                      to="/cordinator/classes"
+                      className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                    >
+                      Classes
                     </Link>
                   </div>
                 )}

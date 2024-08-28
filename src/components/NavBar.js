@@ -7,7 +7,7 @@ const NavBar = () => {
   const { getuserdata, usertype, UserName, toggleMenuVisibility } = context;
   useEffect(() => {
     getuserdata();
-  }, [getuserdata]);
+  }, []);
 
   return (
     <>

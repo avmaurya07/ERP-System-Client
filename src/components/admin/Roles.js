@@ -82,7 +82,7 @@ const Roles = forwardRef(({ ruser }, ref) => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
                 data-bs-dismiss="modal"
               >
                 Close
@@ -90,7 +90,7 @@ const Roles = forwardRef(({ ruser }, ref) => {
               <button
                 onClick={handleSubmit}
                 type="button"
-                className="btn btn-primary"
+                className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
                 data-bs-dismiss="modal"
               >
                 Submit

@@ -3,6 +3,7 @@ import BatchContext from "../../contex/batch/batchcontext";
 import MainContext from "../../contex/main/maincontext";
 import { useNavigate } from "react-router-dom";
 import UserListContext from "../../contex/userlist/userlistcontext";
+import AlertContext from "../../contex/alert/alertcontext";
 
 const EditBatch = () => {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ const EditBatch = () => {
   const { selectedRoles } = context1;
   const context2 = useContext(UserListContext);
   const { userlist, fetchuserlist } = context2;
+  const context3 = useContext(AlertContext);
+  const {setMenuVisible} = context3;
   const [toggleview, setToggleview] = useState("page");
   const [userId, setUserId] = useState("");
   const [inbatch, setInbatch] = useState({});
@@ -89,6 +92,7 @@ const EditBatch = () => {
 
   useEffect(() => {
     checkPermission();
+    setMenuVisible(false);
   }, []);
 
   useEffect(() => {
@@ -171,7 +175,7 @@ const EditBatch = () => {
 
           <div className="overflow-auto max-h-96 mt-10">
             <button
-              className="bg-green-500 text-white font-bold py-1 px-3 rounded hover:bg-green-700"
+              className="flex justify-center rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-yellow-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 transition duration-300 ease-in-out transform hover:scale-105"
               onClick={handleEditStudents}
             >
               Edit
@@ -215,7 +219,7 @@ const EditBatch = () => {
 
             <div className="flex items-center space-x-4 mb-4">
               <button
-                className="bg-yellow-500 text-white font-bold py-1 px-3 rounded hover:bg-yellow-700"
+                className="flex justify-center rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-yellow-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 transition duration-300 ease-in-out transform hover:scale-105"
                 onClick={handleback}
               >
                 Back
@@ -269,7 +273,7 @@ const EditBatch = () => {
                 </tbody>
               </table>
               <button
-                className="bg-green-500 text-white font-bold py-1 px-3 mt-2 rounded hover:bg-green-700"
+                className="flex justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 transition duration-300 ease-in-out transform hover:scale-105"
                 onClick={handlesubmit}
               >
                 Submit
