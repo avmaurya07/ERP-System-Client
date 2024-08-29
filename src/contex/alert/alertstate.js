@@ -34,7 +34,7 @@ const AlertState = (props) => {
     }, 2000);
   };
   const getuserdata = async () => {
-    if (usertype==="") {
+    if (usertype === "") {
       setLoading(true);
     }
     const response = await fetch(`${host}/api/auth/getuserdata`, {
@@ -51,6 +51,10 @@ const AlertState = (props) => {
     const json = await response.json();
     setUserName(json.user.name);
     setusertype(json.user.usertype);
+    if (!(json.user.usertype === "admin")) {
+      localStorage.setItem("school", json.user.school);
+      localStorage.setItem("department", json.user.department);
+    } 
     if (json.user.usertype) {
       setLoading(false);
     }
@@ -61,6 +65,7 @@ const AlertState = (props) => {
     ) {
       setEmpid(json.user.empid);
     }
+    return json;
   };
 
   return (

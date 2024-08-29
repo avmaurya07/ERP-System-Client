@@ -11,7 +11,7 @@ const Classes = () => {
   const context = useContext(ClassesContext);
   const { classlist, getclasslist, addclass, setClasslist } = context;
   const context2 = useContext(AlertContext);
-  const { setMenuVisible } = context2;
+  const { setMenuVisible, getuserdata } = context2;
   const context3 = useContext(BatchContext);
   const { batchlist, getbatchlist, getcourselist, courselist } = context3;
   const context4 = useContext(UserListContext);
@@ -33,11 +33,8 @@ const Classes = () => {
   const [modalCourse, setModalCourse] = useState("");
   const [toggleadmin, setToggleadmin] = useState(true);
   const [toggleyear, setToggleyear] = useState(true);
-  const [modalteacherList, setModalTeacherList] = useState(userlist);
-  const [modalCourseList, setModalCourseList] = useState(courselist);
   const [filteredTeacherList, setFilteredTeacherList] = useState([]);
   const [filteredCourseList, setFilteredCourseList] = useState([]);
-
 
   const [school, setSchool] = useState("");
   const [department, setDepartment] = useState("");
@@ -64,6 +61,8 @@ const Classes = () => {
       setClasslist([]);
     }
     setMenuVisible(false);
+    fetchuserlist("teacher");
+    getcourselist("", school, department);
   }, []);
   const onYearChange = async (e) => {
     const yearCode = e.target.value;
@@ -91,7 +90,6 @@ const Classes = () => {
     }
   };
 
-
   const handleAddBatch = async () => {
     const classname = `${modalTeacher}-${modalCourse}-${selectedYear}-${selectedSem}-${selectedBatch}`;
     const classcode = `${modalTeacher}-${modalCourse}-${selectedYear}-${selectedSem}-${selectedBatch}`;
@@ -107,7 +105,6 @@ const Classes = () => {
       classcode: classcode,
       batchname: selectedBatch,
       teachername: modalTeacher,
-      teachercode: modalTeacher,
     };
     await addclass(data);
 
@@ -152,9 +149,8 @@ const Classes = () => {
   const handlesubmit = () => {
     setToggleadmin(false);
     getcourselist("", school, department);
-    fetchuserlist("teacher");
   };
-  const handlesubmit1 = () => {
+  const handlesubmit1 = async () => {
     getclasslist(
       selectedBatch,
       rdata.school,
@@ -163,18 +159,33 @@ const Classes = () => {
       selectedSem
     );
     setToggleyear(false);
-    if (school && department) {
-      const filteredTeachers = userlist.filter(
-        (teacher) => teacher.school === school && teacher.department === department
-      );
-      setFilteredTeacherList(filteredTeachers);
-
-      const filteredCourses = courselist.filter(
-        (course) => course.schoolcode === school && course.departmentcode === department
-      );
+    if (localStorage.getItem("usertype") === "cordinator") {
+      const data = await getuserdata();
+      setSchool(data.user.school);
+      setDepartment(data.user.department);
+      setRdata({ school: data.user.school, department: data.user.department });
+    }
+    const filteredTeachers = userlist.filter(
+      (teacher) =>
+        school?.includes(teacher.school) &&
+        department?.includes(teacher.department)
+    );
+    const filteredCourses = courselist.filter(
+      (course) =>
+        school?.includes(course.schoolcode) &&
+        department?.includes(course.departmentcode)
+    );
+    if (localStorage.getItem("usertype") === "admin") {
       setFilteredCourseList(filteredCourses);
+      setFilteredTeacherList(filteredTeachers);
+    }
+    else if (localStorage.getItem("usertype") === "cordinator") {
+      setFilteredCourseList(courselist);
+      setFilteredTeacherList(userlist);
+      console.log(courselist);
     }
   };
+
   const filteredbatchlist = batchlist.filter((batch) => {
     return (
       batch.academicyearcode?.includes(selectedYear) &&
@@ -351,7 +362,6 @@ const Classes = () => {
                       </th>
                       <th className="py-2 px-4 border-b text-left">
                         Teacher Name
-                    
                       </th>
                       <th className="py-2 px-4 border-b text-left">
                         Course Name
@@ -369,7 +379,11 @@ const Classes = () => {
                           {batch.batchname}
                         </td>
                         <td className="py-2 px-4 border-b">
-                        <div dangerouslySetInnerHTML={{ __html: batch.classname }} />
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: batch.classname,
+                            }}
+                          />
                         </td>
                         <td className="py-2 px-4 border-b">
                           {batch.teachername}
@@ -392,83 +406,83 @@ const Classes = () => {
           )}
           {/* Add Batch Modal */}
           <div
-        className="modal fade"
-        id="addBatchModal"
-        tabIndex="-1"
-        aria-labelledby="addBatchModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="addBatchModalLabel">
-                Add New Class
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="academicyear" className="form-label">
-                    Teacher
-                  </label>
-                  <select
-                    className="form-control"
-                    id="academicyear"
-                    name="academicyearcode"
-                    onChange={onChangeModalTeacher}
-                    value={modalTeacher}
-                  >
-                    <option value="">Select Teacher</option>
-                    {filteredTeacherList.map((teacher, index) => (
-                      <option key={index} value={teacher.empid}>
-                        {teacher.name}
-                      </option>
-                    ))}
-                  </select>
+            className="modal fade"
+            id="addBatchModal"
+            tabIndex="-1"
+            aria-labelledby="addBatchModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="addBatchModalLabel">
+                    Add New Class
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="semester" className="form-label">
-                    Course
-                  </label>
-                  <select
-                    className="form-control"
-                    id="semester"
-                    name="semestercode"
-                    onChange={onChangeModalCourse}
-                    value={modalCourse}
-                  >
-                    <option value="">Select Course</option>
-                    {filteredCourseList.map((course, index) => (
-                      <option key={index} value={course.coursecode}>
-                        {course.coursename}
-                      </option>
-                    ))}
-                  </select>
+                <div className="modal-body">
+                  <form>
+                    <div className="mb-3">
+                      <label htmlFor="academicyear" className="form-label">
+                        Teacher
+                      </label>
+                      <select
+                        className="form-control"
+                        id="academicyear"
+                        name="academicyearcode"
+                        onChange={onChangeModalTeacher}
+                        value={modalTeacher}
+                      >
+                        <option value="">Select Teacher</option>
+                        {filteredTeacherList.map((teacher, index) => (
+                          <option key={index} value={teacher.empid}>
+                            {teacher.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="semester" className="form-label">
+                        Course
+                      </label>
+                      <select
+                        className="form-control"
+                        id="semester"
+                        name="semestercode"
+                        onChange={onChangeModalCourse}
+                        value={modalCourse}
+                      >
+                        <option value="">Select Course</option>
+                        {filteredCourseList.map((course, index) => (
+                          <option key={index} value={course.coursecode}>
+                            {course.coursename}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </form>
                 </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="flex justify-center rounded-md bg-gray-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
-                onClick={handleAddBatch}
-                data-bs-dismiss="modal"
-              >
-                Add Class
-              </button>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="flex justify-center rounded-md bg-gray-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
+                    onClick={handleAddBatch}
+                    data-bs-dismiss="modal"
+                  >
+                    Add Class
+                  </button>
                 </div>
               </div>
             </div>

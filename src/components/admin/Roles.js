@@ -4,7 +4,6 @@ import MainContext from "../../contex/main/maincontext";
 const Roles = forwardRef(({ ruser }, ref) => {
   const context = useContext(MainContext);
   const { setrole, selectedRoles, setSelectedRoles } = context;
-console.log(selectedRoles);
   const [showSubOptions, setShowSubOptions] = useState(false);
 
   const handleCheckboxChange = (e) => {
@@ -36,7 +35,6 @@ console.log(selectedRoles);
       courses: selectedRoles.courses,
       classes: selectedRoles.classes,
     };
-  console.log(data);
     await setrole(data);
   };
 
