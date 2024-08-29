@@ -35,6 +35,9 @@ const Classes = () => {
   const [toggleyear, setToggleyear] = useState(true);
   const [modalteacherList, setModalTeacherList] = useState(userlist);
   const [modalCourseList, setModalCourseList] = useState(courselist);
+  const [filteredTeacherList, setFilteredTeacherList] = useState([]);
+  const [filteredCourseList, setFilteredCourseList] = useState([]);
+
 
   const [school, setSchool] = useState("");
   const [department, setDepartment] = useState("");
@@ -61,8 +64,6 @@ const Classes = () => {
       setClasslist([]);
     }
     setMenuVisible(false);
-    fetchuserlist("teacher");
-    getcourselist("", school, department);
   }, []);
   const onYearChange = async (e) => {
     const yearCode = e.target.value;
@@ -90,14 +91,6 @@ const Classes = () => {
     }
   };
 
-  const ondepartmentChange = (e) => {
-    const selectedDepartment = e.target.value;
-    setRdata((prevData) => ({
-      ...prevData,
-      department: selectedDepartment,
-    }));
-    setDepartment(selectedDepartment);
-  };
 
   const handleAddBatch = async () => {
     const classname = `${modalTeacher}-${modalCourse}-${selectedYear}-${selectedSem}-${selectedBatch}`;
@@ -129,14 +122,12 @@ const Classes = () => {
     );
   };
 
-  const onChangeModalTeacher = async (e) => {
-    const yearCode = e.target.value;
-    setModalTeacher(yearCode);
+  const onChangeModalTeacher = (e) => {
+    setModalTeacher(e.target.value);
   };
 
   const onChangeModalCourse = (e) => {
-    const semCode = e.target.value;
-    setModalCourse(semCode);
+    setModalCourse(e.target.value);
   };
 
   const onschoolChange = (e) => {
@@ -149,9 +140,19 @@ const Classes = () => {
     getdepartmentlist(selectedSchool);
   };
 
+  const ondepartmentChange = (e) => {
+    const selectedDepartment = e.target.value;
+    setRdata((prevData) => ({
+      ...prevData,
+      department: selectedDepartment,
+    }));
+    setDepartment(selectedDepartment);
+  };
+
   const handlesubmit = () => {
     setToggleadmin(false);
     getcourselist("", school, department);
+    fetchuserlist("teacher");
   };
   const handlesubmit1 = () => {
     getclasslist(
@@ -162,8 +163,17 @@ const Classes = () => {
       selectedSem
     );
     setToggleyear(false);
-    setModalTeacherList(userlist);
-    setModalCourseList(courselist);
+    if (school && department) {
+      const filteredTeachers = userlist.filter(
+        (teacher) => teacher.school === school && teacher.department === department
+      );
+      setFilteredTeacherList(filteredTeachers);
+
+      const filteredCourses = courselist.filter(
+        (course) => course.schoolcode === school && course.departmentcode === department
+      );
+      setFilteredCourseList(filteredCourses);
+    }
   };
   const filteredbatchlist = batchlist.filter((batch) => {
     return (
@@ -382,83 +392,83 @@ const Classes = () => {
           )}
           {/* Add Batch Modal */}
           <div
-            className="modal fade"
-            id="addBatchModal"
-            tabIndex="-1"
-            aria-labelledby="addBatchModalLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="addBatchModalLabel">
-                    Add New Class
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div className="modal-body">
-                  <form>
-                    <div className="mb-3">
-                      <label htmlFor="academicyear" className="form-label">
-                        Teacher
-                      </label>
-                      <select
-                        className="form-control"
-                        id="academicyear"
-                        name="academicyearcode"
-                        onChange={onChangeModalTeacher}
-                        value={modalTeacher}
-                      >
-                        <option value="">Select Teacher</option>
-                        {modalteacherList.map((teacher, index) => (
-                          <option key={index} value={teacher.empid}>
-                            {teacher.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="semester" className="form-label">
-                        Course
-                      </label>
-                      <select
-                        className="form-control"
-                        id="semester"
-                        name="semestercode"
-                        onChange={onChangeModalCourse}
-                        value={modalCourse}
-                      >
-                        <option value="">Select Course</option>
-                        {modalCourseList.map((course, index) => (
-                          <option key={index} value={course.coursecode}>
-                            {course.coursename}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </form>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="flex justify-center rounded-md bg-gray-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
-                    data-bs-dismiss="modal"
+        className="modal fade"
+        id="addBatchModal"
+        tabIndex="-1"
+        aria-labelledby="addBatchModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="addBatchModalLabel">
+                Add New Class
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <form>
+                <div className="mb-3">
+                  <label htmlFor="academicyear" className="form-label">
+                    Teacher
+                  </label>
+                  <select
+                    className="form-control"
+                    id="academicyear"
+                    name="academicyearcode"
+                    onChange={onChangeModalTeacher}
+                    value={modalTeacher}
                   >
-                    Close
-                  </button>
-                  <button
-                    type="button"
-                    className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
-                    onClick={handleAddBatch}
-                    data-bs-dismiss="modal"
+                    <option value="">Select Teacher</option>
+                    {filteredTeacherList.map((teacher, index) => (
+                      <option key={index} value={teacher.empid}>
+                        {teacher.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="semester" className="form-label">
+                    Course
+                  </label>
+                  <select
+                    className="form-control"
+                    id="semester"
+                    name="semestercode"
+                    onChange={onChangeModalCourse}
+                    value={modalCourse}
                   >
-                    Add Class
-                  </button>
+                    <option value="">Select Course</option>
+                    {filteredCourseList.map((course, index) => (
+                      <option key={index} value={course.coursecode}>
+                        {course.coursename}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="flex justify-center rounded-md bg-gray-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="flex justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
+                onClick={handleAddBatch}
+                data-bs-dismiss="modal"
+              >
+                Add Class
+              </button>
                 </div>
               </div>
             </div>
