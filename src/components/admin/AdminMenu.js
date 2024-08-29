@@ -180,6 +180,12 @@ const AdminMenu = () => {
                 >
                   Courses
                 </Link>
+                <Link
+                  to="/admin/classes"
+                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                >
+                  Classes
+                </Link>
                 </div>
               )}
             </div>

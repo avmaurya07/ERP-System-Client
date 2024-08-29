@@ -21,6 +21,7 @@ const UserListState = (props) => {
     const json = await response.json();
     setUserlist(json.userlist)
     // showAlert(json);
+    return json
   };
 
   const masterlogin = async (user) => {

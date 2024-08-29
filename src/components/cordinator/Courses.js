@@ -57,7 +57,7 @@ const Courses = () => {
   const checkPermission = () => {
     if (
       localStorage.getItem("usertype") === "cordinator" &&
-      !selectedRoles.studentcontrol
+      !selectedRoles.courses
     ) {
       return navigate("/cordinator");
     }

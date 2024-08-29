@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import RegisterContext from "../contex/register/registercontext";
 import AlertContext from "../contex/alert/alertcontext";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+import { useNavigate } from "react-router-dom";
 
 const ChangePassword = () => {
-  const { usertype,showAlert,setMenuVisible } = useContext(AlertContext);
+  const { usertype, showAlert, setMenuVisible } = useContext(AlertContext);
   const context = useContext(RegisterContext);
+  const navigate = useNavigate();
   const { changepassword } = context;
   const [cdata, setCdata] = useState({
     password: "",
@@ -21,16 +23,19 @@ const ChangePassword = () => {
     setCdata({ ...cdata, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (cdata.newpassword !== cdata.confirmpassword) {
       showAlert({
-        msgtype:false,
-        msg:"New password and confirm password do not match",
+        msgtype: false,
+        msg: "New password and confirm password do not match",
       });
       return;
     }
-    changepassword(cdata);
+    const res = await changepassword(cdata);
+    if (res.msgtype) {
+      navigate(`/${usertype}`);
+    }
     setCdata({
       password: "",
       newpassword: "",
@@ -73,7 +78,7 @@ const ChangePassword = () => {
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer z-20"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
@@ -102,7 +107,7 @@ const ChangePassword = () => {
               />
               <span
                 onClick={() => setShowNewPassword(!showNewPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer z-20"
               >
                 {showNewPassword ? <FaEyeSlash /> : <FaEye />}
               </span>

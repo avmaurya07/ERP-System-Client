@@ -1,9 +1,11 @@
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef, useContext, useState } from "react";
 import MainContext from "../../contex/main/maincontext";
 
 const Roles = forwardRef(({ ruser }, ref) => {
   const context = useContext(MainContext);
-  const { setrole, selectedRoles, setSelectedRoles,getrole} = context;
+  const { setrole, selectedRoles, setSelectedRoles } = context;
+console.log(selectedRoles);
+  const [showSubOptions, setShowSubOptions] = useState(false);
 
   const handleCheckboxChange = (e) => {
     const { id, checked } = e.target;
@@ -11,17 +13,32 @@ const Roles = forwardRef(({ ruser }, ref) => {
       ...prevRoles,
       [id]: checked,
     }));
+    if (id === "studentcontrol") {
+      setShowSubOptions(checked);
+    }
   };
 
-  const handleSubmit = async () => {
+  const handleSubOptionChange = (e) => {
+    const { id, checked } = e.target;
+    setSelectedRoles((prevRoles) => ({
+      ...prevRoles,
+      [id]: checked,
+    }));
+  };
+
+    const handleSubmit = async () => {
+  
     const data = {
       empid: ruser.empid,
       timetable: selectedRoles.timetable,
       studentcontrol: selectedRoles.studentcontrol,
+      batches: selectedRoles.batches,
+      courses: selectedRoles.courses,
+      classes: selectedRoles.classes,
     };
+  console.log(data);
     await setrole(data);
   };
-
 
   return (
     <>
@@ -78,6 +95,46 @@ const Roles = forwardRef(({ ruser }, ref) => {
                   Student Control
                 </label>
               </div>
+              {showSubOptions && (
+                <div className="ml-4">
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="batches"
+                      checked={selectedRoles.batches}
+                      onChange={handleSubOptionChange}
+                    />
+                    <label className="form-check-label" htmlFor="subOption1">
+                      Batches
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="courses"
+                      checked={selectedRoles.courses}
+                      onChange={handleSubOptionChange}
+                    />
+                    <label className="form-check-label" htmlFor="subOption2">
+                      Courses
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="classes"
+                      checked={selectedRoles.classes}
+                      onChange={handleSubOptionChange}
+                    />
+                    <label className="form-check-label" htmlFor="subOption2">
+                      Classes
+                    </label>
+                  </div>
+                </div>
+              )}
             </div>
             <div className="modal-footer">
               <button

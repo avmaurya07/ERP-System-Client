@@ -165,24 +165,24 @@ const CordinatorMenu = () => {
                 </div>
                 {isstudentcontrolExpanded && (
                   <div className="mt-2 pl-6">
-                    <Link
+                    {selectedRoles.batches && <Link
                       to="/cordinator/batches"
                       className="block p-2 rounded-lg hover:bg-blue-gray-100"
                     >
                       Batches
-                    </Link>
-                    <Link
+                    </Link>}
+                    {selectedRoles.courses && <Link
                       to="/cordinator/courses"
                       className="block p-2 rounded-lg hover:bg-blue-gray-100"
                     >
                       Courses
-                    </Link>
-                    <Link
+                    </Link>}
+                    {selectedRoles.classes && <Link
                       to="/cordinator/classes"
                       className="block p-2 rounded-lg hover:bg-blue-gray-100"
                     >
                       Classes
-                    </Link>
+                    </Link>}
                   </div>
                 )}
               </div>

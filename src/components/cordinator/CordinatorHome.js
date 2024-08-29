@@ -1,30 +1,40 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useContext } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "../NavBar";
 import CordinatorMenu from "./CordinatorMenu";
 import Batches from "./Batches";
 import EditBatch from "./EditBatch";
 import Courses from "./Courses";
 import Classes from "./Classes";
+import Card from '../admin/Card'; // Import the Card component
+import MainContext from "../../contex/main/maincontext";
 
 const CordinatorHome = () => {
+  const context = useContext(MainContext);
+  const {selectedRoles } = context;
+  const location = useLocation();
+
   return (
     <>
       <NavBar />
       <div className="flex flex-row h-screen mt-5">
-      <CordinatorMenu />
-      
-      <div className="flex-grow p-4 overflow-auto">
+        <CordinatorMenu />
+        <div className="flex-grow p-4 overflow-auto">
+          {location.pathname === "/cordinator" && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {selectedRoles.batches && <Card title="Batches" description="Manage batches" link="batches" />}
+              {selectedRoles.courses && <Card title="Courses" description="Manage courses" link="courses" />}
+              {selectedRoles.classes && <Card title="Classes" description="Manage classes" link="classes" />}
+              {/* Add more cards as needed */}
+            </div>
+          )}
           <Routes>
             <Route exact path="batches" element={<Batches />} />
             <Route exact path="courses" element={<Courses />} />
             <Route exact path="classes" element={<Classes />} />
             <Route path="/batches/editstudents" element={<EditBatch />} />
           </Routes>
-          
         </div>
-        
-      
       </div>
     </>
   );

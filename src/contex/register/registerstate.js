@@ -80,6 +80,7 @@ const RegisterState = (props) => {
     });
     const json = await response.json();
     showAlert(json);
+    return json;
   }
 
   return (

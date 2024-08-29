@@ -13,6 +13,9 @@ const MainState = (props) => {
   const [selectedRoles, setSelectedRoles] = useState({
     timetable: false,
     studentcontrol: false,
+    batches: false,
+    courses: false,
+    classes: false,
   });
 
   const getschoollist = async () => {
@@ -175,17 +178,20 @@ const MainState = (props) => {
   };
 
   const setrole = async (data) => {
+    console.log(data); 
     const response = await fetch(`${host}/api/users/editroles`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
       },
-
       body: JSON.stringify({
         empid: data.empid,
         timetable: data.timetable,
         studentcontrol: data.studentcontrol,
+        batches: data.batches,
+        courses: data.courses,
+        classes: data.classes,
       }),
     });
     const json = await response.json();
@@ -208,6 +214,9 @@ const MainState = (props) => {
     setSelectedRoles({
       timetable:json.roles.timetable,
       studentcontrol:json.roles.studentcontrol,
+      batches: json.roles.batches,
+      courses: json.roles.courses,
+      classes: json.roles.classes,
     })
     return json;
   };
