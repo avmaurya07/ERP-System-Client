@@ -49,22 +49,22 @@ const AlertState = (props) => {
       }),
     });
     const json = await response.json();
-    setUserName(json.user.name);
-    setusertype(json.user.usertype);
-    if (!(json.user.usertype === "admin")) {
-      localStorage.setItem("school", json.user.school);
-      localStorage.setItem("department", json.user.department);
-    } 
-    if (json.user.usertype) {
-      setLoading(false);
+    if (json.msgtype) {
+      setUserName(json.user.name);
+      setusertype(json.user.usertype);
+      if (!(json.user.usertype === "admin")) {
+        localStorage.setItem("school", json.user.school);
+        localStorage.setItem("department", json.user.department);
+      }
+      iscordinator = json.iscordinator;
+      if (
+        json.user.usertype === "teacher" ||
+        json.user.usertype === "cordinator"
+      ) {
+        setEmpid(json.user.empid);
+      }
     }
-    iscordinator = json.iscordinator;
-    if (
-      json.user.usertype === "teacher" ||
-      json.user.usertype === "cordinator"
-    ) {
-      setEmpid(json.user.empid);
-    }
+    setLoading(false);
     return json;
   };
 

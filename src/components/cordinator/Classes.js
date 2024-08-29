@@ -48,14 +48,21 @@ const Classes = () => {
   const [semList, setSemList] = useState([]);
 
   useEffect(() => {
-    getschoollist();
-    getyearlist();
-    checkPermision();
-  }, []);
+      const effect = async () => {
+        await getschoollist();
+        const yearlist = await getyearlist(); // Ensure getyearlist is awaited and yearlist is updated
+        checkPermision();
+        setSelectedYear(yearlist[yearlist.length - 1].academicyearcode); // Use the updated yearlist
+        const json = await getsemlist(yearlist[yearlist.length - 1].academicyearcode);
+        setSemList(json.semesterlist);
+      };
+      effect();
+    }, []);
 
   useEffect(() => {
     if (localStorage.getItem("usertype") === "cordinator") {
       getclasslist();
+      setSelectedYear(yearlist[yearlist.length - 1]);
       setToggleadmin(false);
     } else if (localStorage.getItem("usertype") === "admin") {
       setClasslist([]);
@@ -149,6 +156,7 @@ const Classes = () => {
   const handlesubmit = () => {
     setToggleadmin(false);
     getcourselist("", school, department);
+    // setSelectedYear(yearlist[yearlist.length - 1].academicyearcode);
   };
   const handlesubmit1 = async () => {
     getclasslist(
@@ -178,8 +186,7 @@ const Classes = () => {
     if (localStorage.getItem("usertype") === "admin") {
       setFilteredCourseList(filteredCourses);
       setFilteredTeacherList(filteredTeachers);
-    }
-    else if (localStorage.getItem("usertype") === "cordinator") {
+    } else if (localStorage.getItem("usertype") === "cordinator") {
       setFilteredCourseList(courselist);
       setFilteredTeacherList(userlist);
       console.log(courselist);

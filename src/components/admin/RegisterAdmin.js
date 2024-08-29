@@ -4,14 +4,11 @@ import MainContext from "../../contex/main/maincontext";
 import AlertContext from "../../contex/alert/alertcontext";
 
 const RegisterAdmin = () => {
-  const context1 = useContext(MainContext);
-  const { schoollist, getschoollist } = context1;
   const context = useContext(RegisterContext);
   const { register } = context;
   const context2 = useContext(AlertContext);
   const { setMenuVisible } = context2;
 
-  const [school, setSchool] = useState("");
   const [rdata, setRdata] = useState({
     empid: "",
     name: "",
@@ -21,15 +18,6 @@ const RegisterAdmin = () => {
     password: "1234",
     usertype: "admin",
   });
-
-  const onschoolChange = (e) => {
-    const selectedSchool = e.target.value;
-    setRdata((prevData) => ({
-      ...prevData,
-      school: selectedSchool,
-    }));
-    setSchool(selectedSchool);
-  };
 
   const onChange = (e) => {
     setRdata({
@@ -42,19 +30,15 @@ const RegisterAdmin = () => {
     e.preventDefault();
     register(rdata);
     setRdata({
-      empid: "",
       name: "",
       email: "",
       phone: "",
-      school: "",
       password: "1234",
       usertype: "admin",
     });
-    setSchool("");
   };
 
   useEffect(() => {
-    getschoollist();
     setMenuVisible(false);
   }, []);
 
@@ -69,26 +53,6 @@ const RegisterAdmin = () => {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label
-                htmlFor="empid"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Employee ID
-              </label>
-              <div className="mt-2">
-                <input
-                  id="empid"
-                  name="empid"
-                  type="text"
-                  required
-                  onChange={onChange}
-                  value={rdata.empid}
-                  placeholder="Enter your Employee ID"
-                  className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                />
-              </div>
-            </div>
             <div>
               <label
                 htmlFor="name"
@@ -147,28 +111,6 @@ const RegisterAdmin = () => {
                   placeholder="Phone Number"
                   className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                 />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="school"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                School
-              </label>
-              <div className="mt-2">
-                <select
-                  className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  onChange={onschoolChange}
-                  value={school}
-                >
-                  <option value="">Select a School</option>
-                  {schoollist.map((school, index) => (
-                    <option key={index} value={school.schoolcode}>
-                      {school.schoolname}
-                    </option>
-                  ))}
-                </select>
               </div>
             </div>
 

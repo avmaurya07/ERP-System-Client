@@ -63,7 +63,7 @@ const MainState = (props) => {
       setYearlist(json.academicyearlist);
     }
     // showAlert(json);
-    return json;
+    return json.academicyearlist;
   };
   const getsemlist = async (yearcode) => {
     const response = await fetch(`${host}/api/master/getsemesterlist`, {

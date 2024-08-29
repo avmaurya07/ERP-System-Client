@@ -27,6 +27,7 @@ const AdminHome = () => {
         <AdminMenu />
         <div className="flex-grow p-4 overflow-auto">
           {location.pathname === "/admin" && (
+            <div className="p-4 sm:p-6 md:p-8 lg:p-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               <Card title="User List" description="View all users" link="users" />
               <Card title="Change Password" description="Change your password" link="changepassword" />
@@ -35,6 +36,7 @@ const AdminHome = () => {
               <Card title="Batches" description="Manage batches" link="batches" />
               <Card title="Courses" description="Manage courses" link="courses" />
               <Card title="Classes" description="Manage classes" link="classes" />
+            </div>
             </div>
           )}
           <Routes>

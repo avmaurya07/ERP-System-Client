@@ -164,7 +164,7 @@ const Menu = () => {
                 Enroll in a Course
               </Link>
               <Link
-                to="/student/enrolledcourses"
+                to="/student/mycourses"
                 className="block p-2 rounded-lg hover:bg-blue-gray-100"
               >
                 My Courses

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ title, description, link, imgSrc }) => {
   return (
-    <div className="w-full aspect-w-1 aspect-h-1 rounded overflow-hidden shadow-lg m-4 bg-white">
+    <div className="aspect-w-1 aspect-h-1 rounded overflow-hidden shadow-lg m-4 bg-white">
       <Link to={link} className="block text-center no-underline h-full">
         {/* <div className="p-4">
           <img src={imgSrc} alt={title} className="mx-auto max-w-full h-auto" />
