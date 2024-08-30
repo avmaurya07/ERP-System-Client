@@ -50,18 +50,18 @@ const AlertState = (props) => {
     });
     const json = await response.json();
     if (json.msgtype) {
-      setUserName(json.user.name);
-      setusertype(json.user.usertype);
-      if (!(json.user.usertype === "admin")) {
-        localStorage.setItem("school", json.user.school);
-        localStorage.setItem("department", json.user.department);
+      setUserName(json?.user?.name);
+      setusertype(json?.user?.usertype);
+      if (!(json?.user?.usertype === "admin")) {
+        localStorage.setItem("school", json?.user?.school);
+        localStorage.setItem("department", json?.user?.department);
       }
       iscordinator = json.iscordinator;
       if (
-        json.user.usertype === "teacher" ||
-        json.user.usertype === "cordinator"
+        json?.user?.usertype === "teacher" ||
+        json?.user?.usertype === "cordinator"
       ) {
-        setEmpid(json.user.empid);
+        setEmpid(json?.user?.empid);
       }
     }
     setLoading(false);

@@ -53,7 +53,7 @@ const AdminMenu = () => {
           </div>
           <nav className="flex flex-col gap-1">
             <div className="relative">
-              <div
+              {/* <div
                 role="button"
                 onClick={toggleDashboard}
                 className="flex items-center justify-between w-full p-3 rounded-lg bg-blue-gray-50 hover:bg-blue-gray-100 focus:bg-blue-gray-100 transition-colors cursor-pointer"
@@ -107,7 +107,7 @@ const AdminMenu = () => {
                     Attendance
                   </Link>
                 </div>
-              )}
+              )} */}
             </div>
             <div className="relative">
               <div
@@ -232,12 +232,12 @@ const AdminMenu = () => {
               </div>
               {isAccountExpanded && (
                 <div className="mt-2 pl-6">
-                  <Link
+                  {/* <Link
                     to="/"
                     className="block p-2 rounded-lg hover:bg-blue-gray-100"
                   >
                     Profile
-                  </Link>
+                  </Link> */}
                   <Link
                     to="/admin/changepassword"
                     className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/admin/changepassword" ? "bg-blue-200" : ""}`}

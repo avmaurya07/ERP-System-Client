@@ -125,8 +125,8 @@ const RegisterState = (props) => {
         return true;
       });
     };
-    
-    if (students[students.length - 1] === "") {
+ 
+    if (students[students.length - 1].systemid === "") {
       students.pop();
     }
 

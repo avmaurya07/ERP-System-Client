@@ -46,8 +46,15 @@ const NavBar = () => {
       navigate("/teacher");
     }}
   };
+  const getdata = async () => {
+    const json = await getuserdata();
+    if (!json.msgtype) {
+      handleLogout();
+      navigate("/login");
+    }
+  };
   useEffect(() => {
-    getuserdata();
+    getdata();
   }, []);
 
   return (
@@ -73,7 +80,7 @@ const NavBar = () => {
             {usertype === "cordinator" && <>Cordinator</>})
 
             <div className={`absolute bg-white border border-gray-300 mt-2 flex flex-col rounded-lg shadow-lg transition-max-height duration-500 ease-out overflow-hidden ${isHovered ? 'max-h-40 p-4' : 'max-h-0 p-0 border-0'}`}>
-              <Link to="" className="text-blue-600 hover:text-blue-800 hover:underline mb-2">Profile</Link>
+              {/* <Link to="" className="text-blue-600 hover:text-blue-800 hover:underline mb-2">Profile</Link> */}
               {usertype==="cordinator" && <button className="text-green-600 hover:text-green-800 hover:underline" onClick={onswitchrole}>
               Switch Role to Teacher</button>}
               {(usertype==="teacher" && iscordinator) && <button className="text-green-600 hover:text-green-800 hover:underline" onClick={onswitchrole}>
