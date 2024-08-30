@@ -191,7 +191,8 @@ const Courses = () => {
                 </tr>
               </thead>
               <tbody>
-                {courselist.map((course, index) => (
+                {courselist
+                .sort((a, b) => a.coursename.localeCompare(b.coursename)).map((course, index) => (
                   <tr key={index}>
                     <td className="py-2 px-4 border-b">{course.coursename}</td>
                     <td className="py-2 px-4 border-b">{course.coursecode}</td>

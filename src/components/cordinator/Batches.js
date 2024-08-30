@@ -321,7 +321,8 @@ const Batches = () => {
                 </tr>
               </thead>
               <tbody>
-                {filteredbatchList.map((batch, index) => (
+                {filteredbatchList
+                .sort((a, b) => a.batchname.localeCompare(b.batchname)).map((batch, index) => (
                   <tr key={index}>
                     <td className="py-2 px-4 border-b">{batch.batchname}</td>
                     <td className="py-2 px-4 border-b">{batch.batchcode}</td>

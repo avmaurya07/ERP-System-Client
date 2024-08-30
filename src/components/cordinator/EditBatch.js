@@ -191,7 +191,8 @@ const EditBatch = () => {
               </thead>
               <tbody>
                 {selectedBatch?.students?.length > 0 ? (
-                  selectedBatch.students.map((student, index) => (
+                  selectedBatch.students
+                  .sort((a, b) => a.name.localeCompare(b.name)).map((student, index) => (
                     <tr key={index}>
                       <td className="py-2 px-4 border-b">{student.name}</td>
                       <td className="py-2 px-4 border-b">{student.systemid}</td>
@@ -244,7 +245,7 @@ const EditBatch = () => {
                     <th className="py-2 px-4 border-b text-left">Phone</th>
                   </tr>
                 </thead>
-                <tbody>
+                                <tbody>
                   {filteredUserList.length === 0 ? (
                     <tr>
                       <td colSpan={7} className="py-2 px-4 text-center">
@@ -252,23 +253,34 @@ const EditBatch = () => {
                       </td>
                     </tr>
                   ) : (
-                    filteredUserList.map((user) => (
-                      <tr key={user.systemid}>
-                        <td className="py-2 px-4 border-b">
-                          <input
-                            type="checkbox"
-                            id="inbatch"
-                            checked={!!inbatch[user.systemid]}
-                            onChange={(e) => handleCheckboxChange(e, user)}
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
-                          />
-                        </td>
-                        <td className="py-2 px-4 border-b">{user.name}</td>
-                        <td className="py-2 px-4 border-b">{user.systemid}</td>
-                        <td className="py-2 px-4 border-b">{user.email}</td>
-                        <td className="py-2 px-4 border-b">{user.phone}</td>
-                      </tr>
-                    ))
+                    filteredUserList
+                      .sort((a, b) => {
+                        // First sort by inbatch status
+                        const inBatchA = !!inbatch[a.systemid];
+                        const inBatchB = !!inbatch[b.systemid];
+                        if (inBatchA === inBatchB) {
+                          // If inbatch status is the same, sort by name
+                          return a.name.localeCompare(b.name);
+                        }
+                        return inBatchA ? -1 : 1;
+                      })
+                      .map((user) => (
+                        <tr key={user.systemid}>
+                          <td className="py-2 px-4 border-b">
+                            <input
+                              type="checkbox"
+                              id="inbatch"
+                              checked={!!inbatch[user.systemid]}
+                              onChange={(e) => handleCheckboxChange(e, user)}
+                              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                            />
+                          </td>
+                          <td className="py-2 px-4 border-b">{user.name}</td>
+                          <td className="py-2 px-4 border-b">{user.systemid}</td>
+                          <td className="py-2 px-4 border-b">{user.email}</td>
+                          <td className="py-2 px-4 border-b">{user.phone}</td>
+                        </tr>
+                      ))
                   )}
                 </tbody>
               </table>

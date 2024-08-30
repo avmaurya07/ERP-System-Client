@@ -168,7 +168,8 @@ const UserList = () => {
                 </td>
               </tr>
             ) : (
-              filteredUserList.map((user) => (
+              filteredUserList
+              .sort((a, b) => a.name.localeCompare(b.name)).map((user) => (
                 <tr key={user.email}>
                   {usertype === "teacher" || usertype === "cordinator" ? (
                     <td className="py-2 px-4 border-b">{user.empid}</td>

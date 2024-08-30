@@ -3,11 +3,41 @@ import RegisterContext from "../../contex/register/registercontext";
 import MainContext from "../../contex/main/maincontext";
 import AlertContext from "../../contex/alert/alertcontext";
 
+const SampleCSVModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-xl font-bold mb-4">Sample CSV Format</h2>
+        <p>systemid,name,email,phone,schoolcode,departmentcode</p>
+        <p>12345,John Doe,johndoe@example.com,1234567890,SSET,CSE</p>
+        <p>
+          67890,Jane Smith,janesmith@example.com,0987654321,SSET,CSE
+        </p>
+        <p>
+          11223,Jim Brown,jimbrown@example.com,1122334455,SSET,CSE
+        </p>
+        <p>
+          44556,Emily White,emilywhite@example.com,1122334455,SSET,CSE
+        </p>
+        <button
+          onClick={onClose}
+          className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const RegisterStudent = () => {
   const context1 = useContext(MainContext);
-  const { schoollist, departmentslist, getschoollist, getdepartmentlist } = context1;
+  const { schoollist, departmentslist, getschoollist, getdepartmentlist } =
+    context1;
   const context = useContext(RegisterContext);
-  const { register } = context;
+  const { register, registerbulkstudent } = context;
   const context2 = useContext(AlertContext);
   const { setMenuVisible } = context2;
 
@@ -23,6 +53,8 @@ const RegisterStudent = () => {
     password: "1234",
     usertype: "student",
   });
+  const [file, setFile] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onschoolChange = (e) => {
     const selectedSchool = e.target.value;
@@ -50,9 +82,50 @@ const RegisterStudent = () => {
     });
   };
 
+  const onFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    register(rdata);
+    if (file) {
+      handleFileUpload(file);
+    } else {
+      register(rdata);
+      resetForm();
+    }
+  };
+
+  const handleFileUpload = (file) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = e.target.result;
+      const students = parseCSV(content);
+      registerbulkstudent(students);
+      resetForm();
+    };
+    reader.readAsText(file);
+  };
+
+  const parseCSV = (content) => {
+    const lines = content.split("\n");
+    const headers = lines[0].split(",");
+    const students = lines.slice(1).map((line) => {
+      const values = line.split(",");
+      const student = {};
+      headers.forEach((header, index) => {
+        student[header.trim()] = values[index]?.trim();
+      });
+      student.password = "1234";
+      student.usertype = "student";
+      return student;
+    });
+  
+  
+    return students;
+  };
+
+  const resetForm = () => {
     setRdata({
       systemid: "",
       name: "",
@@ -65,6 +138,7 @@ const RegisterStudent = () => {
     });
     setSchool("");
     setDepartment("");
+    setFile(null);
   };
 
   useEffect(() => {
@@ -207,18 +281,57 @@ const RegisterStudent = () => {
                 </select>
               </div>
             </div>
-
             <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+              <label
+                htmlFor="file"
+                className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Register
+                Upload Students (CSV)
+              </label>
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className="ml-2 bg-blue-600 text-white px-2 py-1 rounded-md"
+              >
+                Sample Format
               </button>
+              <div className="mt-2">
+                <input
+                  id="file"
+                  name="file"
+                  type="file"
+                  accept=".csv"
+                  onChange={onFileChange}
+                  className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                />
+              </div>
+            </div>
+            <div>
+              {!file && (
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+                >
+                  Register
+                </button>
+              )}
             </div>
           </form>
+          {file && (
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+            >
+              Register Students in Bulk
+            </button>
+          )}
         </div>
       </div>
+      <SampleCSVModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
