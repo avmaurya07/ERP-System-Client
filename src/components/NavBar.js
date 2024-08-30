@@ -1,17 +1,50 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AlertContext from "../contex/alert/alertcontext";
+import MainContext from "../contex/main/maincontext";
 
 const NavBar = () => {
   const context = useContext(AlertContext);
-  const { getuserdata, usertype, UserName, toggleMenuVisibility } = context;
+  const { getuserdata, usertype, UserName, toggleMenuVisibility, iscordinator } = context;
+  const context2 = useContext(MainContext);
+  const { switchrole } = context2;
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("usertype");
-    localStorage.removeItem("username");
-    navigate("/login"); 
+    if (localStorage.getItem("token1")) {
+      localStorage.removeItem("token");
+      localStorage.setItem("token", localStorage.getItem("token1"));
+      localStorage.removeItem("token1");
+      localStorage.removeItem("usertype");
+      localStorage.setItem("usertype", "admin");
+      localStorage.removeItem("username");
+      navigate("/admin/users");
+    } else {
+      localStorage.removeItem("token");
+      localStorage.removeItem("usertype");
+      localStorage.removeItem("username");
+      navigate("/login");
+    }
+  };
+   const onswitchrole = async () => {
+    if (usertype==="teacher"){const user = {
+      usertype: "cordinator",
+    };
+    const json = await switchrole(user);
+    if (json.msgtype) {
+      localStorage.removeItem("usertype");
+      localStorage.setItem("usertype", "cordinator");
+      navigate("/cordinator");
+    }}
+    if (usertype==="cordinator"){const user = {
+      usertype: "teacher",
+    };
+    const json = await switchrole(user);
+    if (json.msgtype) {
+      localStorage.removeItem("usertype");
+      localStorage.setItem("usertype", "teacher");
+      navigate("/teacher");
+    }}
   };
   useEffect(() => {
     getuserdata();
@@ -40,7 +73,11 @@ const NavBar = () => {
             {usertype === "cordinator" && <>Cordinator</>})
 
             <div className={`absolute bg-white border border-gray-300 mt-2 flex flex-col rounded-lg shadow-lg transition-max-height duration-500 ease-out overflow-hidden ${isHovered ? 'max-h-40 p-4' : 'max-h-0 p-0 border-0'}`}>
-              <Link to="/link2" className="text-blue-600 hover:text-blue-800 hover:underline mb-2">Profile</Link>
+              <Link to="" className="text-blue-600 hover:text-blue-800 hover:underline mb-2">Profile</Link>
+              {usertype==="cordinator" && <button className="text-green-600 hover:text-green-800 hover:underline" onClick={onswitchrole}>
+              Switch Role to Teacher</button>}
+              {(usertype==="teacher" && iscordinator) && <button className="text-green-600 hover:text-green-800 hover:underline" onClick={onswitchrole}>
+              Switch Role to Cordinator</button>}
               <button className="text-red-600 hover:text-red-800 hover:underline" onClick={handleLogout}>
               Logout</button>
             </div>

@@ -24,7 +24,7 @@ const AdminHome = () => {
       <NavBar />
 
       <div className="flex flex-row h-screen mt-5">
-        <AdminMenu />
+      <div> <AdminMenu /></div>
         <div className="flex-grow p-4 overflow-auto">
           {location.pathname === "/admin" && (
             <div className="p-4 sm:p-6 md:p-8 lg:p-10">

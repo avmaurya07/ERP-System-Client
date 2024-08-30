@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MainContext from "../../contex/main/maincontext";
 import AlertContext from "../../contex/alert/alertcontext";
 
@@ -9,6 +9,7 @@ const CordinatorMenu = () => {
   const context1 = useContext(AlertContext);
   const { empid, isMenuVisible,setMenuVisible } = context1;
   const navigate = useNavigate();
+  const location = useLocation();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isstudentcontrolExpanded, setstudentcontrolExpanded] = useState(false);
   const [isAccountExpanded, setAccountExpanded] = useState(false);
@@ -41,7 +42,22 @@ const CordinatorMenu = () => {
       setMenuVisible(false);
     }
   };
-
+  const handleLogout = () => {
+    if (localStorage.getItem("token1")){
+      localStorage.removeItem("token");
+      localStorage.setItem("token",localStorage.getItem("token1"))
+      localStorage.removeItem("token1");
+      localStorage.removeItem("usertype");
+      localStorage.setItem("usertype","admin")
+      localStorage.removeItem("username");
+      navigate("/admin/users");
+    }else{
+    localStorage.removeItem("token");
+    localStorage.removeItem("usertype");
+    localStorage.removeItem("username");
+    navigate("/login");
+    }
+  };
   useEffect(() => {
     if (localStorage.getItem("usertype") !== "cordinator") {
       navigate("/login");
@@ -164,22 +180,22 @@ const CordinatorMenu = () => {
                   </svg>
                 </div>
                 {isstudentcontrolExpanded && (
-                  <div className="mt-2 pl-6">
+                                    <div className="mt-2 pl-6">
                     {selectedRoles.batches && <Link
                       to="/cordinator/batches"
-                      className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                      className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/cordinator/batches" ? "bg-blue-200" : ""}`}
                     >
                       Batches
                     </Link>}
                     {selectedRoles.courses && <Link
                       to="/cordinator/courses"
-                      className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                      className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/cordinator/courses" ? "bg-blue-200" : ""}`}
                     >
                       Courses
                     </Link>}
                     {selectedRoles.classes && <Link
                       to="/cordinator/classes"
-                      className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                      className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/cordinator/classes" ? "bg-blue-200" : ""}`}
                     >
                       Classes
                     </Link>}
@@ -242,6 +258,12 @@ const CordinatorMenu = () => {
                   >
                     Profile
                   </Link>
+                  <button
+                  onClick={handleLogout}
+                  className="block w-full text-left p-2 rounded-lg hover:bg-red-50 text-red-700 hover:text-red-900"
+                >
+                  Logout
+                </button>
                 </div>
               )}
             </div>

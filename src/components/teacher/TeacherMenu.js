@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MainContext from "../../contex/main/maincontext";
 import AlertContext from "../../contex/alert/alertcontext";
 
@@ -9,6 +9,7 @@ const TeacherMenu = () => {
   const context1 = useContext(AlertContext);
   const { iscordinator, isMenuVisible, setMenuVisible } = context1;
   const navigate = useNavigate();
+  const location = useLocation();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isAccountExpanded, setAccountExpanded] = useState(false);
 
@@ -181,7 +182,7 @@ const TeacherMenu = () => {
                 </Link>
                 <Link
                   to="/teacher/changepassword"
-                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/teacher/changepassword" ? "bg-blue-200" : ""}`}
                 >
                   Change Password
                 </Link>

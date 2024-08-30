@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AlertContext from "../../contex/alert/alertcontext";
 
 const Menu = () => {
   const context1 = useContext(AlertContext);
   const {isMenuVisible } = context1;
   const navigate = useNavigate();
+  const location = useLocation();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isCourseExpanded, setCourseExpanded] = useState(false);
   const [isAccountExpanded, setAccountExpanded] = useState(false);
@@ -158,14 +159,8 @@ const Menu = () => {
           {isCourseExpanded && (
             <div className="mt-2 pl-6">
               <Link
-                to="/student/enrollcourse"
-                className="block p-2 rounded-lg hover:bg-blue-gray-100"
-              >
-                Enroll in a Course
-              </Link>
-              <Link
                 to="/student/mycourses"
-                className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/student/mycourses" ? "bg-blue-200" : ""}`}
               >
                 My Courses
               </Link>
@@ -222,7 +217,7 @@ const Menu = () => {
                 </Link>
                 <Link
                   to="/student/changepassword"
-                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/student/changepassword" ? "bg-blue-200" : ""}`}
                 >
                   Change Password
                 </Link>

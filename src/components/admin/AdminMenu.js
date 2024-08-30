@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AlertContext from "../../contex/alert/alertcontext";
 
 const AdminMenu = () => {
   const context = useContext(AlertContext);
   const { isMenuVisible,setMenuVisible } = context;
   const navigate = useNavigate();
+  const location = useLocation();
   const [isDashboardExpanded, setDashboardExpanded] = useState(false);
   const [isRegisterExpanded, setRegisterExpanded] = useState(false);
   const [isAccountExpanded, setAccountExpanded] = useState(false);
@@ -152,37 +153,37 @@ const AdminMenu = () => {
                 <div className="mt-2 pl-6">
                 <Link
                   to="/admin/users"
-                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/admin/users" ? "bg-blue-200" : ""}`}
                 >
                   Users
                 </Link>
                 <Link
                   to="/admin/schooldep"
-                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/admin/schooldep" ? "bg-blue-200" : ""}`}
                 >
                   School & Department
                 </Link>
                 <Link
                   to="/admin/yearsem"
-                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/admin/yearsem" ? "bg-blue-200" : ""}`}
                 >
                   Academic Year & Semester
                 </Link>
                 <Link
                   to="/admin/batches"
-                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/admin/batches" ? "bg-blue-200" : ""}`}
                 >
                   Batches
                 </Link>
                 <Link
                   to="/admin/courses"
-                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/admin/courses" ? "bg-blue-200" : ""}`}
                 >
                   Courses
                 </Link>
                 <Link
                   to="/admin/classes"
-                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/admin/classes" ? "bg-blue-200" : ""}`}
                 >
                   Classes
                 </Link>
@@ -239,7 +240,7 @@ const AdminMenu = () => {
                   </Link>
                   <Link
                     to="/admin/changepassword"
-                    className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                    className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/admin/changepassword" ? "bg-blue-200" : ""}`}
                   >
                     Change Password
                   </Link>
