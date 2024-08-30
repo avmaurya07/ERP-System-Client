@@ -27,7 +27,7 @@ const CourseList = () => {
       setFilteredCourses(json.mycourses);
 
       // Extract unique semesters
-      const uniqueSemesters = [...new Set(json.mycourses.map(course => course.semestername))];
+          const uniqueSemesters = [...new Set(json.mycourses.map(course => course.semestername))].sort();
       setSemesters(uniqueSemesters);
 
       // Set default semester to the last value in the semesters list
