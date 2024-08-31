@@ -115,10 +115,10 @@ const TeacherMenu = () => {
                   Time Table
                 </Link>
                 <Link
-                  to="/"
-                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
-                >
-                  Attendance
+                  to="/teacher/batches"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/teacher/batches" ? "bg-blue-200" : ""}`}
+                 >
+                  Batches
                 </Link>
               </div>
             )}

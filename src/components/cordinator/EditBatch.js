@@ -14,7 +14,7 @@ const EditBatch = () => {
   const context2 = useContext(UserListContext);
   const { userlist, fetchuserlist } = context2;
   const context3 = useContext(AlertContext);
-  const {setMenuVisible} = context3;
+  const { setMenuVisible } = context3;
   const [toggleview, setToggleview] = useState("page");
   const [userId, setUserId] = useState("");
   const [inbatch, setInbatch] = useState({});
@@ -26,8 +26,8 @@ const EditBatch = () => {
         navigate("/cordinator");
       }
     }
-    if (!(selectedBatch.batchcode)){
-      navigate("/admin/batches")
+    if (!selectedBatch.batchcode) {
+      navigate("/admin/batches");
     }
   };
 
@@ -45,20 +45,19 @@ const EditBatch = () => {
   };
 
   const handlesubmit = async () => {
-    const data ={
-      academicyearcode:selectedBatch.academicyearcode,
-      semestercode:selectedBatch.semestercode,
-      schoolcode:selectedBatch.schoolcode,
-      departmentcode:selectedBatch.departmentcode,
-      batchcode:selectedBatch.batchcode,
-      students:Students,
-    }
+    const data = {
+      academicyearcode: selectedBatch.academicyearcode,
+      semestercode: selectedBatch.semestercode,
+      schoolcode: selectedBatch.schoolcode,
+      departmentcode: selectedBatch.departmentcode,
+      batchcode: selectedBatch.batchcode,
+      students: Students,
+    };
     await editbatch(data);
-    if (localStorage.getItem("usertype")==="cordinator"){
-      navigate("/cordinator/batches")
-    }
-    else if (localStorage.getItem("usertype")==="admin"){
-      navigate("/admin/batches")
+    if (localStorage.getItem("usertype") === "cordinator") {
+      navigate("/cordinator/batches");
+    } else if (localStorage.getItem("usertype") === "admin") {
+      navigate("/admin/batches");
     }
   };
 
@@ -76,7 +75,12 @@ const EditBatch = () => {
     if (checked) {
       setStudents((prevStudents) => [
         ...prevStudents,
-        { systemid: user.systemid, name: user.name, email: user.email, phone: user.phone }
+        {
+          systemid: user.systemid,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+        },
       ]);
     } else {
       setStudents((prevStudents) =>
@@ -173,7 +177,7 @@ const EditBatch = () => {
             </table>
           </div>
 
-          <div className="overflow-auto max-h-96 mt-10">
+          <div className="overflow-auto mt-10">
             <button
               className="flex justify-center rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-yellow-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 transition duration-300 ease-in-out transform hover:scale-105"
               onClick={handleEditStudents}
@@ -192,14 +196,17 @@ const EditBatch = () => {
               <tbody>
                 {selectedBatch?.students?.length > 0 ? (
                   selectedBatch.students
-                  .sort((a, b) => a.name.localeCompare(b.name)).map((student, index) => (
-                    <tr key={index}>
-                      <td className="py-2 px-4 border-b">{student.name}</td>
-                      <td className="py-2 px-4 border-b">{student.systemid}</td>
-                      <td className="py-2 px-4 border-b">{student.email}</td>
-                      <td className="py-2 px-4 border-b">{student.phone}</td>
-                    </tr>
-                  ))
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((student, index) => (
+                      <tr key={index}>
+                        <td className="py-2 px-4 border-b">{student.name}</td>
+                        <td className="py-2 px-4 border-b">
+                          {student.systemid}
+                        </td>
+                        <td className="py-2 px-4 border-b">{student.email}</td>
+                        <td className="py-2 px-4 border-b">{student.phone}</td>
+                      </tr>
+                    ))
                 ) : (
                   <tr>
                     <td colSpan={4} className="py-2 px-4 text-center">
@@ -245,7 +252,7 @@ const EditBatch = () => {
                     <th className="py-2 px-4 border-b text-left">Phone</th>
                   </tr>
                 </thead>
-                                <tbody>
+                <tbody>
                   {filteredUserList.length === 0 ? (
                     <tr>
                       <td colSpan={7} className="py-2 px-4 text-center">
@@ -276,7 +283,9 @@ const EditBatch = () => {
                             />
                           </td>
                           <td className="py-2 px-4 border-b">{user.name}</td>
-                          <td className="py-2 px-4 border-b">{user.systemid}</td>
+                          <td className="py-2 px-4 border-b">
+                            {user.systemid}
+                          </td>
                           <td className="py-2 px-4 border-b">{user.email}</td>
                           <td className="py-2 px-4 border-b">{user.phone}</td>
                         </tr>
