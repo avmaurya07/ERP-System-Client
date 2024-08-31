@@ -19,7 +19,7 @@ sample.csv
 .env.development.local
 .env.test.local
 .env.production.local
-
+forme.txt
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
