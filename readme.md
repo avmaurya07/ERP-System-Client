@@ -125,6 +125,10 @@ This repository contains the client-side implementation of the College ERP (Ente
 ![Student's Menu](pictures/44.png)
 ![Student's Menu](pictures/45.png)
 
+### My Courses Page
+
+![My Courses Page](pictures/47.png)
+
 
 ## Try Now
 

@@ -5,7 +5,7 @@ const host = config.host;
 
 const CourseList = () => {
   const context = useContext(AlertContext);
-  const { setLoading } = context;
+  const { setLoading,setMenuVisible } = context;
   const [courses, setCourses] = useState([]);
   const [filteredcourses, setFilteredCourses] = useState([]);
   const [semester, setSemester] = useState(''); // State to manage selected semester
@@ -45,6 +45,7 @@ const CourseList = () => {
     } else {
       setFilteredCourses(courses);
     }
+    setMenuVisible(false)
   }, [semester, courses]);
 
   return (
