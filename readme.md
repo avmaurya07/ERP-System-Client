@@ -26,8 +26,13 @@ This repository contains the client-side implementation of the College ERP (Ente
 ### Login
 ![Login](pictures/01.png)
 
+### Change Password
+
+#### It will be same for all the users
+![Change Password](pictures/46.png)
+
 ### Reset Password Page
-![Login](pictures/04.png)
+![Reset Password](pictures/04.png)
 
 ### Admin DashBoard
 ![Admin DashBoard](pictures/02.png)
@@ -63,8 +68,65 @@ This repository contains the client-side implementation of the College ERP (Ente
 ![School wise list of Departments](pictures/19.png)
 ![Modal to add School and Department](pictures/20.png)
 
+### Academic Year and Semester
+![Academic Year and Semester](pictures/21.png)
+![List of Academic Years](pictures/22.png)
+![Academic Year wise list of Semesters](pictures/23.png)
+![Modal to add Academic Year and Semester](pictures/24.png)
 
-## Demo
+### Batches
+
+#### This will display only to admin to set school and department
+![To select School and Department](pictures/25.png)
+#### This will show to both admin and cordinator
+![To select Year and semester](pictures/26.png)
+![List of batches in that perticular batch](pictures/27.png)
+![Modal to add a new batch](pictures/28.png)
+![View page of selected batch](pictures/29.png)
+![Edit Students in Selected Batch](pictures/30.png)
+
+### Courses
+
+#### This will display only to admin to set school and department
+![To select School and Department](pictures/31.png)
+#### This will show to both admin and cordinator
+![List of courses Available](pictures/32.png)
+![To add a new course](pictures/33.png)
+
+### Classes
+
+#### This will display only to admin to set school and department
+![To select School and Department](pictures/34.png)
+#### This will show to both admin and cordinator
+![To Select Batch](pictures/35.png)
+![List of Classes of selected Batch](pictures/36.png)
+![Modal to add a new Class](pictures/37.png)
+
+### Teacher's Menu
+
+![Teacher's Menu](pictures/38.png)
+![Teacher's Menu](pictures/39.png)
+
+### Cordinator's HomePage
+
+![Cordinator's HomePage](pictures/40.png)
+
+### Cordinator's Menu
+
+![Cordinator's Menu](pictures/41.png)
+![Cordinator's Menu](pictures/42.png)
+
+### Student's HomePage
+
+![Student's HomePage](pictures/43.png)
+
+### Student's Menu
+
+![Student's Menu](pictures/44.png)
+![Student's Menu](pictures/45.png)
+
+
+## Try Now
 
 You can try out the ERP system using the following demo credentials:
 
