@@ -30,59 +30,13 @@ This repository contains the client-side implementation of the College ERP (Ente
 ### Student's View
 ![Student's View](screenshots/students-view.png)
 
+## Demo
 
-## Project Structure
+You can try out the ERP system using the following demo credentials:
 
-```plaintext
-erp-system/
-│
-├── public/
-│   └── index.html
-│
-├── src/
-│   ├── components/
-│   │   ├── admin/
-│   │   │   ├── AdminHome.js
-│   │   │   ├── AdminMenu.js
-│   │   │   ├── RegisterAdmin.js
-│   │   │   ├── RegisterStudent.js
-│   │   │   ├── RegisterTeacher.js
-│   │   │   └── userlist.js
-│   │   │
-│   │   ├── student/
-│   │   │   ├── Studenthome.js
-│   │   │   └── StudentMenu.js
-│   │   │
-│   │   ├── teacher/
-│   │   │   ├── TeacherHome.js
-│   │   │   └── TeacherMenu.js
-│   │   │
-│   │   ├── Alert.js
-│   │   ├── ChangePassword.js
-│   │   ├── Login.js
-│   │   └── NavBar.js
-│   │
-│   ├── context/
-│   │   ├── alert/
-│   │   │   ├── alertcontext.js
-│   │   │   └── alertstate.js
-│   │   ├── register/
-│   │   │   ├── registercontext.js
-│   │   │   └── registerstate.js
-│   │   └── userlist/
-│   │       ├── userlistcontext.js
-│   │       └── userliststate.js
-│   │
-│   ├── App.js
-│   ├── config.js
-│   ├── index.css
-│   ├── index.js
-│   ├── input.css
-│   └── output.css
-│
-├── .env
-├── db.js
-├── package-lock.json
-├── package.json
-└── tailwind.config.js
-```
+- **Version**: 0.7.0
+- **Email**: [test@mail.com]
+- **Password**: `0000`
+
+Feel free to use these credentials to explore the system.
+   (Note- only for this demo email system is not verifying the password)
