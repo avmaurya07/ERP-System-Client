@@ -54,7 +54,7 @@ This repository contains the client-side implementation of the College ERP (Ente
 ![Teacher User List](pictures/12.png)
 ![Cordinator User List](pictures/13.png)
 
-**Roles Modal**
+## Roles Modal
 ![Roles Modal](pictures/14.png)
 
 ### School and Department
