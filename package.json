@@ -24,7 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "css": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch",
-    "both": "concurrently \"npm run start\" \"nodemon ../Server/index.js\" "
+    "both": "concurrently \"npm run start\" \"node ../Server/index.js\" "
   },
   "eslintConfig": {
     "extends": [
