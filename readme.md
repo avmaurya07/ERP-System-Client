@@ -2,6 +2,10 @@
 
 This repository contains the client-side implementation of the College ERP (Enterprise Resource Planning) system. The ERP system provides an intuitive and user-friendly interface for admins, teachers, and students to manage and interact with academic information efficiently.
 
+## Project Link
+
+- **Project**: [College ERP System](http://erp.avmaurya07.tech)
+
 ## Features
 
 ### Admin
