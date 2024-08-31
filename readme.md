@@ -102,10 +102,19 @@ This repository contains the client-side implementation of the College ERP (Ente
 ![List of Classes of selected Batch](pictures/36.png)
 ![Modal to add a new Class](pictures/37.png)
 
+### Teacher's HomePage
+
+![Teacher's HomePage](pictures/48.png)
+
 ### Teacher's Menu
 
 ![Teacher's Menu](pictures/38.png)
 ![Teacher's Menu](pictures/39.png)
+
+### Teacher's Batches
+
+![Teacher's Batches](pictures/49.png)
+![Teacher's Batches](pictures/50.png)
 
 ### Cordinator's HomePage
 
@@ -134,7 +143,7 @@ This repository contains the client-side implementation of the College ERP (Ente
 
 You can try out the ERP system using the following demo credentials:
 
-- **Version**: 0.7.0
+- **Version**: 0.8.0
 - **Website**: (https://erp.avmaurya07.tech)
 - **Email**: `test@mail.com`
 - **Password**: `0000`
