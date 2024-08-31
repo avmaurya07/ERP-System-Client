@@ -25,8 +25,8 @@ This repository contains the client-side implementation of the College ERP (Ente
 
 ## Screenshots
 
-### Dashboard
-![Dashboard](screenshots/dashboard.png)
+### Login
+![Dashboard](pictures/01.png)
 
 ### Teacher's View
 ![Teacher's View](screenshots/teachers-view.png)
@@ -42,6 +42,7 @@ You can try out the ERP system using the following demo credentials:
 - **Website**: (https://erp.avmaurya07.tech)
 - **Email**: `test@mail.com`
 - **Password**: `0000`
+- **User Type**: Admin
 
 Feel free to use these credentials to explore the system.
-   (Note- only for this demo email system is not verifying the password)
+   (Note- only for this demo email, system is not verifying the password)
