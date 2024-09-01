@@ -103,8 +103,8 @@ const Menu = () => {
             <div className="mt-2 pl-6">
               <Link
                 to="/student/timetable"
-                className="block p-2 rounded-lg hover:bg-blue-gray-100"
-              >
+                className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/student/timetable" ? "bg-blue-200" : ""}`}
+                >
                 Time Table
               </Link>
               <Link
