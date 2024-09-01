@@ -5,6 +5,7 @@ import NavBar from "../NavBar";
 import ChangePassword from "../ChangePassword";
 import Card from "../admin/Card";
 import MyCourses from "./MyCourses";
+import Timetable from "./Timetable";
 
 const Studenthome = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const Studenthome = () => {
           {location.pathname === "/student" && (
             <div className="p-4 sm:p-6 md:p-8 lg:p-10">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <Card title="Timetable" link="timetable" />
                 <Card title="My Courses" link="mycourses" />
               </div>
             </div>
@@ -25,6 +27,7 @@ const Studenthome = () => {
           <Routes>
             <Route exact path="changepassword" element={<ChangePassword />} />
             <Route exact path="mycourses" element={<MyCourses />} />
+            <Route exact path="timetable" element={<Timetable />} />
           </Routes>
         </div>
       </div>

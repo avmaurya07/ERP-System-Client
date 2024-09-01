@@ -8,9 +8,9 @@ const CourseList = () => {
   const { setLoading,setMenuVisible } = context;
   const [courses, setCourses] = useState([]);
   const [filteredcourses, setFilteredCourses] = useState([]);
-  const [semester, setSemester] = useState(''); // State to manage selected semester
-  const [semesters, setSemesters] = useState([]); // State to manage available semesters
-
+  const [semester, setSemester] = useState(''); 
+  const [semesters, setSemesters] = useState([]);
+  
   useEffect(() => {
     // Fetch course data from an API or define it statically
     const fetchCourses = async () => {
