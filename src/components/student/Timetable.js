@@ -123,7 +123,7 @@ const Timetable = () => {
     setinitials(new Date());
   }, []);
 
-  // Fetch course data from an API or define it statically
+
   const fetchtimetable = async (weekcode) => {
     setLoading(true);
     const response = await fetch(`${host}/api/academic/studenttimetable`, {

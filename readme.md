@@ -9,17 +9,59 @@ This repository contains the client-side implementation of the College ERP (Ente
 ## Features
 
 ### Admin
-- **(Details will be updated later)**
 
-### Cordinator
-- **Lecture Management**: View and manage scheduled lectures.
+The Admin user in the ERP system has extensive control and management capabilities. Below are the key features available to the Admin:
+
+- **User Management**
+  - View and manage students, teachers, and other admins.
+  - Add all types of users to the system.
+  - Import students in bulk using a CSV file.
+  - Assign the coordinator role to any existing user.
+  - Define specific roles and responsibilities for coordinators.
+
+- **Login Access**
+  - Directly log in to student and teacher panels for supervision or support.
+
+- **Institutional Management**
+  - Manage schools and departments by viewing existing entries and adding new ones.
+
+- **Academic Year and Semester Management**
+  - Oversee academic years and semesters, with options to view and add new entries.
+
+- **Batch Management**
+  - View existing batches, add new batches, and edit student details within a specific batch.
+
+- **Course and Class Management**
+  - Manage courses by viewing and adding them to the system.
+  - Manage classes on a batch-wise basis, with options to view and add new classes.
+
+
+### Coordinator
+
+The Coordinator role in the ERP system is designed to manage specific academic tasks within their assigned department. The following actions can be performed by a Coordinator, depending on the permissions granted for their role:
+
+- **Timetable Management**
+  - Schedule classes for students within their department.
+
+- **Departmental Management**
+  - Manage batches, courses, and classes, but only within their department.
+
+- **Role-Specific Permissions**
+  - Coordinators can perform these actions only if they have been granted the necessary permissions for their role.
+
+
+### Teacher
+- **Courses**: Can view the mapped batches along with the student list.
+- **Lecture Management**: View scheduled lectures and can arrange alternate.
 - **Attendance**: Mark and track student attendance.
-- **Grades and Assignments**: Update and manage student marks and assignments.
-- **Course Content**: Manage and upload course materials and resources.
+<!-- - **Course Content**: Manage and upload course materials and resources. -->
+<!-- - **Grades and Assignments**: Update and manage student marks and assignments. -->
+
 
 ### Student
+- **Check Timetable**: Check weekwise TimeTable.
 - **Course Enrollment**: Check enrolled Courses.
-- **Change Password**: Can Check Password.
+- **Change Password**: Can Change Password.
 
 ## Screenshots
 
@@ -131,6 +173,7 @@ This repository contains the client-side implementation of the College ERP (Ente
 
 ### Student's Menu
 
+![Student's Menu](pictures/51.png)
 ![Student's Menu](pictures/44.png)
 ![Student's Menu](pictures/45.png)
 
@@ -138,6 +181,14 @@ This repository contains the client-side implementation of the College ERP (Ente
 
 ![My Courses Page](pictures/47.png)
 
+### Timetable Page
+
+![Timetable Page](pictures/52.png)
+
+
+# Server
+
+##### [Click here to go to Server Repository](https://github.com/avmaurya07/ERP-System-Server)
 
 ## Try Now
 
