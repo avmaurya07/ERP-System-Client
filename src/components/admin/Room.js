@@ -165,6 +165,8 @@ const Room = () => {
               <thead>
                 <tr>
                   <th className="py-2 px-4 border-b text-left">Room Name</th>
+                  <th className="py-2 px-4 border-b text-left">School</th>
+                  <th className="py-2 px-4 border-b text-left">Department</th>
                 </tr>
               </thead>
               <tbody>
@@ -173,6 +175,8 @@ const Room = () => {
                   .map((room, index) => (
                     <tr key={index}>
                       <td className="py-2 px-4 border-b">{room.room}</td>
+                      <td className="py-2 px-4 border-b">{room.schoolname}</td>
+                      <td className="py-2 px-4 border-b">{room.departmentname}</td>
                     </tr>
                   ))}
               </tbody>
