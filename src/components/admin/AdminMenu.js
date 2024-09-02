@@ -170,6 +170,12 @@ const AdminMenu = () => {
                   Academic Year & Semester
                 </Link>
                 <Link
+                  to="/admin/rooms"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/admin/rooms" ? "bg-blue-200" : ""}`}
+                >
+                  Rooms
+                </Link>
+                <Link
                   to="/admin/batches"
                   className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/admin/batches" ? "bg-blue-200" : ""}`}
                 >

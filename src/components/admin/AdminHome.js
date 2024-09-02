@@ -15,6 +15,7 @@ import EditBatch from "../cordinator/EditBatch";
 import Courses from "../cordinator/Courses";
 import Classes from "../cordinator/Classes";
 import Card from "./Card"; 
+import Room from "./Room";
 
 const AdminHome = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ const AdminHome = () => {
               <Card title="Change Password" description="Change your password" link="changepassword" />
               <Card title="School & Department" description="Manage school and department" link="schooldep" />
               <Card title="Academic Year & Semester" description="Manage academic year and semester" link="yearsem" />
+              <Card title="Rooms" description="Manage Rooms" link="rooms" />
               <Card title="Batches" description="Manage batches" link="batches" />
               <Card title="Courses" description="Manage courses" link="courses" />
               <Card title="Classes" description="Manage classes" link="classes" />
@@ -49,6 +51,7 @@ const AdminHome = () => {
             <Route exact path="yearsem" element={<YearSem />} />
             <Route exact path="logs" element={<Logs />} />
             <Route exact path="batches" element={<Batches />} />
+            <Route exact path="rooms" element={<Room />} />
             <Route exact path="courses" element={<Courses />} />
             <Route exact path="classes" element={<Classes />} />
             <Route exact path="batches/editstudents" element={<EditBatch />} />

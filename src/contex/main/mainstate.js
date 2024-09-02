@@ -8,6 +8,7 @@ const MainState = (props) => {
   const { showAlert } = context;
   const [schoollist, setSchoollist] = useState([]);
   const [departmentslist, setDepartmentslist] = useState([]);
+  const [roomlist, setRoomlist] = useState([]);
   const [yearlist, setYearlist] = useState([]);
   const [semlist, setSemlist] = useState([]);
   const [selectedRoles, setSelectedRoles] = useState({
@@ -45,6 +46,23 @@ const MainState = (props) => {
     const json = await response.json();
     if (json.msgtype) {
       setDepartmentslist(json.departmentlist);
+    }
+    // showAlert(json);
+    return json;
+  };
+
+  const getroomlist = async (schoolcode,departmentcode) => {
+    const response = await fetch(`${host}/api/master/getroom`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ schoolname: schoolcode,departmentname:departmentcode }),
+    });
+    const json = await response.json();
+    if (json.msgtype) {
+      setRoomlist (json.roomlist);
     }
     // showAlert(json);
     return json;
@@ -108,9 +126,24 @@ const MainState = (props) => {
       body: JSON.stringify(body),
     });
     const json = await response.json();
-    if (json.msgtype) {
-      setDepartmentslist(json.departmentlist);
-    }
+    showAlert(json);
+    return json;
+  };
+
+
+  const addroom = async (data) => {
+      const link = `${host}/api/master/createroom`;
+      const body = { schoolname: data.schoolname, departmentname: data.departmentname,room:data.roomname };
+    
+    const response = await fetch(link, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify(body),
+    });
+    const json = await response.json();
     showAlert(json);
     return json;
   };
@@ -243,6 +276,10 @@ const MainState = (props) => {
         selectedRoles,
         setSelectedRoles,
         getrole,
+        roomlist,
+        setRoomlist,
+        getroomlist,
+        addroom
       }}
     >
       {props.children}
