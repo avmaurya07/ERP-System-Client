@@ -109,9 +109,9 @@ const TeacherMenu = () => {
             {isDashboardExpanded && (
               <div className="mt-2 pl-6">
                 <Link
-                  to="/"
-                  className="block p-2 rounded-lg hover:bg-blue-gray-100"
-                >
+                  to="/teacher/timetable"
+                  className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/teacher/timetable" ? "bg-blue-200" : ""}`}
+                 >
                   Time Table
                 </Link>
                 <Link
