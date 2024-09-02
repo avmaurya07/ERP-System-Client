@@ -20,7 +20,7 @@ The Admin user in the ERP system has extensive control and management capabiliti
   - View and manage students, teachers, and other admins.
   - Add all types of users to the system.
   - Import students in bulk using a CSV file.
-  - Assign the coordinator role to any existing user.
+  - Assign the coordinator role to any existing teachers.
   - Define specific roles and responsibilities for coordinators.
 
 - **Login Access**
