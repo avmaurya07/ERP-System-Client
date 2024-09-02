@@ -82,7 +82,6 @@ const Timetable = () => {
       weekDates.push(format(add(start, { days: i }), "dd/MM/yyyy"));
     }
     setDates(weekDates);
-    console.log(dates);
     // Fetch timetable with updated weekcode
     fetchtimetable(weekcode);
   };
@@ -141,12 +140,12 @@ const Timetable = () => {
 
   return (
     <>
-        <button onClick={handleprevweek} class="inline-block px-4 py-2 bg-gray-200 text-black rounded hover:bg-gray-300 hover:text-black transition duration-300 ease-in-out">
+        <button onClick={handleprevweek} className="inline-block px-4 py-2 bg-gray-200 text-black rounded hover:bg-gray-300 hover:text-black transition duration-300 ease-in-out">
       &laquo; Previous
     </button>
       <p className="text-xl font-bold mb-4">
         From: {dates[0]} to {dates[6]}{" "}</p>
-        <button onClick={handlenextweek} class="inline-block px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300 ease-in-out">
+        <button onClick={handlenextweek} className="inline-block px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300 ease-in-out">
       Next &raquo;
     </button>
       
