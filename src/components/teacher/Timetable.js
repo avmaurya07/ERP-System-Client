@@ -79,7 +79,7 @@ const Timetable = () => {
     // Calculate all dates of the week
     const weekDates = [];
     for (let i = 0; i < 7; i++) {
-      weekDates.push(format(add(start, { days: i }), "dd/MM/yyyy"));
+      weekDates.push(format(add(start, { days: i }), "yyyy-MM-dd"));
     }
     setDates(weekDates);
     // Fetch timetable with updated weekcode
@@ -122,7 +122,6 @@ const Timetable = () => {
     setinitials(new Date());
   }, []);
 
-
   const fetchtimetable = async (weekcode) => {
     setLoading(true);
     const response = await fetch(`${host}/api/academic/teachertimetable`, {
@@ -140,15 +139,22 @@ const Timetable = () => {
 
   return (
     <>
-        <button onClick={handleprevweek} className="inline-block px-4 py-2 bg-gray-200 text-black rounded hover:bg-gray-300 hover:text-black transition duration-300 ease-in-out">
-      &laquo; Previous
-    </button>
+      <button
+        onClick={handleprevweek}
+        className="inline-block px-4 py-2 bg-gray-200 text-black rounded hover:bg-gray-300 hover:text-black transition duration-300 ease-in-out"
+      >
+        &laquo; Previous
+      </button>
       <p className="text-xl font-bold mb-4">
-        From: {dates[0]} to {dates[6]}{" "}</p>
-        <button onClick={handlenextweek} className="inline-block px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300 ease-in-out">
-      Next &raquo;
-    </button>
-      
+        From: {dates[0]} to {dates[6]}{" "}
+      </p>
+      <button
+        onClick={handlenextweek}
+        className="inline-block px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300 ease-in-out"
+      >
+        Next &raquo;
+      </button>
+
       <div style={{ transform: "scale(0.8)", transformOrigin: "top left" }}>
         <table className="min-w-full border-2 border-black divide-y-2 divide-x-2 divide-black">
           <thead>
@@ -216,7 +222,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[1]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -235,7 +248,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[1]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -255,6 +275,14 @@ const Timetable = () => {
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
                           </p>
+                          {Date.now() >
+                            new Date(`${dates[1]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -273,7 +301,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[1]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -292,7 +327,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[1]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -311,7 +353,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[1]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -330,7 +379,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[1]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -349,7 +405,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[1]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -368,7 +431,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[1]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -389,8 +459,8 @@ const Timetable = () => {
               {!holidays.includes(dates[2]) ? (
                 <>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday1?.length > 0 &&
-                      timetable.Tuseday1.map((slot, index) => (
+                    {timetable.Tuesday1?.length > 0 &&
+                      timetable.Tuesday1.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -403,13 +473,20 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[2]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday2?.length > 0 &&
-                      timetable.Tuseday2.map((slot, index) => (
+                    {timetable.Tuesday2?.length > 0 &&
+                      timetable.Tuesday2.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -422,13 +499,20 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[2]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday3?.length > 0 &&
-                      timetable.Tuseday3.map((slot, index) => (
+                    {timetable.Tuesday3?.length > 0 &&
+                      timetable.Tuesday3.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -441,13 +525,20 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[2]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday4?.length > 0 &&
-                      timetable.Tuseday4.map((slot, index) => (
+                    {timetable.Tuesday4?.length > 0 &&
+                      timetable.Tuesday4.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -460,13 +551,20 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[2]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday5?.length > 0 &&
-                      timetable.Tuseday5.map((slot, index) => (
+                    {timetable.Tuesday5?.length > 0 &&
+                      timetable.Tuesday5.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -479,13 +577,20 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[2]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday6?.length > 0 &&
-                      timetable.Tuseday6.map((slot, index) => (
+                    {timetable.Tuesday6?.length > 0 &&
+                      timetable.Tuesday6.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -498,13 +603,20 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[2]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday7?.length > 0 &&
-                      timetable.Tuseday7.map((slot, index) => (
+                    {timetable.Tuesday7?.length > 0 &&
+                      timetable.Tuesday7.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -518,12 +630,21 @@ const Timetable = () => {
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
                           </p>
+                          {Date.now() >
+                            new Date(`${dates[2]}T10:25:00`).getTime() ? (
+                              <button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                            
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday8?.length > 0 &&
-                      timetable.Tuseday8.map((slot, index) => (
+                    {timetable.Tuesday8?.length > 0 &&
+                      timetable.Tuesday8.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -536,13 +657,20 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[2]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday9?.length > 0 &&
-                      timetable.Tuseday9.map((slot, index) => (
+                    {timetable.Tuesday9?.length > 0 &&
+                      timetable.Tuesday9.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -555,7 +683,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[2]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -590,7 +725,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[3]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -609,7 +751,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[3]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -628,7 +777,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[3]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -647,7 +803,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[3]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -666,7 +829,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[3]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -685,7 +855,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[3]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -704,7 +881,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[3]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -723,7 +907,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[3]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -742,7 +933,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[3]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -777,7 +975,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[4]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -796,7 +1001,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[4]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -815,7 +1027,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[4]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -834,7 +1053,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[4]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -853,7 +1079,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[4]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -872,7 +1105,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[4]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -891,7 +1131,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[4]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -910,7 +1157,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[4]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -929,7 +1183,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[4]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -964,7 +1225,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[5]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -983,7 +1251,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[5]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1002,7 +1277,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[5]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1021,7 +1303,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[5]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1040,7 +1329,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[5]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1059,7 +1355,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[5]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1078,7 +1381,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[5]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1097,7 +1407,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[5]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1116,7 +1433,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[5]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1151,7 +1475,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[6]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1170,7 +1501,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[6]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1189,7 +1527,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[6]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1208,7 +1553,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[6]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1227,7 +1579,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[6]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1246,7 +1605,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[6]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1265,7 +1631,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[6]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1284,7 +1657,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[6]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>
@@ -1303,7 +1683,14 @@ const Timetable = () => {
                           </p>
                           <p className="bg-yellow-200 rounded-lg px-2 py-1">
                             {slot.batchname}
-                          </p>
+                          </p>{Date.now() >
+                            new Date(`${dates[6]}T10:25:00`).getTime() ? (
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Take Attendance
+                            </button>
+                          ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
+                            Not Allowed to Mark future Attendence
+                          </p>)}
                         </div>
                       ))}
                   </td>

@@ -389,8 +389,8 @@ const Timetable = () => {
               {!holidays.includes(dates[2]) ? (
                 <>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday1?.length > 0 &&
-                      timetable.Tuseday1.map((slot, index) => (
+                    {timetable.Tuesday1?.length > 0 &&
+                      timetable.Tuesday1.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -408,8 +408,8 @@ const Timetable = () => {
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday2?.length > 0 &&
-                      timetable.Tuseday2.map((slot, index) => (
+                    {timetable.Tuesday2?.length > 0 &&
+                      timetable.Tuesday2.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -427,8 +427,8 @@ const Timetable = () => {
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday3?.length > 0 &&
-                      timetable.Tuseday3.map((slot, index) => (
+                    {timetable.Tuesday3?.length > 0 &&
+                      timetable.Tuesday3.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -446,8 +446,8 @@ const Timetable = () => {
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday4?.length > 0 &&
-                      timetable.Tuseday4.map((slot, index) => (
+                    {timetable.Tuesday4?.length > 0 &&
+                      timetable.Tuesday4.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -465,8 +465,8 @@ const Timetable = () => {
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday5?.length > 0 &&
-                      timetable.Tuseday5.map((slot, index) => (
+                    {timetable.Tuesday5?.length > 0 &&
+                      timetable.Tuesday5.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -484,8 +484,8 @@ const Timetable = () => {
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday6?.length > 0 &&
-                      timetable.Tuseday6.map((slot, index) => (
+                    {timetable.Tuesday6?.length > 0 &&
+                      timetable.Tuesday6.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -503,8 +503,8 @@ const Timetable = () => {
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday7?.length > 0 &&
-                      timetable.Tuseday7.map((slot, index) => (
+                    {timetable.Tuesday7?.length > 0 &&
+                      timetable.Tuesday7.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -522,8 +522,8 @@ const Timetable = () => {
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday8?.length > 0 &&
-                      timetable.Tuseday8.map((slot, index) => (
+                    {timetable.Tuesday8?.length > 0 &&
+                      timetable.Tuesday8.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
@@ -541,8 +541,8 @@ const Timetable = () => {
                       ))}
                   </td>
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
-                    {timetable.Tuseday9?.length > 0 &&
-                      timetable.Tuseday9.map((slot, index) => (
+                    {timetable.Tuesday9?.length > 0 &&
+                      timetable.Tuesday9.map((slot, index) => (
                         <div
                           key={index}
                           className="m-1 bg-indigo-500 p-3 rounded-lg flex flex-col items-center"
