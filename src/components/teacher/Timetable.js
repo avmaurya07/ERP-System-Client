@@ -632,7 +632,7 @@ const Timetable = () => {
                           </p>
                           {Date.now() >
                             new Date(`${dates[2]}T10:25:00`).getTime() ? (
-                              <button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 transform transition-transform duration-200 hover:scale-105">
+                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
                             </button>
                             

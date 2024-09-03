@@ -28,9 +28,7 @@ const AdminMenu = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("usertype");
-    localStorage.removeItem("username");
+    localStorage.clear();
     navigate("/login"); 
   };
 

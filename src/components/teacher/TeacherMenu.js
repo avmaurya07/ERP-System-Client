@@ -23,17 +23,13 @@ const TeacherMenu = () => {
   };
   const handleLogout = () => {
     if (localStorage.getItem("token1")) {
-      localStorage.removeItem("token");
-      localStorage.setItem("token", localStorage.getItem("token1"));
-      localStorage.removeItem("token1");
-      localStorage.removeItem("usertype");
+      const token1 = localStorage.getItem("token1");
+      localStorage.clear();
+      localStorage.setItem("token", token1);
       localStorage.setItem("usertype", "admin");
-      localStorage.removeItem("username");
       navigate("/admin/users");
-    } else {
-      localStorage.removeItem("token");
-      localStorage.removeItem("usertype");
-      localStorage.removeItem("username");
+    } else { 
+      localStorage.clear();
       navigate("/login");
     }
   };
