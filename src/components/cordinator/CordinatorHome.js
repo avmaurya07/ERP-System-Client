@@ -8,6 +8,7 @@ import Courses from "./Courses";
 import Classes from "./Classes";
 import Card from "../admin/Card"; // Import the Card component
 import MainContext from "../../contex/main/maincontext";
+import Timetable from "./Timetable";
 
 const CordinatorHome = () => {
   const context = useContext(MainContext);
@@ -23,6 +24,13 @@ const CordinatorHome = () => {
           {location.pathname === "/cordinator" && (
             <div className="p-4 sm:p-6 md:p-8 lg:p-10">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {selectedRoles.timetable && (
+                  <Card
+                    title="Timetable"
+                    description="Manage batches"
+                    link="timetable"
+                  />
+                )}
                 {selectedRoles.batches && (
                   <Card
                     title="Batches"
@@ -52,6 +60,7 @@ const CordinatorHome = () => {
             <Route exact path="batches" element={<Batches />} />
             <Route exact path="courses" element={<Courses />} />
             <Route exact path="classes" element={<Classes />} />
+            <Route exact path="timetable" element={<Timetable />} />
             <Route path="/batches/editstudents" element={<EditBatch />} />
           </Routes>
         </div>
