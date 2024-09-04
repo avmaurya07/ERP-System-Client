@@ -191,7 +191,7 @@ The Coordinator role in the ERP system is designed to manage specific academic t
 
 ![Timetable Page](pictures/52.png)
 
-# Versions 0.9.0
+# Versions 0.9.5
 
 ## Try Now
 

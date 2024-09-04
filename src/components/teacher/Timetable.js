@@ -9,9 +9,7 @@ const Timetable = () => {
   const { setLoading, setMenuVisible } = context;
   const [dates, setDates] = useState([]);
   const [holidays, setHolidays] = useState([
-    "01/09/2024",
-    "15/09/2024",
-    "25/12/2024",
+    "2024-09-01",
   ]);
   const [timetable, settimetable] = useState({
     Monday1: [],
@@ -88,7 +86,7 @@ const Timetable = () => {
 
   const getNextDate = (dateString) => {
     // Parse the date string to a Date object
-    const date = parse(dateString, "dd/MM/yyyy", new Date());
+    const date = parse(dateString, "yyyy-MM-dd", new Date());
 
     // Add one day to the date
     const nextDate = add(date, { days: 1 });
@@ -99,7 +97,7 @@ const Timetable = () => {
 
   const getPrevDate = (dateString) => {
     // Parse the date string to a Date object
-    const date = parse(dateString, "dd/MM/yyyy", new Date());
+    const date = parse(dateString, "yyyy-MM-dd", new Date());
 
     // Add one day to the date
     const prevDate = add(date, { days: -1 });

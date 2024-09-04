@@ -118,8 +118,8 @@ const CordinatorMenu = () => {
                 {isDashboardExpanded && (
                   <div className="mt-2 pl-6">
                     <Link
-                      to="/"
-                      className="block p-2 rounded-lg hover:bg-blue-gray-100"
+                      to="/cordinator/timetable"
+                      className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/cordinator/timetable" ? "bg-blue-200" : ""}`}
                     >
                       Time Table
                     </Link>
