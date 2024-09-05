@@ -4,6 +4,7 @@ import MainContext from "../../contex/main/maincontext";
 import { useNavigate } from "react-router-dom";
 import EditTimetable from "./EditTimetable";
 import AlertContext from "../../contex/alert/alertcontext";
+import { getWeek, startOfWeek, add, getYear, format, parse } from "date-fns";
 
 const host = config.host;
 
@@ -28,14 +29,15 @@ const Timetable = () => {
   const [weekCodeModal, setWeekCodeModal] = useState("");
   const [copy, setCopy] = useState(false);
   const [modalYear, setModalYear] = useState("");
+  const [weekcode1, setweekcode1] = useState("");
   const [modalSem, setModalSem] = useState("");
   const classrooms = [];
-
   useEffect(() => {
     getroomlist();
     getyearlist();
     setMenuVisible(false);
     checkPermission();
+    initials();
   }, []);
 
   const checkPermission = () => {
@@ -46,7 +48,12 @@ const Timetable = () => {
       navigate("/cordinator");
     }
   };
-
+const initials = () => {
+    const date = new Date();
+    const week = getWeek(date);
+    const year = getYear(date);
+    setweekcode1(`${year}-${week}`)
+  };
   const onYearChange = async (e) => {
     const yearCode = e.target.value;
     setSelectedYear(yearCode);
@@ -226,7 +233,7 @@ const Timetable = () => {
                 htmlFor="weekCode"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Week Code
+                Week Code (Current Week: {weekcode1})
               </label>
               <input
                 type="text"
@@ -328,7 +335,7 @@ const Timetable = () => {
                     </div>
                     <div className="form-group mt-3">
                       <label htmlFor="weekCodeModal" className="form-label">
-                        Week Code
+                        Week Code (Current Week: {weekcode1})
                       </label>
                       <input
                         type="text"
