@@ -85,8 +85,8 @@ const CourseList = () => {
             ) : (
               filteredcourses
                 .sort((a, b) => a.coursename.localeCompare(b.coursename))
-                .map((course) => (
-                  <tr key={course.id}>
+                .map((course,index) => (
+                  <tr key={index}>
                     <td className="py-2 px-4 border-b">{course.coursecode}</td>
                     <td className="py-2 px-4 border-b">{course.coursename}</td>
                     <td className="py-2 px-4 border-b">{course.teachername}</td>

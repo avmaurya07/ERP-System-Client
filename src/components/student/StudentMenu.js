@@ -105,10 +105,11 @@ const Menu = () => {
               </Link>
               <Link
                 to="/student/attendance"
-                className="block p-2 rounded-lg hover:bg-blue-gray-100"
-              >
+                className={`block p-2 rounded-lg hover:bg-blue-gray-100 ${location.pathname === "/student/attendance" ? "bg-blue-200" : ""}`}
+                >
                 Attendance
               </Link>
+              
             </div>
           )}
         </div>

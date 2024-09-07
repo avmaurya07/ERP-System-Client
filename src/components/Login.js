@@ -43,7 +43,7 @@ const Login = () => {
       //save the token on local storage and redirect
       localStorage.setItem("token", json.authtoken);
       localStorage.setItem("usertype", json.usertype);
-
+      if(ldata.usertype==="student"){localStorage.setItem("systemid", ldata.systemid)};
       if (!json.istemppassword) {
         if (json.usertype === "admin") {
           navigate("/admin");

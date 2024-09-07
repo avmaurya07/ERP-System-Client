@@ -54,6 +54,7 @@ const UserListState = (props) => {
       localStorage.setItem("token", json.authtoken);
       localStorage.removeItem("usertype")
       localStorage.setItem("usertype", json.usertype);
+      if(user.usertype==="student"){localStorage.setItem("systemid", user.systemid);}
     }
     showAlert(json);
     return json
