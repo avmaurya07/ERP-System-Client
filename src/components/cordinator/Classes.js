@@ -189,7 +189,6 @@ const Classes = () => {
     } else if (localStorage.getItem("usertype") === "cordinator") {
       setFilteredCourseList(courselist);
       setFilteredTeacherList(userlist);
-      console.log(courselist);
     }
   };
 

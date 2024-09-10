@@ -222,9 +222,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[1]}T08:35:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -248,9 +251,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[1]}T09:30:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -275,9 +281,12 @@ const Timetable = () => {
                           </p>
                           {Date.now() >
                             new Date(`${dates[1]}T10:25:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -301,9 +310,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[1]}T11:20:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -327,9 +339,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[1]}T12:15:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -353,9 +368,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[1]}T13:10:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -379,9 +397,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[1]}T14:05:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -405,9 +426,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[1]}T15:00:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -431,9 +455,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[1]}T15:50:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -473,9 +500,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[2]}T08:35:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -499,9 +529,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[2]}T09:30:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -525,9 +558,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[2]}T10:25:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -551,9 +587,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[2]}T11:20:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -577,9 +616,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[2]}T12:15:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -603,9 +645,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[2]}T13:10:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -630,10 +675,12 @@ const Timetable = () => {
                           </p>
                           {Date.now() >
                             new Date(`${dates[2]}T14:05:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
-                            
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -657,9 +704,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[2]}T15:00:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -683,9 +733,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[2]}T15:50:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -725,9 +778,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[3]}T08:35:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -751,9 +807,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[3]}T09:30:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -777,9 +836,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[3]}T10:25:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -803,9 +865,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[3]}T11:20:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -829,9 +894,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[3]}T12:15:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -855,9 +923,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[3]}T13:10:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -881,9 +952,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[3]}T14:05:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -907,9 +981,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[3]}T15:00:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -933,9 +1010,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[3]}T15:50:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -975,9 +1055,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[4]}T08:35:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1001,9 +1084,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[4]}T09:30:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1027,9 +1113,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[4]}T10:25:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1053,9 +1142,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[4]}T11:20:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1079,9 +1171,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[4]}T12:15:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1105,9 +1200,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[4]}T13:10:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1131,9 +1229,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[4]}T14:05:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1157,9 +1258,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[4]}T15:00:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1183,9 +1287,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[4]}T15:50:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1225,9 +1332,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[5]}T08:35:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1251,9 +1361,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[5]}T09:30:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1277,9 +1390,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[5]}T10:25:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1303,9 +1419,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[5]}T11:20:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1329,9 +1448,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[5]}T12:15:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1355,9 +1477,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[5]}T13:10:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1381,9 +1506,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[5]}T14:05:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1407,9 +1535,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[5]}T15:00:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1433,9 +1564,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[5]}T15:50:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1475,9 +1609,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[6]}T08:35:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1501,9 +1638,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[6]}T09:30:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1527,9 +1667,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[6]}T10:25:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1553,9 +1696,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[6]}T11:20:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1579,9 +1725,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[6]}T12:15:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1605,9 +1754,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[6]}T13:10:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1631,9 +1783,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[6]}T14:05:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1657,9 +1812,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[6]}T15:00:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}
@@ -1683,9 +1841,12 @@ const Timetable = () => {
                             {slot.batchname}
                           </p>{Date.now() >
                             new Date(`${dates[6]}T15:50:00`).getTime() ? (
-                              <button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              !(slot.markedAttendence) ? (<button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
                               Take Attendance
-                            </button>
+                            </button>)
+                              : (<button className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold rounded-lg shadow-md px-4 py-2 my-1 transform transition-transform duration-200 hover:scale-105">
+                              Update Attendance
+                            </button>)
                           ):(<p className="bg-yellow-200 rounded-lg px-2 py-1 my-1">
                             Not Allowed to Mark future Attendence
                           </p>)}

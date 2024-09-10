@@ -6,7 +6,7 @@ const host = config.host;
 
 const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
   const context = useContext(AlertContext);
-  const { setLoading, setMenuVisible } = context;
+  const { setLoading, setMenuVisible,showAlert2 } = context;
   const [dates, setDates] = useState([]);
   const [holidays, setHolidays] = useState(["2024-09-01"]);
   const [attandance, setattandance] = useState({
@@ -142,8 +142,10 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
       );
       const json = await response.json();
       if (json.msgtype) {
-        const weekAttendance = json.attendance[0].weeks[0].attendance;
-        const formattedAttendance = {
+        let formattedAttendance ={};
+        if(json.attendance.length>0){
+          const weekAttendance = json.attendance[0].attendance;
+           formattedAttendance = {
           Monday1: weekAttendance[0][0] || "",
           Monday2: weekAttendance[0][1] || "",
           Monday3: weekAttendance[0][2] || "",
@@ -198,15 +200,72 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
           Saturday7: weekAttendance[5][6] || "",
           Saturday8: weekAttendance[5][7] || "",
           Saturday9: weekAttendance[5][8] || "",
-        };
+        };}
+        else{
+          formattedAttendance = {
+            Monday1: "",
+            Monday2: "",
+            Monday3: "",
+            Monday4: "",
+            Monday5: "",
+            Monday6: "",
+            Monday7: "",
+            Monday8: "",
+            Monday9: "",
+            Tuesday1: "",
+            Tuesday2: "",
+            Tuesday3: "",
+            Tuesday4: "",
+            Tuesday5: "",
+            Tuesday6: "",
+            Tuesday7: "",
+            Tuesday8: "",
+            Tuesday9: "",
+            Wednesday1: "",
+            Wednesday2: "",
+            Wednesday3: "",
+            Wednesday4: "",
+            Wednesday5: "",
+            Wednesday6: "",
+            Wednesday7: "",
+            Wednesday8: "",
+            Wednesday9: "",
+            Thursday1: "",
+            Thursday2: "",
+            Thursday3: "",
+            Thursday4: "",
+            Thursday5: "",
+            Thursday6: "",
+            Thursday7: "",
+            Thursday8: "",
+            Thursday9: "",
+            Friday1: "",
+            Friday2: "",
+            Friday3: "",
+            Friday4: "",
+            Friday5: "",
+            Friday6: "",
+            Friday7: "",
+            Friday8: "",
+            Friday9: "",
+            Saturday1: "",
+            Saturday2: "",
+            Saturday3: "",
+            Saturday4: "",
+            Saturday5: "",
+            Saturday6: "",
+            Saturday7: "",
+            Saturday8: "",
+            Saturday9: "",
+          };
+        }
 
         setattandance(formattedAttendance);
-        console.log(formattedAttendance);
       } else {
-        console.error("Failed to fetch attendance:", json.msg);
+        showAlert2(json)
       }
     } catch (error) {
-      console.error("Error fetching attendance:", error);
+      showAlert2({msgtype:false,msg: "Error fetching attendance"});
     } finally {
       setLoading(false);
     }
@@ -292,7 +351,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Monday1 && (
                       <div
-                        className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                        className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                           attandance.Monday1 === "P"
                             ? "bg-green-500"
                             : attandance.Monday1 === "A"
@@ -300,12 +359,8 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                             : "bg-gray-500"
                         }`}
                       >
-                        <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
-                          {attandance.Monday1 === "P"
-                            ? "Present"
-                            : attandance.Monday1 === "A"
-                            ? "Absent"
-                            : "No Data"}
+                        <p className="font-bold text-white text-lg">
+                          {attandance.Monday1 === "P" ? "P" : attandance.Monday1 === "A" ? "A" : "No Data"}
                         </p>
                       </div>
                     )}
@@ -313,7 +368,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Monday2 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Monday2 === "P"
                               ? "bg-green-500"
                               : attandance.Monday2 === "A"
@@ -321,11 +376,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Monday2 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Monday2 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -334,7 +389,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Monday3 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Monday3 === "P"
                               ? "bg-green-500"
                               : attandance.Monday3 === "A"
@@ -342,11 +397,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Monday3 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Monday3 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -355,7 +410,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Monday4 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Monday4 === "P"
                               ? "bg-green-500"
                               : attandance.Monday4 === "A"
@@ -363,11 +418,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Monday4 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Monday4 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -376,7 +431,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Monday5 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Monday5 === "P"
                               ? "bg-green-500"
                               : attandance.Monday5 === "A"
@@ -384,11 +439,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Monday5 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Monday5 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -397,7 +452,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Monday6 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Monday6 === "P"
                               ? "bg-green-500"
                               : attandance.Monday6 === "A"
@@ -405,11 +460,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Monday6 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Monday6 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -418,7 +473,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Monday7 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Monday7 === "P"
                               ? "bg-green-500"
                               : attandance.Monday7 === "A"
@@ -426,11 +481,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Monday7 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Monday7 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -439,7 +494,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Monday8 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Monday8 === "P"
                               ? "bg-green-500"
                               : attandance.Monday8 === "A"
@@ -447,11 +502,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Monday8 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Monday8 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -460,7 +515,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Monday9 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Monday9 === "P"
                               ? "bg-green-500"
                               : attandance.Monday9 === "A"
@@ -468,11 +523,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Monday9 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Monday9 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -497,7 +552,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Tuesday1 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Tuesday1 === "P"
                               ? "bg-green-500"
                               : attandance.Tuesday1 === "A"
@@ -505,11 +560,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Tuesday1 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Tuesday1 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -518,7 +573,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Tuesday2 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Tuesday2 === "P"
                               ? "bg-green-500"
                               : attandance.Tuesday2 === "A"
@@ -526,11 +581,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Tuesday2 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Tuesday2 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -539,7 +594,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Tuesday3 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Tuesday3 === "P"
                               ? "bg-green-500"
                               : attandance.Tuesday3 === "A"
@@ -547,11 +602,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Tuesday3 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Tuesday3 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -560,7 +615,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Tuesday4 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Tuesday4 === "P"
                               ? "bg-green-500"
                               : attandance.Tuesday4 === "A"
@@ -568,11 +623,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Tuesday4 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Tuesday4 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -581,7 +636,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Tuesday5 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Tuesday5 === "P"
                               ? "bg-green-500"
                               : attandance.Tuesday5 === "A"
@@ -589,11 +644,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Tuesday5 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Tuesday5 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -602,7 +657,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Tuesday6 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Tuesday6 === "P"
                               ? "bg-green-500"
                               : attandance.Tuesday6 === "A"
@@ -610,11 +665,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Tuesday6 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Tuesday6 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -623,7 +678,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Tuesday7 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Tuesday7 === "P"
                               ? "bg-green-500"
                               : attandance.Tuesday7 === "A"
@@ -631,11 +686,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Tuesday7 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Tuesday7 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -644,7 +699,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Tuesday8 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Tuesday8 === "P"
                               ? "bg-green-500"
                               : attandance.Tuesday8 === "A"
@@ -652,11 +707,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Tuesday8 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Tuesday8 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -665,7 +720,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Tuesday9 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Tuesday9 === "P"
                               ? "bg-green-500"
                               : attandance.Tuesday9 === "A"
@@ -673,11 +728,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Tuesday9 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Tuesday9 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -702,7 +757,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Wednesday1 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Wednesday1 === "P"
                               ? "bg-green-500"
                               : attandance.Wednesday1 === "A"
@@ -710,11 +765,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Wednesday1 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Wednesday1 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -723,7 +778,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Wednesday2 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Wednesday2 === "P"
                               ? "bg-green-500"
                               : attandance.Wednesday2 === "A"
@@ -731,11 +786,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Wednesday2 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Wednesday2 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -744,7 +799,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Wednesday3 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Wednesday3 === "P"
                               ? "bg-green-500"
                               : attandance.Wednesday3 === "A"
@@ -752,11 +807,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Wednesday3 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Wednesday3 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -765,7 +820,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Wednesday4 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Wednesday4 === "P"
                               ? "bg-green-500"
                               : attandance.Wednesday4 === "A"
@@ -773,11 +828,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Wednesday4 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Wednesday4 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -786,7 +841,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Wednesday5 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Wednesday5 === "P"
                               ? "bg-green-500"
                               : attandance.Wednesday5 === "A"
@@ -794,11 +849,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Wednesday5 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Wednesday5 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -807,7 +862,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Wednesday6 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Wednesday6 === "P"
                               ? "bg-green-500"
                               : attandance.Wednesday6 === "A"
@@ -815,11 +870,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Wednesday6 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Wednesday6 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -828,7 +883,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Wednesday7 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Wednesday7 === "P"
                               ? "bg-green-500"
                               : attandance.Wednesday7 === "A"
@@ -836,11 +891,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Wednesday7 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Wednesday7 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -849,7 +904,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Wednesday8 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Wednesday8 === "P"
                               ? "bg-green-500"
                               : attandance.Wednesday8 === "A"
@@ -857,11 +912,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Wednesday8 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Wednesday8 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -870,7 +925,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Wednesday9 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Wednesday9 === "P"
                               ? "bg-green-500"
                               : attandance.Wednesday9 === "A"
@@ -878,11 +933,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Wednesday9 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Wednesday9 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -907,7 +962,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Thursday1 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Thursday1 === "P"
                               ? "bg-green-500"
                               : attandance.Thursday1 === "A"
@@ -915,11 +970,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Thursday1 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Thursday1 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -928,7 +983,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Thursday2 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Thursday2 === "P"
                               ? "bg-green-500"
                               : attandance.Thursday2 === "A"
@@ -936,11 +991,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Thursday2 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Thursday2 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -949,7 +1004,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Thursday3 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Thursday3 === "P"
                               ? "bg-green-500"
                               : attandance.Thursday3 === "A"
@@ -957,11 +1012,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Thursday3 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Thursday3 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -970,7 +1025,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Thursday4 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Thursday4 === "P"
                               ? "bg-green-500"
                               : attandance.Thursday4 === "A"
@@ -978,11 +1033,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Thursday4 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Thursday4 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -991,7 +1046,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Thursday5 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Thursday5 === "P"
                               ? "bg-green-500"
                               : attandance.Thursday5 === "A"
@@ -999,11 +1054,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Thursday5 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Thursday5 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1012,7 +1067,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Thursday6 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Thursday6 === "P"
                               ? "bg-green-500"
                               : attandance.Thursday6 === "A"
@@ -1020,11 +1075,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Thursday6 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Thursday6 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1033,7 +1088,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Thursday7 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Thursday7 === "P"
                               ? "bg-green-500"
                               : attandance.Thursday7 === "A"
@@ -1041,11 +1096,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Thursday7 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Thursday7 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1054,7 +1109,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Thursday8 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Thursday8 === "P"
                               ? "bg-green-500"
                               : attandance.Thursday8 === "A"
@@ -1062,11 +1117,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Thursday8 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Thursday8 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1075,7 +1130,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Thursday9 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Thursday9 === "P"
                               ? "bg-green-500"
                               : attandance.Thursday9 === "A"
@@ -1083,11 +1138,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Thursday9 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Thursday9 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1112,7 +1167,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Friday1 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Friday1 === "P"
                               ? "bg-green-500"
                               : attandance.Friday1 === "A"
@@ -1120,11 +1175,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Friday1 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Friday1 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1133,7 +1188,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Friday2 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Friday2 === "P"
                               ? "bg-green-500"
                               : attandance.Friday2 === "A"
@@ -1141,11 +1196,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Friday2 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Friday2 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1154,7 +1209,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Friday3 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Friday3 === "P"
                               ? "bg-green-500"
                               : attandance.Friday3 === "A"
@@ -1162,11 +1217,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Friday3 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Friday3 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1175,7 +1230,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Friday4 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Friday4 === "P"
                               ? "bg-green-500"
                               : attandance.Friday4 === "A"
@@ -1183,11 +1238,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Friday4 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Friday4 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1196,7 +1251,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Friday5 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Friday5 === "P"
                               ? "bg-green-500"
                               : attandance.Friday5 === "A"
@@ -1204,11 +1259,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Friday5 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Friday5 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1217,7 +1272,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Friday6 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Friday6 === "P"
                               ? "bg-green-500"
                               : attandance.Friday6 === "A"
@@ -1225,11 +1280,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Friday6 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Friday6 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1238,7 +1293,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Friday7 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Friday7 === "P"
                               ? "bg-green-500"
                               : attandance.Friday7 === "A"
@@ -1246,11 +1301,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Friday7 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Friday7 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1259,7 +1314,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Friday8 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Friday8 === "P"
                               ? "bg-green-500"
                               : attandance.Friday8 === "A"
@@ -1267,11 +1322,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Friday8 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Friday8 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1280,7 +1335,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Friday9 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Friday9 === "P"
                               ? "bg-green-500"
                               : attandance.Friday9 === "A"
@@ -1288,11 +1343,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Friday9 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Friday9 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1317,7 +1372,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Saturday1 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Saturday1 === "P"
                               ? "bg-green-500"
                               : attandance.Saturday1 === "A"
@@ -1325,11 +1380,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Saturday1 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Saturday1 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1338,7 +1393,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Saturday2 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Saturday2 === "P"
                               ? "bg-green-500"
                               : attandance.Saturday2 === "A"
@@ -1346,11 +1401,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Saturday2 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Saturday2 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1359,7 +1414,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Saturday3 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Saturday3 === "P"
                               ? "bg-green-500"
                               : attandance.Saturday3 === "A"
@@ -1367,11 +1422,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Saturday3 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Saturday3 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1380,7 +1435,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Saturday4 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Saturday4 === "P"
                               ? "bg-green-500"
                               : attandance.Saturday4 === "A"
@@ -1388,11 +1443,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Saturday4 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Saturday4 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1401,7 +1456,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Saturday5 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Saturday5 === "P"
                               ? "bg-green-500"
                               : attandance.Saturday5 === "A"
@@ -1409,11 +1464,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Saturday5 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Saturday5 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1422,7 +1477,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Saturday6 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Saturday6 === "P"
                               ? "bg-green-500"
                               : attandance.Saturday6 === "A"
@@ -1430,11 +1485,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Saturday6 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Saturday6 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1443,7 +1498,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Saturday7 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Saturday7 === "P"
                               ? "bg-green-500"
                               : attandance.Saturday7 === "A"
@@ -1451,11 +1506,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Saturday7 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Saturday7 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1464,7 +1519,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Saturday8 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Saturday8 === "P"
                               ? "bg-green-500"
                               : attandance.Saturday8 === "A"
@@ -1472,11 +1527,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Saturday8 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Saturday8 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
@@ -1485,7 +1540,7 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                   <td className="px-1 py-1 whitespace-nowrap text-xs text-gray-500 border-r-2 border-black overflow-hidden">
                     {attandance.Saturday9 &&
                         <div
-                          className={`m-1 p-3 rounded-lg flex flex-col items-center ${
+                          className={`m-1 w-12 h-12 rounded-full flex items-center justify-center ${
                             attandance.Saturday9 === "P"
                               ? "bg-green-500"
                               : attandance.Saturday9 === "A"
@@ -1493,11 +1548,11 @@ const Courseattendance = ({ selectedcourse, setShowCourseAttendance }) => {
                               : "bg-gray-500"
                           }`}
                         >
-                          <p className="bg-blue-200 rounded-lg px-2 py-1 mb-2">
+                          <p className="font-bold text-white text-lg">
                             {attandance.Saturday9 === "P"
-                              ? "Present"
+                              ? "P"
                               : attandance.Saturday9 === "A"
-                              ? "Absent"
+                              ? "A"
                               : "No Data"}
                           </p>
                         </div>
