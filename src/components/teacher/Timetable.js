@@ -12,9 +12,8 @@ const Timetable = () => {
   const context = useContext(AlertContext);
   const { setLoading, setMenuVisible } = context;
   const context1 = useContext(AttendanceContext);
-  const { setSelectedClass,markAttendance } = context1;
+  const { setSelectedClass,markAttendance,setweekcode } = context1;
   const [dates, setDates] = useState([]);
-  const [weekcode1, setweekcode] = useState([]);
   const [holidays, setHolidays] = useState([
     "2024-09-01",
   ]);
@@ -95,7 +94,7 @@ const Timetable = () => {
 
   const onTakeAttendance = async (slot) => {
     setSelectedClass(slot);
-    await markAttendance(slot,weekcode1);
+    await markAttendance(slot);
     navigate("/teacher/markattendance");
   };
 

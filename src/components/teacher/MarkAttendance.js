@@ -11,7 +11,7 @@ const host = config.host;
 const MarkAttendance = () => {
   const navigate = useNavigate();
   const context1 = useContext(AttendanceContext);
-  const { selectedClass, studentlist } = context1;
+  const { selectedClass, studentlist, updateAttendance } = context1;
 
   const [students, setStudents] = useState(studentlist);
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,7 +21,7 @@ const MarkAttendance = () => {
     if (Object.keys(selectedClass).length === 0) {
       navigate("/teacher/timetable");
     }
-    
+
     if (!selectedClass.markedAttendence) {
       setStudents((prevStudents) =>
         prevStudents.map((stud) =>
@@ -32,7 +32,7 @@ const MarkAttendance = () => {
   }, [selectedClass]);
 
   const handleAttendanceChange = (e, id) => {
-    const newAttendance = e.target.checked ? 'P' : 'A';
+    const newAttendance = e.target.checked ? "P" : "A";
     setStudents((prevStudents) =>
       prevStudents.map((stud) =>
         stud.systemid === id ? { ...stud, attendance: newAttendance } : stud
@@ -44,9 +44,9 @@ const MarkAttendance = () => {
     setShowPopup(true);
   };
 
-  const handleFinalSubmit = () => {
-    console.log(students);
+  const handleFinalSubmit = async () => {
     setShowPopup(false);
+    await updateAttendance(students);
   };
 
   const handleSearchChange = (e) => {
@@ -54,8 +54,8 @@ const MarkAttendance = () => {
   };
 
   const countAttendance = () => {
-    const totalA = students.filter(stud => stud.attendance === "A").length;
-    const totalP = students.filter(stud => stud.attendance === "P").length;
+    const totalA = students.filter((stud) => stud.attendance === "A").length;
+    const totalP = students.filter((stud) => stud.attendance === "P").length;
     return { totalA, totalP };
   };
 
@@ -63,9 +63,10 @@ const MarkAttendance = () => {
 
   // Filter and sort students by name
   const filteredStudents = students
-    .filter((stud) =>
-      stud.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      stud.systemid.includes(searchQuery)
+    .filter(
+      (stud) =>
+        stud.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        stud.systemid.includes(searchQuery)
     )
     .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -128,17 +129,23 @@ const MarkAttendance = () => {
                   <td className="py-2 px-4 border-b">
                     <label>
                       <div className="relative inline-block w-11 h-5">
-                        <input 
-                          id={`switch-component-${stud.systemid}`} 
-                          type="checkbox" 
-                          className={`peer appearance-none w-11 h-5 rounded-full cursor-pointer transition-colors duration-300 ${stud.attendance === "P" ? "bg-green-500" : "bg-red-500"}`} 
-                          checked={stud.attendance === "P"} 
-                          onChange={(e) => handleAttendanceChange(e, stud.systemid)} 
+                        <input
+                          id={`switch-component-${stud.systemid}`}
+                          type="checkbox"
+                          className={`peer appearance-none w-11 h-5 rounded-full cursor-pointer transition-colors duration-300 ${
+                            stud.attendance === "P"
+                              ? "bg-green-500"
+                              : "bg-red-500"
+                          }`}
+                          checked={stud.attendance === "P"}
+                          onChange={(e) =>
+                            handleAttendanceChange(e, stud.systemid)
+                          }
                         />
-                        <label 
-                          htmlFor={`switch-component-${stud.systemid}`} 
-                          className="absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-green-500 cursor-pointer">
-                        </label>
+                        <label
+                          htmlFor={`switch-component-${stud.systemid}`}
+                          className="absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-green-500 cursor-pointer"
+                        ></label>
                       </div>
                     </label>
                   </td>
@@ -150,32 +157,40 @@ const MarkAttendance = () => {
       </div>
       {showPopup && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-                                        <div className="bg-white p-6 rounded-lg shadow-xl max-w-md mx-auto mt-10">
-                      <h2 className="text-2xl font-extrabold mb-6 text-gray-800">Attendance Summary</h2>
-                      <p className="text-lg mb-2 text-gray-700">
-                        <span className="font-semibold text-red-500">Total Absent (A): {totalA}</span>
-                      </p>
-                      <p className="text-lg mb-2 text-gray-700">
-                        <span className="font-semibold text-green-500">Total Present (P): {totalP}</span>
-                      </p>
-                      <p className="text-lg mb-4 text-gray-700">
-                        <span className="font-semibold">Total Students: {totalP + totalA}</span>
-                      </p>
-                      <div className="flex justify-end mt-6 space-x-4">
-                        <button
-                          onClick={() => setShowPopup(false)}
-                          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          onClick={handleFinalSubmit}
-                          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
-                        >
-                          Submit
-                        </button>
-                      </div>
-                    </div>
+          <div className="bg-white p-6 rounded-lg shadow-xl max-w-md mx-auto mt-10">
+            <h2 className="text-2xl font-extrabold mb-6 text-gray-800">
+              Attendance Summary
+            </h2>
+            <p className="flex justify-center text-lg mb-2 text-gray-700">
+              <span className="font-semibold text-red-500">
+                Total Absent (A): {totalA}
+              </span>
+            </p>
+            <p className="flex justify-center text-lg mb-2 text-gray-700">
+              <span className="font-semibold text-green-500">
+                Total Present (P): {totalP}
+              </span>
+            </p>
+            <p className="flex justify-center text-lg mb-4 text-gray-700">
+              <span className="font-semibold">
+                Total Students: {totalP + totalA}
+              </span>
+            </p>
+            <div className="flex justify-center mt-6 space-x-4">
+              <button
+                onClick={() => setShowPopup(false)}
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleFinalSubmit}
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
