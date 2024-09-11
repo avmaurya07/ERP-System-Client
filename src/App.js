@@ -18,6 +18,7 @@ import BatchState from "./contex/batch/batchstate";
 import Loader from "./components/loader";
 import Reset from "./components/Reset";
 import ClassesState from "./contex/classes/classesstate";
+import AttendanceState from "./contex/attendance/attendancestate";
 
 function App() {
   return (
@@ -28,31 +29,21 @@ function App() {
             <MainState>
               <BatchState>
                 <ClassesState>
-                  <Alert />
-                  <Loader />
-                  <Router>
-                    <Routes>
-                      <Route exact path="/login" element={<Login />} />
-                      <Route exact path="/resetpassword" element={<Reset />} />
-                      <Route
-                        exact
-                        path="/student/*"
-                        element={<Studenthome />}
-                      />
-                      <Route
-                        exact
-                        path="/teacher/*"
-                        element={<TeacherHome />}
-                      />
-                      <Route
-                        exact
-                        path="/cordinator/*"
-                        element={<CordinatorHome />}
-                      />
-                      <Route exact path="/admin/*" element={<AdminHome />} />
-                      <Route path="*" element={<Navigate to="/login" />} />
-                    </Routes>
-                  </Router>
+                  <AttendanceState>
+                    <Alert />
+                    <Loader />
+                    <Router>
+                      <Routes>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/resetpassword" element={<Reset />} />
+                        <Route path="/student/*" element={<Studenthome />} />
+                        <Route path="/teacher/*" element={<TeacherHome />} />
+                        <Route path="/cordinator/*" element={<CordinatorHome />} />
+                        <Route path="/admin/*" element={<AdminHome />} />
+                        <Route path="*" element={<Navigate to="/login" />} />
+                      </Routes>
+                    </Router>
+                  </AttendanceState>
                 </ClassesState>
               </BatchState>
             </MainState>
